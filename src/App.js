@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Signup from './user/Signup'
+import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import Axios from 'axios'
 
-function App() {
+
+export default function App() {
+
+  const [isAuth, setIsAuth] = useState(false)
+
+  const [user, setUser] = useState({})
+  
+  const registerHandler = (user) => {
+    console.log("Made it this far")
+    Axios.post("auth/signup", user)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <Router>
+        <nav>
+          <Link to="/signup">Sign Up</Link> &nbsp;
+        </nav>
+        <div>
+          <Routes>
+            <Route path="/signup" element={<Signup register={registerHandler} />} />
+          </Routes>
+        </div>
+      </Router>
 
-export default App;
+
+
+    </div>
+  )
+}
