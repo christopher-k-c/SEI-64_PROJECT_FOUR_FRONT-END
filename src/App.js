@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Signup from './user/Signup'
 import Login from './user/Login'
 import Dash from './user/Dash'
+import Cart from './cart/Cart'
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
@@ -10,6 +11,7 @@ import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
+import Badge from 'react-bootstrap/Badge'
 
 
 export default function App() {
@@ -44,6 +46,7 @@ export default function App() {
   const [userRole, setUserRole] = useState("")
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
+  const [productQuantity, setProductQuantity] = useState(1)
   
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
@@ -56,14 +59,28 @@ export default function App() {
     })
   }
 
+  const increaseQuantity = () => {
+    console.log("increment button clicked")
+    setProductQuantity(productQuantity + 1)
+  }
+  const decreaseQuantity = () => {
+    console.log("decrement button clicked")
+    if(productQuantity > 1){
+      setProductQuantity(productQuantity - 1)
+    }
+    
+  }
+
   const addToCart = (product) => {
     console.log("button clicked")
     console.log(product)
     // let tempCart = []
-
+    for (let i = 1; i <= productQuantity; i++){
+      setCart(cart => [...cart, product])
+    }
     // setCart(cart.concat(product))
-    setCart(cart => [...cart, product])
-    setCartCount(cartCount + 1)
+    // setCart(cart => [...cart, product])
+    setCartCount(cartCount + productQuantity)
     console.log(cart)
     console.log(cartCount)
   }
@@ -73,7 +90,7 @@ export default function App() {
     
     <div key={index}>
 
-        <Product  {...products} addToCart={addToCart} />
+      <Product  {...products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
 
     </div>
 
@@ -129,7 +146,7 @@ export default function App() {
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+              <Link to="/cart"> <BsCart4> <Badge bg="secondary"> {cartCount} </Badge></BsCart4> </Link> &nbsp;
             </div>
           ):(
             <div>
@@ -137,7 +154,7 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
-              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+              <Link to="/cart"> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
 
           </div>
           )}
@@ -149,6 +166,7 @@ export default function App() {
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts}/>} />
+            <Route path="/cart" element={<Cart cartItems={cart}/>} />
           </Routes>
         </div>
       </Router>
