@@ -3,6 +3,8 @@ import Signup from './user/Signup'
 import Login from './user/Login'
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import Axios from 'axios'
+import ProductList from './product/ProductList'
+import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
 
@@ -29,8 +31,9 @@ export default function App() {
   }, [])
 
   const [isAuth, setIsAuth] = useState(false)
-
   const [user, setUser] = useState({})
+  // 
+  const [products, setProducts] = useState([])
   
   const registerHandler = (user) => {
     console.log("Made it this far")
@@ -43,6 +46,15 @@ export default function App() {
     })
   }
 
+  const allProducts = products.map((products, index) => (
+
+    <div key={index}>
+
+        <Product  {...products} />
+
+    </div>
+
+  ))
   const loginHandler = (cred) => {
     console.log(cred)
     Axios.post("auth/login", cred)
@@ -70,16 +82,22 @@ export default function App() {
     <div>
       <Router>
         <nav>
+
+          
+          
+          
           { isAuth ? (
             <div>
               {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
               <Link to="/">Home</Link> &nbsp;
+              <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
             </div>
 
           ):(
             <div>
               <Link to="/">Home</Link> &nbsp;
+              <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
           </div>
@@ -89,12 +107,13 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
           </Routes>
         </div>
       </Router>
-
-
+      {/* <ProductList /> */}
+    
 
     </div>
   )
