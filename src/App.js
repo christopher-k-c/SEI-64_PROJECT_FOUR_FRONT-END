@@ -9,6 +9,7 @@ import ProductList from './product/ProductList'
 import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
+import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 
@@ -95,6 +96,16 @@ export default function App() {
 
   ))
 
+  const allStock = products.map((products, index) => (
+
+    <div key={index}>
+
+        <ProductMetrics {...products} products={products} setProducts={setProducts} />
+
+    </div>
+
+  ))
+
   const loginHandler = (cred) => {
     console.log(cred)
     Axios.post("auth/login", cred)
@@ -137,7 +148,6 @@ export default function App() {
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
               <Link to="/cart"> <BsCart4> <Badge bg="secondary"> {cartCount} </Badge></BsCart4> </Link> &nbsp;
             </div>
-
           ):(
             <div>
               <Link to="/">Home</Link> &nbsp;
@@ -155,8 +165,8 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
-            <Route path="/manage" element={<Dash role={userRole} />} />
-            <Route path="/cart" element={<Cart cartItems={cart}/>} /> 
+            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts}/>} />
+            <Route path="/cart" element={<Cart cartItems={cart}/>} />
           </Routes>
         </div>
       </Router>
