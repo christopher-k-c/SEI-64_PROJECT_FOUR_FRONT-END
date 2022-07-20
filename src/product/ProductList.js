@@ -9,7 +9,7 @@ export default function ProductList(props) {
   
 
     useEffect(() => {
-        loadProductList() 
+        loadProductList()
     }, [])
 
 
