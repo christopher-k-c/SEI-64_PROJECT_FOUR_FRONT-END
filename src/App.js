@@ -9,6 +9,7 @@ import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
 
 
+
 export default function App() {
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function App() {
 
       if(user){
         setIsAuth(true)
-        setUser(true)
+        setUser(user)
       }
       else if (!user){
         localStorage.removeItem("token");
@@ -33,6 +34,8 @@ export default function App() {
   const [user, setUser] = useState({})
   // 
   const [products, setProducts] = useState([])
+
+
   
   const registerHandler = (user) => {
     console.log("Made it this far")
@@ -54,6 +57,9 @@ export default function App() {
     </div>
 
   ))
+
+
+
   const loginHandler = (cred) => {
     console.log(cred)
     Axios.post("auth/login", cred)
@@ -99,6 +105,7 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
+            
           </div>
           )}
         </nav>
@@ -108,10 +115,11 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
+
           </Routes>
         </div>
       </Router>
-      {/* <ProductList /> */}
+
     
 
     </div>
