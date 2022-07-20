@@ -15,6 +15,7 @@ export default function App() {
     if(token != null){
       let user = jwt_decode(token)
       console.log("USER: ", user.user.name)
+      console.log(user)
 
       if(user){
         setIsAuth(true)
