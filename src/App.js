@@ -16,25 +16,21 @@ export default function App() {
     console.log("useEffect triggered")
     let token = localStorage.getItem("token")
 
-    try{
-      if(token != null){
-        let user = jwt_decode(token)
-        console.log("USER NAME:", user.user.name)
-        console.log("USER ROLE:", user.user.role)
 
-        if(user){
-          setIsAuth(true)
-          setUser(user)
-          setUserRole(user.user.role)
-        }
-        else if (!user){
-          localStorage.removeItem("token");
-          setIsAuth(false)
-        }
+    if(token != null){
+      let user = jwt_decode(token)
+      console.log("USER NAME:", user.user.name)
+      console.log("USER ROLE:", user.user.role)
+
+      if(user){
+        setIsAuth(true)
+        setUser(user)
+        setUserRole(user.user.role)
       }
-    }
-    catch(error) {
-      console.log("Error:", error)
+      else if (!user){
+        localStorage.removeItem("token");
+        setIsAuth(false)
+      }
     }
   }, [])
 
