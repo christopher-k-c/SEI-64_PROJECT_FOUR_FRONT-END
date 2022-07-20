@@ -7,6 +7,7 @@ import ProductList from './product/ProductList'
 import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
+import {BsCart4} from 'react-icons/bs'
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
 
       if(user){
         setIsAuth(true)
-        setUser(true)
+        setUser(user)
       }
       else if (!user){
         localStorage.removeItem("token");
@@ -35,6 +36,7 @@ export default function App() {
   // 
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
+  const [cartCount, setCartCount] = useState(0)
   
   const registerHandler = (user) => {
     console.log("Made it this far")
@@ -54,7 +56,9 @@ export default function App() {
 
     // setCart(cart.concat(product))
     setCart(cart => [...cart, product])
+    setCartCount(cartCount + 1)
     console.log(cart)
+    console.log(cartCount)
   }
 
 
@@ -105,6 +109,7 @@ export default function App() {
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
+              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
             </div>
 
           ):(
@@ -113,6 +118,8 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
+              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+
           </div>
           )}
         </nav>
