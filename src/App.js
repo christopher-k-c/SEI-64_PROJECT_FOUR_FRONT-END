@@ -14,6 +14,7 @@ import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 
 
+
 export default function App() {
 
   useEffect(() => {
@@ -170,7 +171,7 @@ export default function App() {
           </Routes>
         </div>
       </Router>
-      {/* <ProductList /> */}
+
     
 
     </div>
