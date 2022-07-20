@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Signup from './user/Signup'
 import Login from './user/Login'
+import Dash from './user/Dash'
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
@@ -12,20 +13,28 @@ import Home from './home/Home'
 export default function App() {
 
   useEffect(() => {
+    console.log("useEffect triggered")
     let token = localStorage.getItem("token")
 
-    if(token != null){
-      let user = jwt_decode(token)
-      console.log("USER: ", user.user.name)
+    try{
+      if(token != null){
+        let user = jwt_decode(token)
+        console.log("USER NAME:", user.user.name)
+        console.log("USER ROLE:", user.user.role)
 
-      if(user){
-        setIsAuth(true)
-        setUser(true)
+        if(user){
+          setIsAuth(true)
+          setUser(user)
+          setUserRole(user.user.role)
+        }
+        else if (!user){
+          localStorage.removeItem("token");
+          setIsAuth(false)
+        }
       }
-      else if (!user){
-        localStorage.removeItem("token");
-        setIsAuth(false)
-      }
+    }
+    catch(error) {
+      console.log("Error:", error)
     }
   }, [])
 
@@ -33,12 +42,13 @@ export default function App() {
   const [user, setUser] = useState({})
   // 
   const [products, setProducts] = useState([])
+  const [userRole, setUserRole] = useState("")
   
   const registerHandler = (user) => {
-    console.log("Made it this far")
     Axios.post("auth/signup", user)
     .then(response => {
       console.log(response)
+      console.log("Signed up successfully!")
     })
     .catch(error => {
       console.log(error)
@@ -64,8 +74,14 @@ export default function App() {
         let user = jwt_decode(response.data.token)
         setIsAuth(true)
         setUser(user)
+        console.log(user.user.role)
+        setUserRole(user.user.role)
+        console.log(userRole)
         console.log("User successfully logged in.")
       }
+    })
+    .catch(error => {
+      console.log(error)
     })
   }
 
@@ -81,13 +97,10 @@ export default function App() {
     <div>
       <Router>
         <nav>
-
-          
-          
-          
           { isAuth ? (
             <div>
               {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
+              <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
@@ -108,6 +121,7 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
+            <Route path="/manage" element={<Dash role={userRole} />} />
           </Routes>
         </div>
       </Router>

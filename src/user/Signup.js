@@ -7,7 +7,6 @@ export default function Signup(props) {
     const [newUser, setNewUser] = useState({})
 
     const [sellerVerify, setSellerVerify] = useState("--")
-    const [sellerVerifyCodeTrue, setSellerVerifyCodeTrue] = useState(false)
 
     const sellerKey = "billsbuddies"
 
