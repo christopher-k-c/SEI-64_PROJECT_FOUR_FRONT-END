@@ -8,6 +8,7 @@ import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
 import {BsCart4} from 'react-icons/bs'
+import Badge from 'react-bootstrap/Badge'
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
+  const [productQuantity, setProductQuantity] = useState(1)
   
   const registerHandler = (user) => {
     console.log("Made it this far")
@@ -109,7 +111,7 @@ export default function App() {
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+              <Link to="/checkout"> <BsCart4> <Badge bg="secondary"> {cartCount} </Badge></BsCart4> </Link> &nbsp;
             </div>
 
           ):(
@@ -118,7 +120,7 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
-              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+              <Link to="/checkout"> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
 
           </div>
           )}
