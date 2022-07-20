@@ -34,6 +34,7 @@ export default function App() {
   const [user, setUser] = useState({})
   // 
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
   
   const registerHandler = (user) => {
     console.log("Made it this far")
@@ -46,15 +47,27 @@ export default function App() {
     })
   }
 
-  const allProducts = products.map((products, index) => (
+  const addToCart = (product) => {
+    console.log("button clicked")
+    console.log(product)
+    // let tempCart = []
 
+    // setCart(cart.concat(product))
+    setCart(cart => [...cart, product])
+    console.log(cart)
+  }
+
+
+  const allProducts = products.map((products, index) => (
+    
     <div key={index}>
 
-        <Product  {...products} />
+        <Product  {...products} addToCart={addToCart} />
 
     </div>
 
   ))
+
   const loginHandler = (cred) => {
     console.log(cred)
     Axios.post("auth/login", cred)
@@ -107,7 +120,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
           </Routes>
         </div>
