@@ -9,6 +9,7 @@ import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
+import {BsCart4} from 'react-icons/bs'
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
       let user = jwt_decode(token)
       console.log("USER NAME:", user.user.name)
       console.log("USER ROLE:", user.user.role)
+      console.log(user)
 
       if(user){
         setIsAuth(true)
@@ -40,6 +42,8 @@ export default function App() {
   // 
   const [products, setProducts] = useState([])
   const [userRole, setUserRole] = useState("")
+  const [cart, setCart] = useState([])
+  const [cartCount, setCartCount] = useState(0)
   
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
@@ -52,11 +56,24 @@ export default function App() {
     })
   }
 
-  const allProducts = products.map((products, index) => (
+  const addToCart = (product) => {
+    console.log("button clicked")
+    console.log(product)
+    // let tempCart = []
 
+    // setCart(cart.concat(product))
+    setCart(cart => [...cart, product])
+    setCartCount(cartCount + 1)
+    console.log(cart)
+    console.log(cartCount)
+  }
+
+
+  const allProducts = products.map((products, index) => (
+    
     <div key={index}>
 
-        <Product  {...products} />
+        <Product  {...products} addToCart={addToCart} />
 
     </div>
 
@@ -112,6 +129,7 @@ export default function App() {
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
+              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
             </div>
           ):(
             <div>
@@ -119,6 +137,8 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
+              <Link to="/checkout"> <BsCart4 /> </Link> &nbsp;
+
           </div>
           )}
         </nav>
@@ -126,7 +146,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts}/>} />
           </Routes>
