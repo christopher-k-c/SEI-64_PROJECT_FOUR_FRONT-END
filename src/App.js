@@ -8,6 +8,7 @@ import ProductList from './product/ProductList'
 import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
+import ProductMetrics from './product/ProductMetrics'
 
 
 export default function App() {
@@ -60,6 +61,17 @@ export default function App() {
     </div>
 
   ))
+
+  const allStock = products.map((products, index) => (
+
+    <div key={index}>
+
+        <ProductMetrics {...products} products={products} setProducts={setProducts} />
+
+    </div>
+
+  ))
+
   const loginHandler = (cred) => {
     console.log(cred)
     Axios.post("auth/login", cred)
@@ -101,7 +113,6 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
             </div>
-
           ):(
             <div>
               <Link to="/">Home</Link> &nbsp;
@@ -117,7 +128,7 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts}/>} />
             <Route path="/login" element={<Login login={loginHandler} />} />
-            <Route path="/manage" element={<Dash role={userRole} />} />
+            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts}/>} />
           </Routes>
         </div>
       </Router>
