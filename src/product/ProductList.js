@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Axios from 'axios'
-import Product from './Product'
+
 
 export default function ProductList(props) {
 
@@ -26,18 +26,9 @@ export default function ProductList(props) {
         })
     }
 
+    
 
 
-    // // List all products
-    // const allProducts = products.map((products, index) => (
-
-    //     <div key={index}>
-
-    //         <Product  {...products} />
-
-    //     </div>
-
-    // ))
 
   return (
     <div>
@@ -45,23 +36,9 @@ export default function ProductList(props) {
 
         {props.allProducts}
 
-        <h1>Test</h1>
+       
 
 
-        {/* <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Price</th>
-                        <th>Product Description</th>
-                        <th>Product Stock</th>
-                        <th>Product Url</th>
-                    </tr>
-                    {allProducts}
-                </tbody>
-            </table>
-        </div> */}
 
 
     
