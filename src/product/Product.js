@@ -22,6 +22,9 @@ export default function Product(props) {
   }
 
   
+  const stopWarning = (e) => {
+    console.log(e.target)
+  }
 
 
   // const increaseQuantity = () => {
@@ -35,22 +38,18 @@ export default function Product(props) {
                 <Card.Title>{props.products.productName}</Card.Title> 
                 <Card.Text>£{props.products.productPrice}</Card.Text>
 
-                <Button onClick={setModalIsOpenToTrue}>Product Details</Button>
+                <Button onClick={setModalIsOpenToTrue}>Product Details</Button> &nbsp;
 
                 <Modal isOpen={modalIsOpen} ariaHideApp={false}>
            
                 <Button onClick={setModalIsOpenToFalse}>x</Button>
                 
                 <ProductDetail />
-
-                
-
-
-
                 </Modal>
-                <Button variant="primary" onClick={() => {props.addToCart(props._id)}}> Add to Cart </Button> &nbsp;
+
+                <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
                 <Button onClick={props.increaseQuantity}> + </Button>
-                <input type="number" value={props.productQuantity}></input>
+                <input type="number" value={props.productQuantity} onChange={(e) => stopWarning(e)}></input>
                 <Button onClick={props.decreaseQuantity}> - </Button>
             </Card.Body>
 

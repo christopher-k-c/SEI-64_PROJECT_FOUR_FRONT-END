@@ -1,26 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import OrderHistory from './OrderHistory'
 import Axios from 'axios'
+import ProductCreateForm from '../product/ProductCreateForm'
+import { Button} from 'react-bootstrap'
+import Modal from 'react-modal'
 
 export default function Dash(props) {
-    console.log(props.allStock)
     useEffect(() => {
-        loadProductList()
+        props.loadProductList()
     }, [])
 
-    const loadProductList = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-        Axios.get("product/index")
-        .then((response) => {
-            console.log(response.data.product)
-            // Setting state here:
-            props.setProducts(response.data.product)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    const setModalIsOpenToTrue =()=>{
+    
+        setModalIsOpen(true)
     }
-    console.log(props.allStock)
+
+    const setModalIsOpenToFalse =()=>{
+        setModalIsOpen(false)
+    }
+
+    
 
   return (
     <div>
@@ -29,6 +30,17 @@ export default function Dash(props) {
         <h1>Dashboard</h1>
         <h4>Customer Orders</h4>
         <OrderHistory />
+        <br/>
+        <br/>
+        <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
+
+                <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+           
+                <Button onClick={setModalIsOpenToFalse}>x</Button>
+                <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} />
+
+                </Modal>
+
         {props.allStock}
         </>
         ) : (

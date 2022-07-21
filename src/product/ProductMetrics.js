@@ -1,7 +1,10 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap'
+import Axios from 'axios'
 
 export default function ProductMetrics(props) {
+
+    
 
   return (
     <div>
@@ -12,7 +15,7 @@ export default function ProductMetrics(props) {
                 <Card.Text># of Outstanding Orders: 2</Card.Text>
                 <Card.Text>Total Orders: 28</Card.Text>
                 <Button variant="primary">Update Record</Button> &nbsp;
-                <Button variant="primary">De-list Item</Button>
+                <Button variant="primary" onClick={() => props.handleDelete(props._id)}>De-list Item</Button>
             </Card.Body>
         </Card>
     </div>
