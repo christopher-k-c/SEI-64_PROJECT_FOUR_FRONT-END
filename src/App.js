@@ -12,7 +12,6 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-import axios from 'axios'
 
 
 
