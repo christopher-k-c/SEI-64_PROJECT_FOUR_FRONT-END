@@ -27,7 +27,7 @@ export default function App() {
       let user = jwt_decode(token)
       console.log("USER NAME:", user.user.name)
       console.log("USER ROLE:", user.user.role)
-      console.log(user)
+      console.log(user.user)
 
       if(user){
         setIsAuth(true)
@@ -113,12 +113,48 @@ export default function App() {
     })
 }
 
+  const loadCartArray = (cartItems) => {
+    // console.log("cart clicked")
+    // console.log(cart)
+    console.log(cartItems)
+  //   Axios.get("cart", cartItems)
+  //   .then(response => {
+  //     console.log(response)
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //   })
+  }
+
+  const makeCart = (cartItems) => {
+    // e.preventDefault()
+    console.log(cartItems)
+    console.log("makecart working")
+    let idArr = []
+    cartItems.forEach(element => {
+      idArr.push(element._id)
+    });
+    console.log(idArr)
+    var dataObj = {}
+    dataObj.user = user.user.id
+    dataObj.status = "active" 
+    dataObj.product = idArr
+    console.log(dataObj)
+    Axios.post("cart", dataObj)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
 
   const allProducts = products.map((products, index) => (
     
     <div key={index}>
 
-      <Product  {...products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
+      <Product  products={products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
 
     </div>
 
@@ -192,7 +228,7 @@ export default function App() {
               <Link to="/">Home</Link> &nbsp;
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-              <Link to="/cart"> <BsCart4> <Badge bg="secondary"> {cartCount} </Badge></BsCart4> </Link> &nbsp;
+              <Link to="/cart" onClick={loadCartArray}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
             </div>
           ):(
             <div>
@@ -200,7 +236,7 @@ export default function App() {
               <Link to="/index">Products</Link> &nbsp;
               <Link to="/signup">Sign Up</Link> &nbsp;
               <Link to="/login">Log In</Link> &nbsp;
-              <Link to="/cart"> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
+              <Link to="/cart" onClick={() => {loadCartArray(cart)}}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
 
           </div>
           )}
@@ -212,7 +248,7 @@ export default function App() {
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} />} />
-            <Route path="/cart" element={<Cart cartItems={cart}/>} />
+            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} />} />
           </Routes>
         </div>
       </Router>

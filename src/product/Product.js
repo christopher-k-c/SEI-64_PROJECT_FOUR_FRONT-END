@@ -33,25 +33,21 @@ export default function Product(props) {
   return (
     <>
         <Card style={{width: '18rem'}}>
-            <Card.Img variant="top" src={props.productImageUrl} />
+            <Card.Img variant="top" src={props.products.productImageUrl} />
             <Card.Body>
-                <Card.Title>{props.productName}</Card.Title> 
-                <Card.Text>£{props.productPrice}</Card.Text>
+                <Card.Title>{props.products.productName}</Card.Title> 
+                <Card.Text>£{props.products.productPrice}</Card.Text>
 
-                <Button onClick={setModalIsOpenToTrue}>Product Details</Button>
+                <Button onClick={setModalIsOpenToTrue}>Product Details</Button> &nbsp;
 
                 <Modal isOpen={modalIsOpen} ariaHideApp={false}>
            
                 <Button onClick={setModalIsOpenToFalse}>x</Button>
                 
                 <ProductDetail />
-
-                
-
-
-
                 </Modal>
-                <Button variant="primary" onClick={() => {props.addToCart(props._id)}}> Add to Cart </Button> &nbsp;
+
+                <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
                 <Button onClick={props.increaseQuantity}> + </Button>
                 <input type="number" value={props.productQuantity} onChange={(e) => stopWarning(e)}></input>
                 <Button onClick={props.decreaseQuantity}> - </Button>
