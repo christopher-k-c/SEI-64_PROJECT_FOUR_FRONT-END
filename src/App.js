@@ -12,7 +12,15 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-import axios from 'axios'
+import {Alert} from 'react-bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
@@ -49,12 +57,20 @@ export default function App() {
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
   const [productQuantity, setProductQuantity] = useState(1)
+  // const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  // Product Detail
+  // const [currentProduct, setCurrentProduct] = useState()
+  // const [isDetail, setIsDetail] = useState(false)
   
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
     .then(response => {
       console.log(response)
       console.log("Signed up successfully!")
+      setSuccessMessage("User signup has been user successful")
     })
     .catch(error => {
       console.log(error)
@@ -183,10 +199,12 @@ export default function App() {
         console.log(user.user.role)
         setUserRole(user.user.role)
         console.log("User successfully logged in.")
+        setSuccessMessage("User successfully logged in.")
       }
     })
     .catch(error => {
       console.log(error)
+      setErrorMessage("User has failed to login.")
     })
   }
 
@@ -197,8 +215,14 @@ export default function App() {
     setUser(null)
     setUserRole("")
     console.log("User successfully logged out.")
+    setSuccessMessage("User successfully logged out.")
+    
   }
 
+//   function detailView(id){
+//     console.log("it's me over here!")
+//     Axios.get(`product/detail?id=${id}`)
+//     .then(response => {
   
 
   
@@ -217,30 +241,91 @@ export default function App() {
   //   })
   // }
 
-  return (
-    <div>
-      <Router>
-        <nav>
-          { isAuth ? (
-            <div>
-              {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
-              <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/index">Products</Link> &nbsp;
-              <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-              <Link to="/cart" onClick={loadCartArray}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
-            </div>
-          ):(
-            <div>
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/index">Products</Link> &nbsp;
-              <Link to="/signup">Sign Up</Link> &nbsp;
-              <Link to="/login">Log In</Link> &nbsp;
-              <Link to="/cart" onClick={() => {loadCartArray(cart)}}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
+//   return (
+//     <div>
+//       <Router>
+//         <nav>
+//           { isAuth ? (
+//             <div>
+//               {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
+//               <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
+//               <Link to="/">Home</Link> &nbsp;
+//               <Link to="/index">Products</Link> &nbsp;
+//               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
+//               <Link to="/cart" onClick={loadCartArray}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
+//             </div>
+//           ):(
+//             <div>
+//               <Link to="/">Home</Link> &nbsp;
+//               <Link to="/index">Products</Link> &nbsp;
+//               <Link to="/signup">Sign Up</Link> &nbsp;
+//               <Link to="/login">Log In</Link> &nbsp;
+//               <Link to="/cart" onClick={() => {loadCartArray(cart)}}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
 
-          </div>
+// //         console.log(response.data)
+// //         var productDetail = response.data
+// //         setIsDetail(true)
+// //         setCurrentProduct(productDetail)
+// //     })
+// //     .catch(error => {
+//         console.log(error)
+//         console.log("Error loading recipe information")
+//     })
+// }
+
+
+  const sucMessage = successMessage ? (
+    <Alert variant="success" >{successMessage}</Alert>
+  ): null;
+
+  const errMessage = errorMessage ? (
+    <Alert variant="danger">{errorMessage}</Alert>
+  ): null;
+
+
+
+
+  return (
+
+    
+    <div>
+
+
+
+    <Router>
+      {/* React Bootstrap Nav Bar*/}
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="#home">Bootleg Tapes</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          { isAuth ? (
+          <>          
+          <Nav.Link as={Link} to="/"> Home</Nav.Link>
+          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler}>Logout</Nav.Link>
+          <Nav.Link as={Link} to="/manage"> 
+          <Navbar.Text>
+          {userRole === "seller" ? "Seller Dashboard" : "My Orders"}
+          </Navbar.Text>
+          </Nav.Link>
+          <Navbar.Text>{`Signed in as: ${user.user.name}!`}</Navbar.Text>
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          </>
+          ):(
+          <>
+          <Nav.Link as={Link} to="/login"> Login</Nav.Link>
+          <Nav.Link as={Link} to="/"> Home</Nav.Link>
+          <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
+          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          </>
           )}
-        </nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+     {sucMessage}
+     {errMessage}
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -253,8 +338,7 @@ export default function App() {
         </div>
       </Router>
 
-    
-
+  
     </div>
   )
 }
