@@ -30,10 +30,10 @@ export default function Product(props) {
   return (
     <>
         <Card style={{width: '18rem'}}>
-            <Card.Img variant="top" src={props.productImageUrl} />
+            <Card.Img variant="top" src={props.products.productImageUrl} />
             <Card.Body>
-                <Card.Title>{props.productName}</Card.Title> 
-                <Card.Text>£{props.productPrice}</Card.Text>
+                <Card.Title>{props.products.productName}</Card.Title> 
+                <Card.Text>£{props.products.productPrice}</Card.Text>
 
                 <Button onClick={setModalIsOpenToTrue}>Product Details</Button>
 

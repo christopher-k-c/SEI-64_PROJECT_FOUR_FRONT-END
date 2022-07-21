@@ -3,7 +3,7 @@ import Signup from './user/Signup'
 import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, Link, Navigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
 import Product from './product/Product'
@@ -12,6 +12,15 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
+import {Alert} from 'react-bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
@@ -48,12 +57,20 @@ export default function App() {
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
   const [productQuantity, setProductQuantity] = useState(1)
+  // const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  // Product Detail
+  // const [currentProduct, setCurrentProduct] = useState()
+  // const [isDetail, setIsDetail] = useState(false)
   
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
     .then(response => {
       console.log(response)
       console.log("Signed up successfully!")
+      setSuccessMessage("User signup has been user successful")
     })
     .catch(error => {
       console.log(error)
@@ -91,7 +108,7 @@ export default function App() {
     
     <div key={index}>
 
-      <Product  {...products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
+      <Product  products={products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
 
     </div>
 
@@ -121,10 +138,12 @@ export default function App() {
         setUserRole(user.user.role)
         console.log(userRole)
         console.log("User successfully logged in.")
+        setSuccessMessage("User successfully logged in.")
       }
     })
     .catch(error => {
       console.log(error)
+      setErrorMessage("User has failed to login.")
     })
   }
 
@@ -134,32 +153,79 @@ export default function App() {
     setIsAuth(false)
     setUser(null)
     console.log("User successfully logged out.")
+    setSuccessMessage("User successfully logged out.")
+    
   }
 
-  return (
-    <div>
-      <Router>
-        <nav>
-          { isAuth ? (
-            <div>
-              {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
-              <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/index">Products</Link> &nbsp;
-              <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-              <Link to="/cart"> <BsCart4> <Badge bg="secondary"> {cartCount} </Badge></BsCart4> </Link> &nbsp;
-            </div>
-          ):(
-            <div>
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/index">Products</Link> &nbsp;
-              <Link to="/signup">Sign Up</Link> &nbsp;
-              <Link to="/login">Log In</Link> &nbsp;
-              <Link to="/cart"> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
+//   function detailView(id){
+//     console.log("it's me over here!")
+//     Axios.get(`product/detail?id=${id}`)
+//     .then(response => {
 
-          </div>
+//         console.log(response.data)
+//         var productDetail = response.data
+//         setIsDetail(true)
+//         setCurrentProduct(productDetail)
+//     })
+//     .catch(error => {
+//         console.log(error)
+//         console.log("Error loading recipe information")
+//     })
+// }
+
+
+  const sucMessage = successMessage ? (
+    <Alert variant="success" >{successMessage}</Alert>
+  ): null;
+
+  const errMessage = errorMessage ? (
+    <Alert variant="danger">{errorMessage}</Alert>
+  ): null;
+
+
+
+
+  return (
+
+    
+    <div>
+
+
+
+    <Router>
+      {/* React Bootstrap Nav Bar*/}
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="#home">Bootleg Tapes</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          { isAuth ? (
+          <>          
+          <Nav.Link as={Link} to="/"> Home</Nav.Link>
+          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler}>Logout</Nav.Link>
+          <Nav.Link as={Link} to="/manage"> 
+          <Navbar.Text>
+          {userRole === "seller" ? "Seller Dashboard" : "My Orders"}
+          </Navbar.Text>
+          </Nav.Link>
+          <Navbar.Text>{`Signed in as: ${user.user.name}!`}</Navbar.Text>
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          </>
+          ):(
+          <>
+          <Nav.Link as={Link} to="/login"> Login</Nav.Link>
+          <Nav.Link as={Link} to="/"> Home</Nav.Link>
+          <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
+          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          </>
           )}
-        </nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+     {sucMessage}
+     {errMessage}
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -172,8 +238,7 @@ export default function App() {
         </div>
       </Router>
 
-    
-
+  
     </div>
   )
 }
