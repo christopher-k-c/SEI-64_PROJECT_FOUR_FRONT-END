@@ -13,17 +13,23 @@ export default function ProductList(props) {
     }, [])
 
 
+    // const loadProductList = () => {
+
+    //     Axios.get("product/index")
+    //     .then((response) => {
+    //         console.log(response)
+    //         // Setting state here:
+    //         props.setProducts(response.data.product)
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
+
     const loadProductList = () => {
 
-        Axios.get("product/index")
-        .then((response) => {
-            console.log(response)
-            // Setting state here:
-            props.setProducts(response.data.product)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+        props.loadProductList()
+        
     }
 
     

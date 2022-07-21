@@ -3,7 +3,7 @@ import Signup from './user/Signup'
 import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, Link, useNavigate, Navigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
 import Product from './product/Product'
@@ -12,6 +12,7 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
+import axios from 'axios'
 
 
 
@@ -69,7 +70,6 @@ export default function App() {
     if(productQuantity > 1){
       setProductQuantity(productQuantity - 1)
     }
-    
   }
 
   const addToCart = (product) => {
@@ -86,6 +86,33 @@ export default function App() {
     console.log(cartCount)
   }
 
+  const loadProductList = () => {
+    Axios.get("product/index")
+    .then((response) => {
+        console.log(response)
+        // Setting state here:
+        setProducts(response.data.product)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+  }
+
+  const handleDelete = (id) => {
+    console.log(id)
+    console.log("clicked")
+    Axios.delete(`product/delete?id=${id}`)
+    .then((response) => {
+        console.log(response)
+        console.log("Product record successfully deleted.")
+        loadProductList()
+    })
+    .catch((error) => {
+        console.log("Error deleting product record:")
+        console.log(error)
+    })
+}
+
 
   const allProducts = products.map((products, index) => (
     
@@ -101,7 +128,7 @@ export default function App() {
 
     <div key={index}>
 
-        <ProductMetrics {...products} products={products} setProducts={setProducts} />
+        <ProductMetrics {...products} products={products} setProducts={setProducts} handleDelete={handleDelete}/>
 
     </div>
 
@@ -119,7 +146,6 @@ export default function App() {
         setUser(user)
         console.log(user.user.role)
         setUserRole(user.user.role)
-        console.log(userRole)
         console.log("User successfully logged in.")
       }
     })
@@ -133,8 +159,27 @@ export default function App() {
     localStorage.removeItem("token");
     setIsAuth(false)
     setUser(null)
+    setUserRole("")
     console.log("User successfully logged out.")
   }
+
+  
+
+  
+
+  // const addProduct = (product) => {
+  //   console.log("Add Product")
+  //   Axios.post("product/add", product)
+  //   .then(response => {
+  //     console.log(response.data)
+  //     console.log("Product added successfully.")
+  //     // loadProductList();
+  //   })
+  //   .catch((error) => {
+  //     console.log("Error adding product.")
+  //     console.log(error)
+  //   })
+  // }
 
   return (
     <div>
@@ -164,9 +209,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart}/>} />
-            <Route path="/login" element={<Login login={loginHandler} />} />
-            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
+            <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
+            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} />} />
             <Route path="/cart" element={<Cart cartItems={cart}/>} />
           </Routes>
         </div>
