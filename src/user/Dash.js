@@ -37,7 +37,7 @@ export default function Dash(props) {
                 <Modal isOpen={modalIsOpen} ariaHideApp={false}>
            
                 <Button onClick={setModalIsOpenToFalse}>x</Button>
-                <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} />
+                <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
 
                 </Modal>
 

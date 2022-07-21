@@ -3,7 +3,7 @@ import Signup from './user/Signup'
 import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
-import {BrowserRouter as Router, Route, Routes, Link, useNavigate, Navigate} from 'react-router-dom'
+import {Route, Routes, Link, useNavigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
 import Product from './product/Product'
@@ -25,6 +25,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 export default function App() {
+
+  let navigation = useNavigate()
 
   useEffect(() => {
     console.log("useEffect triggered")
@@ -216,7 +218,7 @@ export default function App() {
     setUserRole("")
     console.log("User successfully logged out.")
     setSuccessMessage("User successfully logged out.")
-    
+    navigation("/")
   }
 
 //   function detailView(id){
@@ -275,11 +277,11 @@ export default function App() {
 
 
   const sucMessage = successMessage ? (
-    <Alert variant="success" >{successMessage}</Alert>
+    <Alert variant="success" onClose={() => setSuccessMessage(null)} dismissible>{successMessage}</Alert>
   ): null;
 
   const errMessage = errorMessage ? (
-    <Alert variant="danger">{errorMessage}</Alert>
+    <Alert variant="danger" onClose={() => setErrorMessage(null)} dismissible>{errorMessage}</Alert>
   ): null;
 
 
@@ -292,7 +294,7 @@ export default function App() {
 
 
 
-    <Router>
+    
       {/* React Bootstrap Nav Bar*/}
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -332,11 +334,11 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} />} />
+            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} />} />
           </Routes>
         </div>
-      </Router>
+      
 
   
     </div>
