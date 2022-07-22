@@ -5,9 +5,6 @@ import Axios from 'axios'
 
 export default function ProductList(props) {
 
-    
-  
-
     useEffect(() => {
         loadProductList()
     }, [])
@@ -38,18 +35,11 @@ export default function ProductList(props) {
 
   return (
     <div>
+
         <h1>Product List</h1>
 
         {props.allProducts}
 
-       
-
-
-
-
-    
-    
-    
     </div>
   )
 }
