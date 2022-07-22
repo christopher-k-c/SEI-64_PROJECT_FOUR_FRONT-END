@@ -6,6 +6,10 @@ export default function ProductCreateForm(props) {
 
     const [newProduct, setNewProduct] = useState({})
 
+    const success = props.success
+
+    const error = props.error
+
     const handleChange = (event) => {
 
         const attributeToChange = event.target.name
@@ -24,7 +28,7 @@ export default function ProductCreateForm(props) {
         Axios.post("product/add", product)
         .then(response => {
           console.log(response.data)
-          console.log("Product added successfully.")
+          !response.data.product ? props.setError("One or more required fields omitted.") : props.setSuccess("Product added successfully.")
           props.loadProductList();
         })
         .catch((error) => {
