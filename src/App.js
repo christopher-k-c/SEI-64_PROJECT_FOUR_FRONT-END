@@ -71,6 +71,7 @@ export default function App() {
   // const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [productToEdit, setProductToEdit] = useState("")
   // const [cartItemQuant, setCartItemQuant] = useState({})
 
   // Product Detail
@@ -154,6 +155,20 @@ export default function App() {
     })
 }
 
+  const editGet = (id) => {
+    console.log("Edit GET MAIN")
+    console.log(id)
+    Axios.get(`product/edit?id=${id}`)
+    .then(response => {
+      var product = response.data.product
+      console.log("GET PRODUCT", product)
+      setProductToEdit(product)
+    })
+    .catch((error) => {
+      console.log("Error loading product information:", error)
+    })
+  }
+
   const loadCartArray = (cartItems) => {
     // console.log("cart clicked")
     // console.log(cart)
@@ -198,11 +213,11 @@ export default function App() {
 
   ))
 
-  const allStock = products.map((products, index) => (
+  const allStock = products.map((product, index) => (
 
     <div key={index}>
 
-        <ProductMetrics {...products} products={products} setProducts={setProducts} handleDelete={handleDelete}/>
+        <ProductMetrics product={product} setProducts={setProducts} handleDelete={handleDelete} editGet={editGet} productId={productToEdit._id} productToEdit={productToEdit} setProductToEdit={setProductToEdit} loadProductList={loadProductList}/>
 
     </div>
 
