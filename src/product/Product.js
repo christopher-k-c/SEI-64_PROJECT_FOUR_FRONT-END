@@ -4,7 +4,11 @@ import ProductDetail from './ProductDetail';
 import Modal from 'react-modal';
 import Button from 'react-bootstrap/Button';
 
-
+import {
+  Row,
+  Container,
+  Col
+} from "react-bootstrap";
 
 
 export default function Product(props) {
@@ -31,8 +35,8 @@ export default function Product(props) {
   //   props.productQuantity += 1
   // }
   return (
-    <>
-        <Card style={{width: '18rem'}}>
+    <><Col style={{marginBottom: '20px'}} >
+        <Card >
             <Card.Img variant="top" src={props.products.productImageUrl} />
             <Card.Body>
                 <Card.Title>{props.products.productName}</Card.Title> 
@@ -54,6 +58,7 @@ export default function Product(props) {
             </Card.Body>
 
         </Card>
+        </Col>
     </>
   )
 }

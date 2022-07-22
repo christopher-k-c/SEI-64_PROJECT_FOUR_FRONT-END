@@ -13,6 +13,11 @@ import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import {Alert} from 'react-bootstrap';
+import Footer from './footer/Footer'
+
+
+
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,7 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 
 
@@ -49,7 +54,10 @@ export default function App() {
         setIsAuth(false)
       }
     }
+    
   }, [])
+
+  
 
   const [isAuth, setIsAuth] = useState(false)
   const [user, setUser] = useState({})
@@ -277,12 +285,15 @@ export default function App() {
 
 
   const sucMessage = successMessage ? (
-    <Alert variant="success" onClose={() => setSuccessMessage(null)} dismissible>{successMessage}</Alert>
+    <Alert id="box" variant="success" onClose={() => setSuccessMessage(null)} dismissible>{successMessage}</Alert>
   ): null;
 
   const errMessage = errorMessage ? (
-    <Alert variant="danger" onClose={() => setErrorMessage(null)} dismissible>{errorMessage}</Alert>
+    <Alert id="box" variant="danger" onClose={() => setErrorMessage(null)} dismissible>{errorMessage}</Alert>
+    
   ): null;
+
+
 
 
 
@@ -296,11 +307,16 @@ export default function App() {
 
     
       {/* React Bootstrap Nav Bar*/}
-    <Navbar bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+
+
+
+        
         <Navbar.Brand href="#home">Bootleg Tapes</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+        <Navbar.Collapse className="justify-content-end" >
+        <Nav>
           { isAuth ? (
           <>          
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
@@ -323,6 +339,7 @@ export default function App() {
           <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
           </>
           )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -338,6 +355,9 @@ export default function App() {
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} />} />
           </Routes>
         </div>
+
+
+        <Footer />
       
 
   
