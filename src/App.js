@@ -62,6 +62,7 @@ export default function App() {
   // const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  // const [cartItemQuant, setCartItemQuant] = useState({})
 
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
@@ -79,27 +80,39 @@ export default function App() {
     })
   }
 
-  const increaseQuantity = () => {
-    console.log("increment button clicked")
-    setProductQuantity(productQuantity + 1)
+  // const increaseQuantity = (e) => {
+  //   console.log("increment button clicked")
+  //   setProductQuantity(productQuantity + 1)
+  // }
+  // const decreaseQuantity = (e) => {
+  //   console.log("decrement button clicked")
+  //   if(productQuantity > 1){
+  //     setProductQuantity(productQuantity - 1)
+  //   }
+  // }
+
+  const handleProductQuantity = (quantity) => {
+    console.log("hello")
+    console.log(quantity)
+    setProductQuantity(quantity)
+    // console.log(productQuantity)
   }
-  const decreaseQuantity = () => {
-    console.log("decrement button clicked")
-    if(productQuantity > 1){
-      setProductQuantity(productQuantity - 1)
-    }
-  }
+
 
   const addToCart = (product) => {
     console.log("button clicked")
     console.log(product)
+    console.log(productQuantity)
+    // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
+    // console.log(cartItemQuant[product._id])
     // let tempCart = []
     for (let i = 1; i <= productQuantity; i++){
       setCart(cart => [...cart, product])
     }
     // setCart(cart.concat(product))
     // setCart(cart => [...cart, product])
-    setCartCount(cartCount + productQuantity)
+    setCartCount(cart.length)
+    setProductQuantity(1)
     console.log(cart)
     console.log(cartCount)
   }
@@ -153,10 +166,7 @@ export default function App() {
       idArr.push(element._id)
     });
     console.log(idArr)
-    var dataObj = {}
-    dataObj.user = user.user.id
-    dataObj.status = "active" 
-    dataObj.product = idArr
+    var dataObj = {user : user.user.id, status : "active", product : idArr }
     console.log(dataObj)
     Axios.post("cart", dataObj)
     .then(response => {
@@ -172,7 +182,7 @@ export default function App() {
     
     <div key={index}>
 
-      <Product  products={products} addToCart={addToCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} productQuantity={productQuantity} />
+      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
 
     </div>
 

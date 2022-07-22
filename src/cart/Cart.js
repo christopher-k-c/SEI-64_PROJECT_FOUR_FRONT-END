@@ -1,12 +1,16 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import Image from 'react-bootstrap/Image'
+// import Image from 'react-bootstrap/Image'
 import Col from 'react-bootstrap/Col'
 
 export default function Cart(props) {
 
 
-    const cartItems = props.cart.map((item, key) => (
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+
+    const cartDisplayArray = Array.from(new Set(props.cart))
+
+    const cartItems = cartDisplayArray.map((item, key) => (
     
           <Card key={key} style={{width: '30rem'}} >
               <Col style={{width: '10rem'}}>
@@ -16,7 +20,9 @@ export default function Cart(props) {
                <Card.Body style={{width: '20rem'}}>
                    <Card.Title> {item.productName} </Card.Title>
                    <Card.Text> £{item.productPrice} </Card.Text>
-                   <Card.Text> Quantity: {props.productQuantity}</Card.Text>
+                   {/* <Card.Text> Quantity: {props.productQuantity}</Card.Text> */}
+                   <Card.Text> Quantity: {countOccurrences(props.cart, item)}</Card.Text>
+
                </Card.Body>
                </Col>
           </Card>
@@ -28,11 +34,10 @@ export default function Cart(props) {
   return (
     <>
         <h1> In your cart: </h1>
-            <form>
+
             {cartItems}
             <button onClick={() => props.makeCart(props.cart)}>Confirm Cart</button>
-            </form>
-           
+     
         
     </>
   )

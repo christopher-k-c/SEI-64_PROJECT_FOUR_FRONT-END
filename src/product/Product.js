@@ -21,9 +21,9 @@ export default function Product(props) {
     setModalIsOpen(false)
   }
 
-  
-  const stopWarning = (e) => {
-    console.log(e.target)
+  const handleInputChange = (e) => {
+    console.log(e.target.value)
+    props.handleProductQuantity(e.target.value)
   }
 
 
@@ -48,9 +48,9 @@ export default function Product(props) {
                 </Modal>
 
                 <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
-                <Button onClick={props.increaseQuantity}> + </Button>
-                <input type="number" value={props.productQuantity} onChange={(e) => stopWarning(e)}></input>
-                <Button onClick={props.decreaseQuantity}> - </Button>
+                {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
+                <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input>
+                {/* <Button onClick={(e) => {props.decreaseQuantity(e)}}> - </Button> */}
             </Card.Body>
 
         </Card>
