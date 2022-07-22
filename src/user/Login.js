@@ -20,22 +20,21 @@ export default function Login(props) {
     }
 
     const loginHandler = () => {
-        let role = ""
         console.log(newUser)
-        Axios.get("auth/users")
-        .then(response => {
-            for (const user in response.data.user) {                
-                const element = response.data.user;
-                if(element[user].emailAddress === newUser.emailAddress){
-                    role = element[user].userType
-                }
-            }
-            props.login(newUser)
-            role === "seller" ? navigation("/manage") : navigation("/index")
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        // Axios.get("auth/users")
+        // .then(response => {
+        //     for (const user in response.data.user) {                
+        //         const element = response.data.user;
+        //         if(element[user].emailAddress === newUser.emailAddress){
+        //             role = element[user].userType
+        //         }
+        //     }
+        props.login(newUser)
+        // role === "seller" ? navigation("/manage") : navigation("/index")
+        // })
+        // .catch(error => {
+        //   console.log(error)
+        // })
     }
 
 

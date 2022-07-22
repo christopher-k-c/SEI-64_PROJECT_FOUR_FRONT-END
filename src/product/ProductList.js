@@ -9,9 +9,6 @@ import './ProductList.css'
 
 export default function ProductList(props) {
 
-    
-  
-
     useEffect(() => {
         loadProductList()
     }, [])

@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form } from 'react-bootstrap'
 import Axios from 'axios'
 
 export default function ProductCreateForm(props) {
 
     const [newProduct, setNewProduct] = useState({})
 
+    const [ModalAlert, setModalAlert] = useState(false)
+
     const success = props.success
 
     const error = props.error
 
-    const handleChange = (event) => {
+    const handleChange = (e) => {
 
-        const attributeToChange = event.target.name
+        const attributeToChange = e.target.name
 
-        const newValue = event.target.value
+        const newValue = e.target.value
 
         const product = {...newProduct}
 
@@ -32,25 +34,30 @@ export default function ProductCreateForm(props) {
           props.loadProductList();
         })
         .catch((error) => {
-          console.log("Error adding product.")
-          console.log(error)
+          console.log("Error adding product:", error)
         })
       }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log(newProduct)
-        addProduct(newProduct)
-        props.closeModal()
+        if(!Object.keys(newProduct).length)
+        {
+            setModalAlert(true)
+        } else {
+            addProduct(newProduct)
+            props.closeModal()
+        }
     }
 
   return (
     <div>
+        { !ModalAlert ? <></> : <Alert variant="danger" onClose={() => {setModalAlert(false)}} dismissible>Product Name, Product Price, Product Description and # in Stock are required fields.</Alert>}
         <h1>Add New Product to Inventory</h1>
         <Container>
             <Form.Group>
                 <Form.Label>Product Name</Form.Label>
-                <Form.Control name="productName" onChange={handleChange}></Form.Control>
+                <Form.Control name="productName" onChange={handleChange} autoFocus></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -60,11 +67,11 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Product Description</Form.Label>
-                <Form.Control name="productDescription" type="textarea" onChange={handleChange}></Form.Control>
+                <Form.Control name="productDescription" as="textarea" rows={5} onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
-                <Form.Label># in Stock</Form.Label>
+                <Form.Label>Stock Count</Form.Label>
                 <Form.Control name="productStock" type="number" onChange={handleChange}></Form.Control>
             </Form.Group>
 
@@ -73,7 +80,7 @@ export default function ProductCreateForm(props) {
                 <Form.Control name="productImageUrl" onChange={handleChange}></Form.Control>
             </Form.Group>
 
-            <Button variant="primary" onClick={(event) => handleSubmit(event)}>Add Product</Button>
+            <Button variant="primary" onClick={(e) => handleSubmit(e)}>Add Product</Button>
 
             
         </Container>

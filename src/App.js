@@ -12,7 +12,8 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-import {Alert} from 'react-bootstrap';
+import {Alert} from 'react-bootstrap'
+import Modal from 'react-modal'
 import Footer from './footer/Footer'
 
 
@@ -140,6 +141,7 @@ export default function App() {
   const handleDelete = (id) => {
     console.log(id)
     console.log("clicked")
+    
     Axios.delete(`product/delete?id=${id}`)
     .then((response) => {
         console.log(response)
@@ -211,15 +213,18 @@ export default function App() {
     Axios.post("auth/login", cred)
     .then(response => {
       console.log(response.data.token)
-      if(response.data.token != null){
+      if(Object.keys(response.data.token).length){
         localStorage.setItem("token", response.data.token);
         let user = jwt_decode(response.data.token)
         setIsAuth(true)
         setUser(user)
         console.log(user.user.role)
         setUserRole(user.user.role)
+        user.user.role === "seller" ? navigation("/manage") : navigation("/index")
         console.log("User successfully logged in.")
         setSuccessMessage("User successfully logged in.")
+      } else {
+        console.log("test")
       }
     })
     .catch(error => {
