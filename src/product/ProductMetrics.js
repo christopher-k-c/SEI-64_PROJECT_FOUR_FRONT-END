@@ -15,8 +15,27 @@ export default function ProductMetrics(props) {
     }
 
     const onEditClick = () => {
-        !showEditModal ? setShowEditModal(true) : setShowEditModal(false)
+        console.log(props.product)
+        if(!showEditModal){ 
+            setShowEditModal(true)
+            console.log("Prod ID:", props.product._id)
+            props.editGet(props.product._id)
+        } else {
+            setShowEditModal(false)
+        }
     }
+
+    const updateProduct = (product) => {
+    console.log(product)
+    Axios.put("product/update", product)
+    .then(response => {
+      console.log(response)
+      props.loadProductList();
+    })
+    .catch((error) => {
+      console.log("Error updating product:", error)
+    })
+  }
 
   return (
     <div>
@@ -27,12 +46,12 @@ export default function ProductMetrics(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
-
                 <p>Are you sure you want to delete this inventory record?</p>
-            <Button variant="primary" onClick={() => props.handleDelete(props._id)}>Yes</Button> &nbsp;
-            <Button variant="primary" onClick={() => setShowDeleteModal(false)}>No</Button>
             </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={() => props.handleDelete(props.product._id)}>Yes</Button> &nbsp;
+                <Button variant="primary" onClick={() => setShowDeleteModal(false)}>No</Button>
+            </Modal.Footer>
         </Modal>
         
         <Modal size="lg" centered show={showEditModal} onHide={() => onEditClick()}>
@@ -42,14 +61,14 @@ export default function ProductMetrics(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ProductEditForm loadProductList={props.loadProductList} showModal={setShowEditModal} product={props.product} />
+                <ProductEditForm loadProductList={props.loadProductList} showModal={setShowEditModal} product={props.product} updateProduct={updateProduct} productToEdit={props.productToEdit}/>
             </Modal.Body>
         </Modal>
 
         <Card>
             <Card.Body>
-                <Card.Title>{props.productName}</Card.Title>
-                <Card.Text>Stock: {props.productStock}</Card.Text>
+                <Card.Title>{props.product.productName}</Card.Title>
+                <Card.Text>Stock: {props.product.productStock}</Card.Text>
                 <Card.Text># of Outstanding Orders: 2</Card.Text>
                 <Card.Text>Total Orders: 28</Card.Text>
                 <Button variant="primary" onClick={() => onEditClick()}>Update Record</Button> &nbsp;
