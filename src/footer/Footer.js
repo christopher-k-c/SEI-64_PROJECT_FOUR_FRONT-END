@@ -1,22 +1,14 @@
 import React from 'react'
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, Navbar} from "react-bootstrap";
 
 export default function Footer() {
   return (
-    <div className="main-Footer">
-        <Container className="d-flex " >
-            
-            <Row className="m-auto align-self-center">
-                
-                <Col>
-                
-
-                </Col>
-            </Row>
+    <div className="fixed-bottom d-flex justify-content-center " >
 
 
-        </Container>
 
     </div>
   )
 }
+
+
