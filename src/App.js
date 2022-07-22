@@ -31,11 +31,16 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 export default function App() {
+  const [cart, setCart] = useState([])
+  const [cartCount, setCartCount] = useState(0)
+
 
   let navigation = useNavigate()
 
   useEffect(() => {
     console.log("useEffect triggered")
+    setCartCount(cart.length)
+    console.log(cartCount)
     let token = localStorage.getItem("token")
 
 
@@ -56,7 +61,7 @@ export default function App() {
       }
     }
     
-  }, [])
+  }, [cart, cartCount])
 
   
 
@@ -65,8 +70,8 @@ export default function App() {
   // 
   const [products, setProducts] = useState([])
   const [userRole, setUserRole] = useState("")
-  const [cart, setCart] = useState([])
-  const [cartCount, setCartCount] = useState(0)
+  // const [cart, setCart] = useState([])
+  // const [cartCount, setCartCount] = useState(0)
   const [productQuantity, setProductQuantity] = useState(1)
   // const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
@@ -107,7 +112,7 @@ export default function App() {
     // console.log(productQuantity)
   }
 
-
+  
   const addToCart = (product) => {
     console.log("button clicked")
     console.log(product)
@@ -154,18 +159,18 @@ export default function App() {
     })
 }
 
-  const loadCartArray = (cartItems) => {
-    // console.log("cart clicked")
-    // console.log(cart)
-    console.log(cartItems)
-  //   Axios.get("cart", cartItems)
-  //   .then(response => {
-  //     console.log(response)
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //   })
-  }
+  // const loadCartArray = (cartItems) => {
+  //   // console.log("cart clicked")
+  //   // console.log(cart)
+  //   console.log(cartItems)
+  // //   Axios.get("cart", cartItems)
+  // //   .then(response => {
+  // //     console.log(response)
+  // //   })
+  // //   .catch(error => {
+  // //     console.log(error)
+  // //   })
+  // }
 
   const makeCart = (cartItems) => {
     // e.preventDefault()
