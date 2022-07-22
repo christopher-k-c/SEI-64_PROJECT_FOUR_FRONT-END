@@ -15,6 +15,7 @@ import Badge from 'react-bootstrap/Badge'
 import {Alert} from 'react-bootstrap'
 import Modal from 'react-modal'
 import Footer from './footer/Footer'
+import NewsLetter from './footer/NewsLetter'
 
 
 
@@ -378,6 +379,7 @@ export default function App() {
 
 
         <Footer />
+        <NewsLetter/>
       
 
   
