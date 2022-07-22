@@ -3,6 +3,15 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <div className="hello">Home</div>
+    <div className="hello">Home
+    
+    
+    
+    
+    
+
+
+    
+    </div>
   )
 }
