@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import {Container, Form, Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Signup(props) {
 
+    const navigation = useNavigate()
+
     const [newUser, setNewUser] = useState({})
 
-    const [sellerVerify, setSellerVerify] = useState("--")
+    const [userRole, setUserRole] = useState("--")
 
-    const sellerKey = "billsbuddies"
+    const sellerKey = process.env.REACT_APP_SELLER_KEY
 
-    console.log(sellerVerify)
+    console.log(userRole)
     
-    console.log(sellerKey)
+    console.log(process.env.REACT_APP_SELLER_KEY)
     
     const handleChange = (event) => {
         const user = {...newUser}
@@ -25,7 +28,7 @@ export default function Signup(props) {
         var select = document.getElementById('userType')
         var val = select.options[select.selectedIndex].value
         console.log("Select: ", select, "Value: ", val)
-        val !== "--" ? setSellerVerify(val) : setSellerVerify("--")
+        val !== "--" ? setUserRole(val) : setUserRole("--")
         const user = {...newUser}
         user[event.target.name] = event.target.value
         console.log(user)
@@ -33,17 +36,25 @@ export default function Signup(props) {
     }
 
     const registerHandler = () => {
-        if(sellerVerify === "buyer"){
+        if(userRole === "buyer"){
             props.register(newUser)
+            navigation("/login")
+            
         } else {
-            if (sellerVerify === "seller" && sellerKey !== document.getElementById("sellerKeyForm").value){
+            if (userRole === "seller" && sellerKey !== document.getElementById("sellerKeyForm").value){
                 console.log(sellerKey)
                 console.log(document.getElementById("sellerKeyForm").value)
                 console.log("Invalid verification key.")
             } else {
                 props.register(newUser)
+                navigation("/login")
             }
         }
+    }
+
+    const handleMask = (e) => {
+        console.log(e.target.attributes)
+        console.log(e.target.attributes)
     }
 
     // var select = document.getElementById('userType')
@@ -84,8 +95,8 @@ export default function Signup(props) {
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>{sellerVerify === "seller" ? ("Enter your seller verification:") : ("")}</Form.Label>
-                <Form.Control id="sellerKeyForm" name="userType" type={sellerVerify !== "seller" ? ("hidden") : ("password")} onChange={(e) => console.log(e.target.value)}></Form.Control>
+                <Form.Label>{userRole === "seller" ? ("Enter your seller verification:") : ("")}</Form.Label>
+                <Form.Control id="sellerKeyForm" name="userType" type={userRole !== "seller" ? ("hidden") : ("text")} onChange={(e) => console.log(e.target.value)} autoComplete='new-password' onClick={(e) => {handleMask(e)}}></Form.Control>
             </Form.Group>
             
 

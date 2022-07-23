@@ -1,26 +1,30 @@
 import Axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 
 export default function ProductEditForm(props) {
-
+  
   const [formAltered, setFormAltered] = useState(false)
-
+  
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
-
+  
+  useEffect(() => {
+    setUpdatedProduct(props.productToEdit)
+  }, [props.productToEdit])
+  
   console.log(props.productToEdit)
-
+  
   const handleChange = (e) => {
     setFormAltered(true)
     console.log(updatedProduct)
     const attributeToChange = e.target.name
-    console.log("e.target.name:", attributeToChange)
+    // console.log("e.target.name:", attributeToChange)
     const updatedValue = e.target.value
-    console.log("e.target.value:", updatedValue)
+    // console.log("e.target.value:", updatedValue)
     const product = {...updatedProduct}
-    console.log("product before updating:", product)
+    // console.log("product before updating:", product)
     product[attributeToChange] = updatedValue
-    console.log("Product after updating:", product)
+    // console.log("Product after updating:", product)
     setUpdatedProduct(product)
   }
 
@@ -37,7 +41,7 @@ export default function ProductEditForm(props) {
     setFormAltered(false)
     props.showModal(false)
   }
-
+  
 
   return (
     <div>
@@ -54,7 +58,7 @@ export default function ProductEditForm(props) {
 
           <Form.Group>
             <Form.Label>Product Description</Form.Label>
-            <Form.Control name="productDescription" onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
+            <Form.Control name="productDescription" as="textarea" rows={5} onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
           </Form.Group>
 
           <Form.Group>

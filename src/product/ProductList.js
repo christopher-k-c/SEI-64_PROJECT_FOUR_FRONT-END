@@ -1,6 +1,6 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { Row, Container } from "react-bootstrap";
+import { useState, useEffect } from 'react'
+import { Row, Container, Modal } from "react-bootstrap";
+import ProductDetail from './ProductDetail';
 import './ProductList.css'
 
 
@@ -8,6 +8,8 @@ import './ProductList.css'
 
 
 export default function ProductList(props) {
+
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         loadProductList()
@@ -33,7 +35,9 @@ export default function ProductList(props) {
         
     }
 
-    
+    const onDetailClick = () => {
+      !showModal ? setShowModal(true) : setShowModal(false)
+    }
 
 
 

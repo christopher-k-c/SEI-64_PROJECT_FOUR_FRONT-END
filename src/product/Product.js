@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
-import Modal from 'react-modal';
 import Button from 'react-bootstrap/Button';
 
 import {
   Row,
   Container,
-  Col
+  Col,
+  Modal
 } from "react-bootstrap";
 
 
@@ -16,13 +16,8 @@ export default function Product(props) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const setModalIsOpenToTrue =()=>{
- 
-    setModalIsOpen(true)
-  }
-
-  const setModalIsOpenToFalse =()=>{
-    setModalIsOpen(false)
+  const setModalOpen =()=>{
+    !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
   }
 
   const handleInputChange = (e) => {
@@ -42,13 +37,17 @@ export default function Product(props) {
                 <Card.Title>{props.products.productName}</Card.Title> 
                 <Card.Text>£{props.products.productPrice}</Card.Text>
 
-                <Button onClick={setModalIsOpenToTrue}>Product Details</Button> &nbsp;
+                <Button onClick={() => setModalOpen()}>Product Details</Button> &nbsp;
 
-                <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-           
-                <Button onClick={setModalIsOpenToFalse}>x</Button>
-                
-                <ProductDetail />
+                <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      More about this product...
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <ProductDetail {...props.products} />
+                  </Modal.Body>
                 </Modal>
 
                 <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
