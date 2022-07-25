@@ -33,8 +33,21 @@ export default function Cart(props) {
 
     // }
 
-    const handleUpdateCart = () => {
-        // re-render the page
+    const handleInputChange = (e) => {
+        console.log(e.target.value)
+        console.log(e.target.placeholder)
+        let updateBy = e.target.value - e.target.placeholder
+        console.log(updateBy)
+        props.handleProductQuantity(updateBy)
+      }
+
+    const handleUpdateCart = (item) => {
+        console.log(item)
+        console.log(props.productQuantity)
+        props.addToCart(item)
+        // for (let i = 1; i <= productQuantity; i++){
+        //     setCart(cart => [...cart, product])
+        //   }
     }
 
     const cartItems = cartDisplayArr.map((item, key) => (
@@ -49,15 +62,14 @@ export default function Cart(props) {
                    <Card.Text> £{item.productPrice} </Card.Text>
                    {/* <Card.Text> Quantity: {props.productQuantity}</Card.Text> */}
                    <Card.Text> Quantity: {countOccurrences(props.cart, item)}</Card.Text>
-                   <input type="number" placeholder="Update Quantity" min="0"></input>
+                   <input type="number" placeholder={countOccurrences(props.cart, item)} min="0" onChange={(e) => handleInputChange(e)}></input>
                    <Button onClick={(e) => {props.handleRemoveFromCart(item)}}> Remove from Cart</Button>
-                    <Card.Link onClick={(e) => {handleUpdateCart(e)}}> Update Cart </Card.Link>
+                    <Card.Link onClick={(e) => {handleUpdateCart(item)}}> Update Cart </Card.Link>
                </Card.Body>
                </Col>
           </Card>
    
     ));
-    console.log(cartItems)
     // const loadCartArray = () => {
     //     console.log(props.cartItems)
     // }
