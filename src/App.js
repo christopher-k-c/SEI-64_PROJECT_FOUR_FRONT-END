@@ -80,6 +80,8 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   // const [cartItemQuant, setCartItemQuant] = useState({})
+  // const [cartDisplayArr, setCartDisplayArr] = useState([])
+
 
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
@@ -147,6 +149,13 @@ export default function App() {
     console.log(cart)
     console.log(cartCount)
   }
+  const handleRemoveFromCart = (deletedItem) => {
+    console.log(deletedItem._id)
+    const updatedCart = cart.filter(element => element._id !== deletedItem._id)
+    // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
+    console.log(updatedCart)
+    setCart(updatedCart)
+}
 
   const loadProductList = () => {
     Axios.get("product/index")
@@ -208,6 +217,7 @@ export default function App() {
       console.log(error)
     })
   }
+
 
 
   const allProducts = products.map((products, index) => (
@@ -400,7 +410,7 @@ export default function App() {
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
-            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} />} />
+            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart}/>} />
           </Routes>
         </div>
 

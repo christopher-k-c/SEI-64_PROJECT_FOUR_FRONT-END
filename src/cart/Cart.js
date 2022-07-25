@@ -22,16 +22,16 @@ export default function Cart(props) {
 
     // const cartDisplayArray = Array.from(new Set(props.cart))
 
-    const handleRemoveFromCart = (deletedItem) => {
-        console.log(deletedItem._id)
-        const test = cartDisplayArr.filter(element => element._id !== deletedItem._id)
-        // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
-        console.log(test)
-        console.log(countOccurrences(props.cart, deletedItem))
-        setCartDisplayArr(test)
-        console.log(cartDisplayArr)
+    // const handleRemoveFromCart = (deletedItem) => {
+    //     console.log(deletedItem._id)
+    //     const test = cartDisplayArr.filter(element => element._id !== deletedItem._id)
+    //     // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
+    //     console.log(test)
+    //     console.log(countOccurrences(props.cart, deletedItem))
+    //     setCartDisplayArr(test)
+    //     console.log(cartDisplayArr)
 
-    }
+    // }
 
     const handleUpdateCart = () => {
         // re-render the page
@@ -50,7 +50,7 @@ export default function Cart(props) {
                    {/* <Card.Text> Quantity: {props.productQuantity}</Card.Text> */}
                    <Card.Text> Quantity: {countOccurrences(props.cart, item)}</Card.Text>
                    <input type="number" placeholder="Update Quantity" min="0"></input>
-                   <Button onClick={(e) => {handleRemoveFromCart(item)}}> Remove from Cart</Button>
+                   <Button onClick={(e) => {props.handleRemoveFromCart(item)}}> Remove from Cart</Button>
                     <Card.Link onClick={(e) => {handleUpdateCart(e)}}> Update Cart </Card.Link>
                </Card.Body>
                </Col>
