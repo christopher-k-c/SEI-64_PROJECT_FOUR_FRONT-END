@@ -14,3 +14,31 @@ body{
       
 }
 
+.footer {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    
+
+    
+}
+
+
+.footer-heading {
+    display: flex;
+    flex-direction: column;
+    margin-right: 4rem;
+    
+}
+
+.footer > .footer-heading > a {
+    color: white;
+    text-decoration: none;
+}
+
+.clear { 
+    clear: both; 
+    height: 12rem; 
+}
