@@ -31,10 +31,14 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 
+
+
 export default function App() {
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
 
+
+  
 
   let navigation = useNavigate()
 
@@ -82,6 +86,20 @@ export default function App() {
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
   // const [isDetail, setIsDetail] = useState(false)
+
+  const addNewsletterEmail = (email) => {
+    // The url is the api and the recipe post comma is the body 
+    Axios.post("newsletter", email)
+    .then(response => {
+        console.log("Recipe Add Fine")
+    })
+    .catch(error => {
+        console.log("There's an error")
+        console.log(error)
+    })
+
+}
+
   
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
@@ -229,6 +247,9 @@ export default function App() {
         user.user.role === "seller" ? navigation("/manage") : navigation("/index")
         console.log("User successfully logged in.")
         setSuccessMessage("User successfully logged in.")
+        setTimeout(() => {
+          setSuccessMessage(null);
+          }, 3000);
       } else {
         console.log("test")
       }
@@ -236,6 +257,9 @@ export default function App() {
     .catch(error => {
       console.log(error)
       setErrorMessage("User has failed to login.")
+      setTimeout(() => {
+        setErrorMessage(null);
+        }, 3000);
     })
   }
 
@@ -248,6 +272,10 @@ export default function App() {
     console.log("User successfully logged out.")
     setSuccessMessage("User successfully logged out.")
     navigation("/")
+
+    setTimeout(() => {
+      setSuccessMessage(null);
+      }, 3000);
   }
 
 //   function detailView(id){
@@ -320,6 +348,7 @@ export default function App() {
 
 
   return (
+    
 
     
     <div>
@@ -378,11 +407,13 @@ export default function App() {
         </div>
 
 
-        <Footer />
-        <NewsLetter/>
+        <Footer addNewsletterEmail={addNewsletterEmail}/>
+        
       
 
   
     </div>
+
   )
+  
 }
