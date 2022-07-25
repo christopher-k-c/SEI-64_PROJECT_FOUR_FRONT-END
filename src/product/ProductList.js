@@ -42,11 +42,11 @@ export default function ProductList(props) {
 
 
   return (
-    <div>
+    <div >
         <h1>Product Index</h1>
 
-        <Container className="d-flex vh-100" >
-          <Row style={{marginBottom: '100px'}} className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
+        <Container className="d-flex"  style={{"marginBottom": "200px"}}>
+          <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
             
             {props.allProducts}
             
