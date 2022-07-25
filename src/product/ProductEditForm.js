@@ -1,30 +1,46 @@
 import Axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 
 export default function ProductEditForm(props) {
-
+  
   const [formAltered, setFormAltered] = useState(false)
-
+  
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
 
+  const [isOriginal, setIsOriginal] = useState ("--")
+  
+  useEffect(() => {
+    setUpdatedProduct(props.productToEdit)
+  }, [props.productToEdit])
+  
   console.log(props.productToEdit)
-
+  
   const handleChange = (e) => {
     setFormAltered(true)
     console.log(updatedProduct)
     const attributeToChange = e.target.name
-    console.log("e.target.name:", attributeToChange)
+    // console.log("e.target.name:", attributeToChange)
     const updatedValue = e.target.value
-    console.log("e.target.value:", updatedValue)
+    // console.log("e.target.value:", updatedValue)
     const product = {...updatedProduct}
-    console.log("product before updating:", product)
+    // console.log("product before updating:", product)
     product[attributeToChange] = updatedValue
-    console.log("Product after updating:", product)
+    // console.log("Product after updating:", product)
     setUpdatedProduct(product)
   }
 
-  
+  const handleSelectChange = (event) => {
+    var select = document.getElementById('productSourceType')
+    var val = select.options[select.selectedIndex].value
+    console.log("Select: ", select, "Value: ", val)
+    val !== 'Original Work' ? setIsOriginal(false) : setIsOriginal(true)
+    const product = {...updatedProduct}
+    product[event.target.name] = event.target.value
+    console.log(product)
+    setUpdatedProduct(product)
+
+}
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +53,7 @@ export default function ProductEditForm(props) {
     setFormAltered(false)
     props.showModal(false)
   }
-
+  
 
   return (
     <div>
@@ -48,13 +64,27 @@ export default function ProductEditForm(props) {
           </Form.Group>
 
           <Form.Group>
+                <Form.Label>Source Material</Form.Label>
+                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType} onChange={handleSelectChange}>
+                    <option value="Film/TV">Film/TV</option>
+                    <option value="Video Game">Video Game</option>
+                    <option value="Original Work">Original Work</option>
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
+                <Form.Control name="productSource" type="text" defaultValue={props.product.productSource} onChange={handleChange}></Form.Control>
+            </Form.Group>
+
+          <Form.Group>
             <Form.Label>Product Price</Form.Label>
             <Form.Control name="productPrice" type="number" onChange={handleChange} defaultValue={props.product.productPrice}></Form.Control>
           </Form.Group>
 
           <Form.Group>
             <Form.Label>Product Description</Form.Label>
-            <Form.Control name="productDescription" onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
+            <Form.Control name="productDescription" as="textarea" rows={5} onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
           </Form.Group>
 
           <Form.Group>

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {Container, Form, Button} from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import Axios from 'axios'
 
 export default function Login(props) {
     console.log(props)
-
-    const navigation = useNavigate()
 
     const [newUser, setNewUser] = useState({})
 
@@ -21,20 +17,7 @@ export default function Login(props) {
 
     const loginHandler = () => {
         console.log(newUser)
-        // Axios.get("auth/users")
-        // .then(response => {
-        //     for (const user in response.data.user) {                
-        //         const element = response.data.user;
-        //         if(element[user].emailAddress === newUser.emailAddress){
-        //             role = element[user].userType
-        //         }
-        //     }
         props.login(newUser)
-        // role === "seller" ? navigation("/manage") : navigation("/index")
-        // })
-        // .catch(error => {
-        //   console.log(error)
-        // })
     }
 
 

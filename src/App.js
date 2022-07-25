@@ -38,9 +38,7 @@ export default function App() {
   const [cartCount, setCartCount] = useState(0)
 
 
-  
-
-  let navigation = useNavigate()
+  const navigation = useNavigate()
 
   useEffect(() => {
     console.log("useEffect triggered")

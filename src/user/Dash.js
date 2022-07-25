@@ -34,12 +34,12 @@ export default function Dash(props) {
         <br/>
         <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
 
-                <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-           
-                <Button onClick={setModalIsOpenToFalse}>x</Button>
-                <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
+        <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+    
+        <Button onClick={setModalIsOpenToFalse}>x</Button>
+        <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
 
-                </Modal>
+        </Modal>
 
         {props.allStock}
         </>
