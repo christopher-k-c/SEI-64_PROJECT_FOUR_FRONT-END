@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import Axios from 'axios'
 
@@ -7,6 +7,8 @@ export default function ProductCreateForm(props) {
     const [newProduct, setNewProduct] = useState({})
 
     const [ModalAlert, setModalAlert] = useState(false)
+
+    const [isOriginal, setIsOriginal] = useState ("--")
 
     const success = props.success
 
@@ -23,6 +25,18 @@ export default function ProductCreateForm(props) {
         product[attributeToChange] = newValue
 
         setNewProduct(product)
+    }
+
+    const handleSelectChange = (event) => {
+        var select = document.getElementById('productSourceType')
+        var val = select.options[select.selectedIndex].value
+        console.log("Select: ", select, "Value: ", val)
+        val !== 'Original Work' ? setIsOriginal(false) : setIsOriginal(true)
+        const product = {...newProduct}
+        product[event.target.name] = event.target.value
+        console.log(product)
+        setNewProduct(product)
+
     }
 
     const addProduct = (product) => {
@@ -52,12 +66,27 @@ export default function ProductCreateForm(props) {
 
   return (
     <div>
-        { !ModalAlert ? <></> : <Alert variant="danger" onClose={() => {setModalAlert(false)}} dismissible>Product Name, Product Price, Product Description and # in Stock are required fields.</Alert>}
+        { !ModalAlert ? <></> : <Alert variant="danger" onClose={() => {setModalAlert(false)}} dismissible>Product Name, Source, Price, Description and # in Stock are required fields.</Alert>}
         <h1>Add New Product to Inventory</h1>
         <Container>
             <Form.Group>
                 <Form.Label>Product Name</Form.Label>
                 <Form.Control name="productName" onChange={handleChange} autoFocus></Form.Control>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Source Material</Form.Label>
+                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue="--" onChange={handleSelectChange}>
+                    <option value="--" disabled>--</option>
+                    <option value="Film/TV">Film/TV</option>
+                    <option value="Video Game">Video Game</option>
+                    <option value="Original Work">Original Work</option>
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
+                <Form.Control name="productSource" type={isOriginal==="--" ? ("hidden") : ("text")} onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>

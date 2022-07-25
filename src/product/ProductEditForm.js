@@ -7,6 +7,8 @@ export default function ProductEditForm(props) {
   const [formAltered, setFormAltered] = useState(false)
   
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
+
+  const [isOriginal, setIsOriginal] = useState ("--")
   
   useEffect(() => {
     setUpdatedProduct(props.productToEdit)
@@ -28,7 +30,17 @@ export default function ProductEditForm(props) {
     setUpdatedProduct(product)
   }
 
-  
+  const handleSelectChange = (event) => {
+    var select = document.getElementById('productSourceType')
+    var val = select.options[select.selectedIndex].value
+    console.log("Select: ", select, "Value: ", val)
+    val !== 'Original Work' ? setIsOriginal(false) : setIsOriginal(true)
+    const product = {...updatedProduct}
+    product[event.target.name] = event.target.value
+    console.log(product)
+    setUpdatedProduct(product)
+
+}
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +62,20 @@ export default function ProductEditForm(props) {
             <Form.Label>Product Name</Form.Label>
             <Form.Control name="productName" onChange={handleChange} defaultValue={props.product.productName}></Form.Control>
           </Form.Group>
+
+          <Form.Group>
+                <Form.Label>Source Material</Form.Label>
+                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType} onChange={handleSelectChange}>
+                    <option value="Film/TV">Film/TV</option>
+                    <option value="Video Game">Video Game</option>
+                    <option value="Original Work">Original Work</option>
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
+                <Form.Control name="productSource" type="text" defaultValue={props.product.productSource} onChange={handleChange}></Form.Control>
+            </Form.Group>
 
           <Form.Group>
             <Form.Label>Product Price</Form.Label>

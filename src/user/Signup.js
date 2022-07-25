@@ -54,7 +54,6 @@ export default function Signup(props) {
 
     const handleMask = (e) => {
         console.log(e.target.attributes)
-        console.log(e.target.attributes)
     }
 
     // var select = document.getElementById('userType')
