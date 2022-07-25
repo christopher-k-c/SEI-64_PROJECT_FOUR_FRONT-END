@@ -241,7 +241,7 @@ const editGet = (id) => {
     <div key={index}>
 
       <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
-
+      
     </div>
 
   ))

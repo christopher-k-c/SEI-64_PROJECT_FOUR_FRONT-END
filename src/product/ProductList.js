@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Row, Container, Modal } from "react-bootstrap";
-import ProductDetail from './ProductDetail';
 import './ProductList.css'
 
 
@@ -45,7 +44,7 @@ export default function ProductList(props) {
     <div >
         <h1>Product Index</h1>
 
-        <Container className="d-flex"  style={{"marginBottom": "200px"}}>
+        <Container className="d-flex"  >
           <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
             
             {props.allProducts}
