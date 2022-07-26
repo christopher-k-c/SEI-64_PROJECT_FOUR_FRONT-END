@@ -33,6 +33,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 
+
 export default function App() {
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
@@ -424,13 +425,17 @@ const editGet = (id) => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart}/>} />
           </Routes>
         </div>
+
+
+
+
 
 
         <Footer addNewsletterEmail={addNewsletterEmail}/>
