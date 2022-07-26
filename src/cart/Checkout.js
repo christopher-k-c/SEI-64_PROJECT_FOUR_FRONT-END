@@ -2,17 +2,26 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Cart from './Cart'
-
+import { Route, Routes, Link } from 'react-router-dom'
 
 export default function Checkout(props) {
+    
+    let getTotalPrice = 0
 
     useEffect(() => {
         setCheckoutItems(Array.from(new Set(props.cart)))
 
-    
-
     }, [props.cart])
     
+    // const getTotalPrice = () => {
+    //     pro
+    // }
+    props.cart.forEach(item => {
+        console.log(item.productPrice)
+        getTotalPrice += item.productPrice
+    })
+
+    console.log(getTotalPrice)
 
     console.log("at checkout")
     const [checkoutItems, setCheckoutItems] = useState([])
@@ -37,7 +46,10 @@ export default function Checkout(props) {
   return (
     <div>
         <h2>Checkout:</h2>
+
         {checkoutList}
+        <div>Total: £{getTotalPrice} </div> 
+        
     </div>
   )
 }
