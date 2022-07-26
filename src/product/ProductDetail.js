@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import './ProductDetail.css'
 
 
+
 export default function ProductDetail(props) {
   let altText = props.productName.replace(/ /g, '').toLowerCase()
 
@@ -52,6 +53,7 @@ export default function ProductDetail(props) {
       <img className='thumb' id={`thumb-${index}`} src={props.productImageUrls[index]} alt={`thumb-${index}`} />
     </div>
   );
+  console.log(props.productAudio)
 
 
   return (
@@ -78,7 +80,8 @@ export default function ProductDetail(props) {
         <p>{props.productDescription}</p>
 
         <div className='audioPlayer'>
-          <div className='player'>
+
+          {/* <div className='player'>
             <div className='playButton'>
               <div className='arrow'></div>
             </div>
@@ -86,7 +89,9 @@ export default function ProductDetail(props) {
               <div className='elapsed'></div>
             </div>
           </div>
-          <p className="timeCount"><span>0:19</span> / <span>0:30</span></p>
+          <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
+
+          <audio id="audio" width="300" height="32" src={props.productAudio} controls> </audio>
 
           <div className='quantityCounter'>
             <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>

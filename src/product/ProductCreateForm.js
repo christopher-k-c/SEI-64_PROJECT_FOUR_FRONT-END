@@ -142,6 +142,11 @@ export default function ProductCreateForm(props) {
                 <Form.Control id='2' onChange={handleUrlChange}></Form.Control>
                 <Form.Control id='3' onChange={handleUrlChange}></Form.Control>
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Product Audio</Form.Label>
+                <Form.Control name="productAudio" onChange={handleChange} autoFocus></Form.Control>
+            </Form.Group>
             <br/>
             <Button variant="primary" onClick={(e) => handleSubmit(e)}>Add Product</Button>
 

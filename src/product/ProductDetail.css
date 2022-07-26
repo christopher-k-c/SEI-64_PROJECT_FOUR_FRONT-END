@@ -111,3 +111,23 @@
     width: 50px;
     text-align: center;
 }
+
+
+/* Audio Player */
+
+#audio {
+    margin-bottom: 30px;
+}
+
+audio::-webkit-media-controls-panel {
+
+    margin: 10px;
+
+}
+
+
+audio::-webkit-media-controls-play-button {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10%; 
+}
+

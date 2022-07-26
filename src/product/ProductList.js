@@ -39,6 +39,8 @@ export default function ProductList(props) {
     }
 
 
+    console.log(props.products, "ProductList Test")
+
 
   return (
     <div >
