@@ -22,9 +22,43 @@
     /* background-color: blue; */
 }
 
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+table {
+    min-width: 500px;
+}
+
+#faux-link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .inventory-list {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     /* background-color: green; */
+}
+
+.scroll {
+    width: 500px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: row;
 }
