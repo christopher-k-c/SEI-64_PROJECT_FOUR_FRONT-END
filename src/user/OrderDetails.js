@@ -14,14 +14,13 @@ export default function OrderDetails(props) {
 
   const orderSet = [...new Set(props.cart)]
 
-  const orderProducts = {}
+  let orderProducts = {}
 
   console.log(orderSet)
 
   props.products.forEach(product => {
       if(orderSet.includes(product._id)){
-        orderProducts["productName"] = product.productName
-        orderProducts["quantity"] = (props.cart.filter(x => x===product._id).length)
+        orderProducts = {"productName": product.productName, "quantity": (props.cart.filter(x => x===product._id).length)}
       }
   });
 
