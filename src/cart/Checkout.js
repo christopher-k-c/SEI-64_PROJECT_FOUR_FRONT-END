@@ -1,20 +1,39 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
-import Cart from './Cart'
-import { Route, Routes, Link } from 'react-router-dom'
+// import Cart from './Cart'
+import { useNavigate } from 'react-router-dom'
 import CardDetailsForm from './CardDetailsForm'
 import OrderAddressForm from './OrderAddressForm'
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios'
+import Switch from 'react-switch'
+// import OrderConfirmation from './OrderConfirmation'
 
 
 export default function Checkout(props) {
-    
+    const navigation = useNavigate()
+
     let getTotalPrice = 0
+
+    const [orderRef, setOrderRef] = useState("")
+    const [sameAddress, setSameAddress] = useState(true)
 
     useEffect(() => {
         setCheckoutItems(Array.from(new Set(props.cart)))
+
+        Axios.get("orders/index")
+        .then((response) => {
+            console.log(response.data.length)
+            let orderRefNo = String(response.data.length + 1).padStart(4, '0')
+            console.log(orderRefNo)
+            setOrderRef(orderRefNo)
+            // console.log(generateOrderRef)
+            // return generateOrderRef
+        })
+        .catch((error) => {
+            console.log(error)
+        }) 
         
     }, [props.cart])
     
@@ -23,7 +42,6 @@ export default function Checkout(props) {
     // }
     const handlePriceCalc = () => {
         props.cart.forEach(item => {
-            console.log(item.productPrice)
             getTotalPrice += item.productPrice
         })
         return getTotalPrice
@@ -32,6 +50,25 @@ export default function Checkout(props) {
 
     console.log(handlePriceCalc())
 
+   
+
+    // const createOrderRefNo = () => {
+    //     Axios.get("orders/index")
+    //     .then((response) => {
+    //         console.log(response.data.length)
+    //         let orderRefNo = String(response.data.length + 1).padStart(4, '0')
+    //         console.log(orderRefNo)
+    //         setOrderRef(orderRefNo)
+    //         // console.log(generateOrderRef)
+    //         // return generateOrderRef
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     }) 
+    // }
+
+    // console.log(createOrderRefNo())
+    console.log(orderRef)
     console.log("at checkout")
     const [checkoutItems, setCheckoutItems] = useState([])
     const [orderForm, setorderForm] = useState({"cart":props.cart})
@@ -56,6 +93,18 @@ export default function Checkout(props) {
         setNewPaymentDetails(paymentDetails)
     }
 
+    const handleBillingChange = (e) => {
+        const attrToChange = e.target.name
+        const newValue = e.target.value
+        const billingAddress = {...newBillingAddress}
+        billingAddress[attrToChange] = newValue
+        console.log(billingAddress)
+        setNewBillingAddress(billingAddress)
+        if (sameAddress) {
+            console.log("sameAddress is true")
+            setNewShippingAddress(billingAddress)}
+    }
+
     const handleShippingChange = (e) => {
         const attrToChange = e.target.name
         const newValue = e.target.value
@@ -65,14 +114,7 @@ export default function Checkout(props) {
         setNewShippingAddress(shippingAddress)
     }
 
-    const handleBillingChange = (e) => {
-        const attrToChange = e.target.name
-        const newValue = e.target.value
-        const billingAddress = {...newBillingAddress}
-        billingAddress[attrToChange] = newValue
-        console.log(billingAddress)
-        setNewBillingAddress(billingAddress)
-    }
+
 
     const addOrder = (order) => {
         console.log("adding order to db")
@@ -82,20 +124,21 @@ export default function Checkout(props) {
         order.billingAddress = newBillingAddress
         order.cart = props.cart
         order.user = props.user.user.id
-        order.orderRef = 1234
+        order.orderRef = orderRef
+        props.setOrderRef(order.orderRef)
         order.totalPrice = getTotalPrice
         console.log(order)
         Axios.post("/checkout", order)
         .then(response => {
             console.log(response)
             console.log("ordere added successfully")
-            // props.setAllOrders([...props.allOrders, order])
+            navigation("/confirmation")
         })
         .catch((error) => {
             console.log(error)
         })
     }
-
+    // props.setOrderRef(order.orderRef)
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -128,8 +171,10 @@ export default function Checkout(props) {
         <div>Total: £{getTotalPrice} </div> 
         <br></br>
         <CardDetailsForm orderForm={orderForm} setorderForm={setorderForm} handleChange={handleChange} />
-        <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} />
+        <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} sameAddress={sameAddress} setSameAddress={setSameAddress} />
         <Button onClick={(e) => {handleSubmit(e)}}> Submit Order</Button>
+
+
     </div>
   )
 }
