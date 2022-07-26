@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import OrderHistory from './OrderHistory'
 import Axios from 'axios'
 import ProductCreateForm from '../product/ProductCreateForm'
-import { Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Modal from 'react-modal'
 import './Dash.css'
 
@@ -44,13 +44,15 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table'>
                     <h4>Customer Orders</h4>
-                    <OrderHistory />
+                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products}/>
                 </div>
             
-                <div className='inventory-list'>
+                <div>
                     <h4>Product inventory</h4>
                     <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
+                    <div className='inventory-list scroll'>
                     {props.allStock}
+                    </div>
                 </div>
             </div>
         
@@ -58,7 +60,7 @@ export default function Dash(props) {
         ) : (
             <div className='order-table'>
                 <h4>Customer Orders</h4>
-                <OrderHistory />
+                <OrderHistory {...props.orders}/>
             </div>
         )
         }

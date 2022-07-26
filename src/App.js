@@ -80,6 +80,7 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
+  const [allOrders, setAllOrders] = useState([])
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
 
@@ -432,9 +433,9 @@ const editGet = (id) => {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
+            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
-            <Route path="/checkout" element={<Checkout cart={cart} user={user} />} />
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} allOrders={allOrders} setAllOrders={setAllOrders}/>} />
           </Routes>
         </div>
 

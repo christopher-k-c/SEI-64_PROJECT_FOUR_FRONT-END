@@ -89,6 +89,7 @@ export default function Checkout(props) {
         .then(response => {
             console.log(response)
             console.log("ordere added successfully")
+            // props.setAllOrders([...props.allOrders, order])
         })
         .catch((error) => {
             console.log(error)
