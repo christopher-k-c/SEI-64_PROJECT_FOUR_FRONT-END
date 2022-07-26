@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import './ProductDetail.css'
 
@@ -7,6 +7,14 @@ export default function ProductDetail(props) {
   let altText = props.productName.replace(/ /g, '').toLowerCase()
 
   const numberInput = useRef(null)
+  
+  const [currentlySelected, setCurrentlySelected] = useState("")
+  
+  useEffect(()=>{
+    setCurrentlySelected(document.getElementById("thumb-0"))
+    var defaultImg = document.getElementById("thumb-0")
+    defaultImg.className = "selected"
+  },[])
 
   const handleNumber = (e) => {
     let number = numberInput.current
@@ -21,16 +29,51 @@ export default function ProductDetail(props) {
     console.log(numberInput.current.value)
   }
 
+  const handleSelect = (e) => {
+    console.log(e.target)
+    if(currentlySelected === e.target){
+      console.log("Currently selected")
+      console.log(currentlySelected.src)
+      
+    } else {
+      const idSlice = e.target.id.slice(0, 5)
+      let doClassIdMatch = (idSlice === e.target.className)
+      let newClass = doClassIdMatch ? "selected" : e.target.className
+      if(currentlySelected){
+        currentlySelected.className = "thumb"
+      }
+      e.target.className = newClass
+      setCurrentlySelected(e.target)
+    }
+  }
+  
+  const imgThumbs = props.productImageUrls.map((url, index) =>
+    <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
+      <img className='thumb' id={`thumb-${index}`} src={props.productImageUrls[index]} alt={`thumb-${index}`} />
+    </div>
+  );
+
 
   return (
     <div className='detailModalFlex'>
+
+      <div className='images'>
+
+        <div className='mainImg'>
+          <img className='detailImg' src={currentlySelected.src} alt={`${altText}_img`}/>
+        </div>
+        
+        <div className='img-thumbs'>
+          {imgThumbs}
+        </div>
+      </div>
       
-      <img className='detailImg' src={props.productImageUrl} alt={`${altText}_img`}/>
 
       <div className='vr'></div>
     
       <div className='detailsInfo'>
         <h3>{props.productName}</h3>
+        <p>{props.productSourceType!=="Original Work" ? "from" : "by"} {props.productSource}</p>
         <h5>£{props.productPrice}</h5>
         <p>{props.productDescription}</p>
 
@@ -54,9 +97,7 @@ export default function ProductDetail(props) {
 
         </div>
       </div>
-
-        
-    
+   
     </div>
   )
 }

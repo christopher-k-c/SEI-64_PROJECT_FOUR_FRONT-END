@@ -6,8 +6,47 @@
     /* background-color: red; */
 }
 
+.mainImg {
+    display: flex;
+    justify-content: center;
+}
+
 .detailImg {
-    width: 45%;
+    width: 90%;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-thumbs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 25px
+}
+
+.img-thumbs div {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+}
+
+.thumb {
+    width: 100%;
+}
+
+.selected {
+    width: 100%;
+    filter: opacity(50%);
+}
+
+#div-1-selected {
+    border: 3px solid black
+}
+
+#div-1-selected img {
 }
 
 .detailsInfo {
@@ -19,6 +58,7 @@
     justify-content: space-evenly;
     align-content: space-between;
     align-items: stretch;
+    margin-left: 20px;
     /* background-color: blue; */
 }
 
