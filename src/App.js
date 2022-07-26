@@ -16,7 +16,7 @@ import {Alert} from 'react-bootstrap'
 import Modal from 'react-modal'
 import Footer from './footer/Footer'
 import NewsLetter from './footer/NewsLetter'
-
+import Checkout from './cart/Checkout' 
 
 
 
@@ -228,6 +228,7 @@ const editGet = (id) => {
     Axios.post("cart", dataObj)
     .then(response => {
       console.log(response)
+      navigation("/checkout")
     })
     .catch(error => {
       console.log(error)
@@ -241,7 +242,7 @@ const editGet = (id) => {
     <div key={index}>
 
       <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
-
+      
     </div>
 
   ))
@@ -426,7 +427,8 @@ const editGet = (id) => {
             <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
-            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart}/>} />
+            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart}/>} />
           </Routes>
         </div>
 

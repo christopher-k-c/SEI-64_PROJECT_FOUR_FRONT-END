@@ -17,7 +17,7 @@ export default function Cart(props) {
     //   }
     }, [props.cart])
     
-
+    const [decreaseQuantity, setDecreaseQuantity] = useState(false)
     const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
     // const cartDisplayArray = Array.from(new Set(props.cart))
@@ -33,8 +33,34 @@ export default function Cart(props) {
 
     // }
 
-    const handleUpdateCart = () => {
-        // re-render the page
+    const handleInputChange = (e, product) => {
+        console.log(e.target.value)
+        console.log(e.target.placeholder)
+        let updateBy = e.target.value - e.target.placeholder
+        console.log(updateBy)
+        console.log(product)
+        if (updateBy >= 0) {
+            props.handleProductQuantity(updateBy)
+        } else {
+            console.log("need to reduce product quantity")
+            // props.handleRemoveFromCart(product)
+            props.handleProductQuantity(e.target.value)
+            // set decrease quantity state to true to pass to the handleUpdateCart fxn
+            setDecreaseQuantity(true)
+        }
+      }
+
+    const handleUpdateCart = (item) => {
+        console.log(item)
+        console.log(props.productQuantity)
+        if (decreaseQuantity) {
+            props.handleRemoveFromCart(item)
+            setDecreaseQuantity(false)
+        }
+        props.addToCart(item)
+        // for (let i = 1; i <= productQuantity; i++){
+        //     setCart(cart => [...cart, product])
+        //   }
     }
 
     const cartItems = cartDisplayArr.map((item, key) => (
@@ -48,16 +74,17 @@ export default function Cart(props) {
                    <Card.Title> {item.productName} </Card.Title>
                    <Card.Text> £{item.productPrice} </Card.Text>
                    {/* <Card.Text> Quantity: {props.productQuantity}</Card.Text> */}
-                   <Card.Text> Quantity: {countOccurrences(props.cart, item)}</Card.Text>
-                   <input type="number" placeholder="Update Quantity" min="0"></input>
+                   <Card.Text> 
+                       Quantity:  <input type="number" placeholder={countOccurrences(props.cart, item)} defaultValue={countOccurrences(props.cart, item)} min="0" onChange={(e) => handleInputChange(e, item)}></input>
+                    </Card.Text>
+                   {/* <input type="number" placeholder={countOccurrences(props.cart, item)} min="0" onChange={(e) => handleInputChange(e)}></input> */}
                    <Button onClick={(e) => {props.handleRemoveFromCart(item)}}> Remove from Cart</Button>
-                    <Card.Link onClick={(e) => {handleUpdateCart(e)}}> Update Cart </Card.Link>
+                    <Card.Link href="#" onClick={(e) => {handleUpdateCart(item)}}> Update Cart </Card.Link>
                </Card.Body>
                </Col>
           </Card>
    
     ));
-    console.log(cartItems)
     // const loadCartArray = () => {
     //     console.log(props.cartItems)
     // }
