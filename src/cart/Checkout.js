@@ -2,15 +2,17 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Cart from './Cart'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import CardDetailsForm from './CardDetailsForm'
 import OrderAddressForm from './OrderAddressForm'
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios'
+import OrderConfirmation from './OrderConfirmation'
 
 
 export default function Checkout(props) {
-    
+    const navigation = useNavigate()
+
     let getTotalPrice = 0
 
     useEffect(() => {
@@ -31,6 +33,10 @@ export default function Checkout(props) {
     // handlePriceCalc()
 
     console.log(handlePriceCalc())
+
+    // const createOrderRefNo = () => {
+
+    // }
 
     console.log("at checkout")
     const [checkoutItems, setCheckoutItems] = useState([])
@@ -83,18 +89,20 @@ export default function Checkout(props) {
         order.cart = props.cart
         order.user = props.user.user.id
         order.orderRef = 1234
+        props.setOrderRef(order.orderRef)
         order.totalPrice = getTotalPrice
         console.log(order)
         Axios.post("/checkout", order)
         .then(response => {
             console.log(response)
             console.log("ordere added successfully")
+            navigation("/confirmation")
         })
         .catch((error) => {
             console.log(error)
         })
     }
-
+    // props.setOrderRef(order.orderRef)
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -129,6 +137,10 @@ export default function Checkout(props) {
         <CardDetailsForm orderForm={orderForm} setorderForm={setorderForm} handleChange={handleChange} />
         <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} />
         <Button onClick={(e) => {handleSubmit(e)}}> Submit Order</Button>
+
+        {/* <Routes>
+        <Route path="/confirmation" element={<OrderConfirmation />} />
+        </Routes> */}
     </div>
   )
 }
