@@ -4,6 +4,7 @@ import Axios from 'axios'
 import ProductCreateForm from '../product/ProductCreateForm'
 import { Button} from 'react-bootstrap'
 import Modal from 'react-modal'
+import './Dash.css'
 
 export default function Dash(props) {
     useEffect(() => {
@@ -24,30 +25,41 @@ export default function Dash(props) {
     
 
   return (
-    <div>
+    <div className="dash-container">
         {props.role === "seller" ? (
         <>
-        <h1>Dashboard</h1>
-        <h4>Customer Orders</h4>
-        <OrderHistory />
-        <br/>
-        <br/>
-        <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
 
-        <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-    
-        <Button onClick={setModalIsOpenToFalse}>x</Button>
-        <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
 
-        </Modal>
+            <div id='add-modal'>
+            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+        
+            <Button onClick={setModalIsOpenToFalse}>x</Button>
+            <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
 
-        {props.allStock}
+            </Modal>
+            </div>
+
+            <h1 className='dash-title'>Dashboard</h1>
+
+            <div className='dash-contents'>
+                <div className='order-table'>
+                    <h4>Customer Orders</h4>
+                    <OrderHistory />
+                </div>
+            
+                <div className='inventory-list'>
+                    <h4>Product inventory</h4>
+                    <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
+                    {props.allStock}
+                </div>
+            </div>
+        
         </>
         ) : (
-        <>
-        <h4>My Orders</h4>
-        <OrderHistory />
-        </>
+            <div className='order-table'>
+                <h4>Customer Orders</h4>
+                <OrderHistory />
+            </div>
         )
         }
     </div>

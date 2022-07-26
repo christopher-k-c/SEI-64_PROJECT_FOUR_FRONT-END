@@ -37,16 +37,9 @@
     width: 100%;
 }
 
-.selected {
+.selected-img {
     width: 100%;
     filter: opacity(50%);
-}
-
-#div-1-selected {
-    border: 3px solid black
-}
-
-#div-1-selected img {
 }
 
 .detailsInfo {

@@ -13,7 +13,7 @@ export default function ProductDetail(props) {
   useEffect(()=>{
     setCurrentlySelected(document.getElementById("thumb-0"))
     var defaultImg = document.getElementById("thumb-0")
-    defaultImg.className = "selected"
+    defaultImg.className = "selected-img"
   },[])
 
   const handleNumber = (e) => {
@@ -38,7 +38,7 @@ export default function ProductDetail(props) {
     } else {
       const idSlice = e.target.id.slice(0, 5)
       let doClassIdMatch = (idSlice === e.target.className)
-      let newClass = doClassIdMatch ? "selected" : e.target.className
+      let newClass = doClassIdMatch ? "selected-img" : e.target.className
       if(currentlySelected){
         currentlySelected.className = "thumb"
       }

@@ -105,13 +105,19 @@ export default function App() {
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
     .then(response => {
+      if(response.data.message.slice(0, 6) === "Failed"){
+        setErrorMessage("User registration failed.")
+      } else {
       console.log(response)
       console.log("Signed up successfully!")
       console.log(user)
       setSuccessMessage("User signup has been successful")
+      navigation("/login")
+      }
     })
     .catch(error => {
       console.log(error)
+      setErrorMessage("User registration failed!")
     })
   }
 
