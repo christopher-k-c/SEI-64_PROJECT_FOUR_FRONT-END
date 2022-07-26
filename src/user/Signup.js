@@ -46,8 +46,6 @@ export default function Signup(props) {
             console.log(newUser.userType)
             console.log(newUser)
             props.register(newUser)
-            navigation("/login")
-            
         } else {
             console.log("Role altered path")
             if (sellerKey !== document.getElementById("sellerKeyForm").value){
@@ -59,7 +57,6 @@ export default function Signup(props) {
                 setUserRole("seller")
                 newUser.userType = userRole
                 props.register(newUser)
-                navigation("/login")
             }
         }
     }

@@ -17,6 +17,7 @@ import Modal from 'react-modal'
 import Footer from './footer/Footer'
 import NewsLetter from './footer/NewsLetter'
 import Checkout from './cart/Checkout' 
+import OrderConfirmation from './cart/OrderConfirmation'
 
 
 
@@ -71,7 +72,7 @@ export default function App() {
 
   const [isAuth, setIsAuth] = useState(false)
   const [user, setUser] = useState({})
-  // 
+  const [orderRef, setOrderRef] = useState()
   const [products, setProducts] = useState([])
   const [userRole, setUserRole] = useState("")
   // const [cart, setCart] = useState([])
@@ -106,13 +107,19 @@ export default function App() {
   const registerHandler = (user) => {
     Axios.post("auth/signup", user)
     .then(response => {
+      if(response.data.message.slice(0, 6) === "Failed"){
+        setErrorMessage("User registration failed.")
+      } else {
       console.log(response)
       console.log("Signed up successfully!")
       console.log(user)
       setSuccessMessage("User signup has been successful")
+      navigation("/login")
+      }
     })
     .catch(error => {
       console.log(error)
+      setErrorMessage("User registration failed!")
     })
   }
 
@@ -429,7 +436,8 @@ const editGet = (id) => {
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
-            <Route path="/checkout" element={<Checkout cart={cart}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef}/>} />
+            <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
         </div>
 
