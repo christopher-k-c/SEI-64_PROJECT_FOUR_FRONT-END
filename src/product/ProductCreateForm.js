@@ -1,14 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import Axios from 'axios'
 
 export default function ProductCreateForm(props) {
 
+    
     const [newProduct, setNewProduct] = useState({})
-
+    
     const [ModalAlert, setModalAlert] = useState(false)
 
-    const [isOriginal, setIsOriginal] = useState ("--")
+    const [isOriginal, setIsOriginal] = useState(false)
+
+    const [sourceTypeAltered, setSourceTypeAltered] = useState(false)
+
+    const [newImageSet, setNewImageSet] = useState([])
+
+    const defaultSourceType = "Film/TV"
 
     const success = props.success
 
@@ -27,7 +34,28 @@ export default function ProductCreateForm(props) {
         setNewProduct(product)
     }
 
+    const handleUrlChange = (e) => {
+
+        let urlToChange = e.target.id
+
+        console.log(urlToChange)
+
+        const newValue = e.target.value
+
+        console.log(newValue)
+
+        const images = [...newImageSet]
+
+        images[urlToChange] = newValue
+        
+        console.log(images)
+
+        setNewImageSet(images)
+        
+    }
+
     const handleSelectChange = (event) => {
+        setSourceTypeAltered(true)
         var select = document.getElementById('productSourceType')
         var val = select.options[select.selectedIndex].value
         console.log("Select: ", select, "Value: ", val)
@@ -41,6 +69,8 @@ export default function ProductCreateForm(props) {
 
     const addProduct = (product) => {
         console.log("Add Product")
+        console.log(product)
+        product.productImageUrls = newImageSet
         Axios.post("product/add", product)
         .then(response => {
           console.log(response.data)
@@ -54,6 +84,7 @@ export default function ProductCreateForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        !sourceTypeAltered ? newProduct.productSourceType = defaultSourceType : (console.log("Source type set to user specified"))
         console.log(newProduct)
         if(!Object.keys(newProduct).length)
         {
@@ -76,8 +107,8 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Source Material</Form.Label>
-                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue="--" onChange={handleSelectChange}>
-                    <option value="--" disabled>--</option>
+                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={defaultSourceType} onChange={handleSelectChange}>
+                    {/* <option value="--" disabled>--</option> */}
                     <option value="Film/TV">Film/TV</option>
                     <option value="Video Game">Video Game</option>
                     <option value="Original Work">Original Work</option>
@@ -105,10 +136,13 @@ export default function ProductCreateForm(props) {
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Product Image URL</Form.Label>
-                <Form.Control name="productImageUrl" onChange={handleChange}></Form.Control>
+                <Form.Label>Product Image URLs &#40;up to four&#41;</Form.Label>
+                <Form.Control id='0'onChange={handleUrlChange}></Form.Control>
+                <Form.Control id='1' onChange={handleUrlChange}></Form.Control>
+                <Form.Control id='2' onChange={handleUrlChange}></Form.Control>
+                <Form.Control id='3' onChange={handleUrlChange}></Form.Control>
             </Form.Group>
-
+            <br/>
             <Button variant="primary" onClick={(e) => handleSubmit(e)}>Add Product</Button>
 
             

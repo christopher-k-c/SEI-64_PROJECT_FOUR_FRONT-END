@@ -29,37 +29,11 @@ export default function Product(props) {
   // const increaseQuantity = () => {
   //   props.productQuantity += 1
   // }
-
-
-
-  let productQuantity = props.products.productStock
-  const divStyle ={
-    color: 'black',
-  }
-
-  if (productQuantity === 0){
-    productQuantity = "OUT OF STOCK"
-    divStyle.color = 'red'
-
-
-  } else if (productQuantity <= 10 ){
-    productQuantity = "LOW STOCK"
-    divStyle.color = 'orange'
-
-  } else if (productQuantity > 10) {
-    productQuantity = `${productQuantity} AVAILABLE`
-    divStyle.color = 'green'
-
-  }
-
-  // document.getElementById("stock").style.color = color;
-
   return (
     <><Col style={{marginBottom: '20px'}} >
         <Card >
             <Card.Img variant="top" src={props.products.productImageUrl} />
             <Card.Body>
-                <Card.Text style={divStyle}>{productQuantity}</Card.Text>
                 <Card.Title>{props.products.productName}</Card.Title> 
                 <Card.Text>£{props.products.productPrice}</Card.Text>
 
