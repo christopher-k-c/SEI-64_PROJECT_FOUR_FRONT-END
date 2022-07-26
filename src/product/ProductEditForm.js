@@ -8,16 +8,22 @@ export default function ProductEditForm(props) {
   
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
 
-  const [isOriginal, setIsOriginal] = useState ("--")
+  const [isOriginal, setIsOriginal] = useState("")
+
+  const [newImageSet, setNewImageSet] = useState([])
   
   useEffect(() => {
     setUpdatedProduct(props.productToEdit)
-  }, [props.productToEdit])
+    setIsOriginal(props.product.productSourceType !== "--" ? (props.product.productSourceType === "Original Work" ? true : false) : "--")
+    setNewImageSet(props.product.productImageUrls)
+  }, [props.productToEdit, props.product.productSourceType, props.product.productImageUrls])
   
   console.log(props.productToEdit)
+  console.log(isOriginal)
+  console.log(newImageSet)
   
   const handleChange = (e) => {
-    setFormAltered(true)
+    !formAltered ? setFormAltered(true) : console.log("Form already altered")
     console.log(updatedProduct)
     const attributeToChange = e.target.name
     // console.log("e.target.name:", attributeToChange)
@@ -31,6 +37,7 @@ export default function ProductEditForm(props) {
   }
 
   const handleSelectChange = (event) => {
+    !formAltered ? setFormAltered(true) : console.log("Form already altered")
     var select = document.getElementById('productSourceType')
     var val = select.options[select.selectedIndex].value
     console.log("Select: ", select, "Value: ", val)
@@ -41,11 +48,36 @@ export default function ProductEditForm(props) {
     setUpdatedProduct(product)
 
 }
+
+const handleUrlChange = (e) => {
+
+  !formAltered ? setFormAltered(true) : console.log("Form already altered")
+
+  let urlToChange = e.target.id
+
+  console.log(urlToChange)
+
+  const newValue = e.target.value
+
+  console.log(newValue)
+
+  const images = [...newImageSet]
+
+  images[urlToChange] = newValue
+  
+  console.log(images)
+
+  setNewImageSet(images)
+  
+}
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(newImageSet)
+    console.log(props.product.productImageUrls)
     console.log(updatedProduct)
     if(formAltered){
+      updatedProduct.productImageUrls = newImageSet
       props.updateProduct(updatedProduct)
     } else {
       console.log("Record not changed.")
@@ -53,7 +85,6 @@ export default function ProductEditForm(props) {
     setFormAltered(false)
     props.showModal(false)
   }
-  
 
   return (
     <div>
@@ -65,7 +96,8 @@ export default function ProductEditForm(props) {
 
           <Form.Group>
                 <Form.Label>Source Material</Form.Label>
-                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType} onChange={handleSelectChange}>
+                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType ? props.product.productSourceType : "--"} onChange={handleSelectChange}>
+                    <option value="--" disabled>--</option>
                     <option value="Film/TV">Film/TV</option>
                     <option value="Video Game">Video Game</option>
                     <option value="Original Work">Original Work</option>
@@ -93,9 +125,12 @@ export default function ProductEditForm(props) {
           </Form.Group>
           
           <Form.Group>
-            <Form.Label>Product Image URL</Form.Label>
-            <Form.Control name="productImageUrl" onChange={handleChange} defaultValue={props.product.productImageUrl}></Form.Control>
-          </Form.Group>
+                <Form.Label>Product Image URLs &#40;up to four&#41;</Form.Label>
+                <Form.Control id='0' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[0]}></Form.Control>
+                <Form.Control id='1' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[1]}></Form.Control>
+                <Form.Control id='2' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[2]}></Form.Control>
+                <Form.Control id='3' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[3]}></Form.Control>
+            </Form.Group>
           
           <Button variant="primary" onClick={(e) => handleSubmit(e)}>Update Product</Button>
           

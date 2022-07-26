@@ -107,7 +107,8 @@ export default function App() {
     .then(response => {
       console.log(response)
       console.log("Signed up successfully!")
-      setSuccessMessage("User signup has been user successful")
+      console.log(user)
+      setSuccessMessage("User signup has been successful")
     })
     .catch(error => {
       console.log(error)

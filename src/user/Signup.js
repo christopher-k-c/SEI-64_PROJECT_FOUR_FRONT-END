@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Container, Form, Button} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import Switch from 'react-switch'
+import './user.css'
 
 
 export default function Signup(props) {
@@ -9,11 +11,19 @@ export default function Signup(props) {
 
     const [newUser, setNewUser] = useState({})
 
-    const [userRole, setUserRole] = useState("--")
+    const [userRole, setUserRole] = useState("")
 
-    const sellerKey = process.env.REACT_APP_SELLER_KEY
+    const [checked, setChecked] = useState(false)
+
+    useEffect(() => {
+        setUserRole(checked ? "seller" : "buyer")
+    }, [checked])
 
     console.log(userRole)
+
+    const defaultUserRole = "buyer"
+
+    const sellerKey = process.env.REACT_APP_SELLER_KEY
     
     console.log(process.env.REACT_APP_SELLER_KEY)
     
@@ -24,28 +34,30 @@ export default function Signup(props) {
         setNewUser(user)
     }
 
-    const handleSelectChange = (event) => {
-        var select = document.getElementById('userType')
-        var val = select.options[select.selectedIndex].value
-        console.log("Select: ", select, "Value: ", val)
-        val !== "--" ? setUserRole(val) : setUserRole("--")
-        const user = {...newUser}
-        user[event.target.name] = event.target.value
-        console.log(user)
-        setNewUser(user)
+    const handleToggleChange = () => {
+        setChecked(!checked)
     }
 
     const registerHandler = () => {
-        if(userRole === "buyer"){
+        if(!checked){
+            console.log("Role not altered path")
+            setUserRole(defaultUserRole)
+            newUser.userType = userRole
+            console.log(newUser.userType)
+            console.log(newUser)
             props.register(newUser)
             navigation("/login")
             
         } else {
-            if (userRole === "seller" && sellerKey !== document.getElementById("sellerKeyForm").value){
+            console.log("Role altered path")
+            if (sellerKey !== document.getElementById("sellerKeyForm").value){
                 console.log(sellerKey)
                 console.log(document.getElementById("sellerKeyForm").value)
                 console.log("Invalid verification key.")
             } else {
+                console.log(newUser)
+                setUserRole("seller")
+                newUser.userType = userRole
                 props.register(newUser)
                 navigation("/login")
             }
@@ -56,10 +68,6 @@ export default function Signup(props) {
         console.log(e.target.attributes)
     }
 
-    // var select = document.getElementById('userType')
-    // var val = (select.options === null)
-    // console.log(val)
-
   return (
     <div>
         <h1>Sign Up</h1>
@@ -69,35 +77,43 @@ export default function Signup(props) {
                 <Form.Control name="firstName" onChange={handleChange}></Form.Control>
             </Form.Group>
 
+            <br/>
+
             <Form.Group>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control name="lastName" onChange={handleChange}></Form.Control>
             </Form.Group>
+
+            <br/>
 
             <Form.Group>
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control name="emailAddress" onChange={handleChange}></Form.Control>
             </Form.Group>
 
+            <br/>
+
             <Form.Group>
                 <Form.Label>Password</Form.Label>
                 <Form.Control name="password" type="password" onChange={handleChange}></Form.Control>
             </Form.Group>
 
+            <br/>
+
             <Form.Group id="formgroup">
-                <Form.Label>User Type</Form.Label>
-                <Form.Select id="userType" name="userType" type="select" defaultValue="--" onChange={handleSelectChange}>
-                    <option value="--" disabled>--</option>
-                    <option value="buyer">Buyer</option>
-                    <option value="seller">Seller</option>
-                </Form.Select>
+                <div className="userType">
+                    <Form.Label>Register as a seller?:</Form.Label>
+                    <Switch className='switch' onChange={handleToggleChange} checked={checked}/>
+                </div>
+                
+                <Form.Group className='verify-seller'>
+                    <Form.Label>{userRole === "seller" ? ("Enter your seller verification code:") : ("")}</Form.Label>
+                    <Form.Control id="sellerKeyForm" type={userRole === "buyer" ? ("hidden") : ("text")} onChange={(e) => console.log(e.target.value)} autoComplete='new-password' onClick={(e) => {handleMask(e)}}></Form.Control>
+                </Form.Group>
             </Form.Group>
 
-            <Form.Group>
-                <Form.Label>{userRole === "seller" ? ("Enter your seller verification:") : ("")}</Form.Label>
-                <Form.Control id="sellerKeyForm" name="userType" type={userRole !== "seller" ? ("hidden") : ("text")} onChange={(e) => console.log(e.target.value)} autoComplete='new-password' onClick={(e) => {handleMask(e)}}></Form.Control>
-            </Form.Group>
-            
+            <br/>
+
 
             <Button variant="primary" onClick={registerHandler}>Register</Button>
         </Container>
