@@ -3,6 +3,15 @@ import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
 
+
+
+
+// import audio from './audio/30_Seconds_of_Bowling_Sounds.mp3'
+
+// import audio from './audio/30_Seconds_of_Bowling_Sounds.mp3'
+
+
+ 
 import {
   Row,
   Container,
@@ -12,7 +21,6 @@ import {
 
 
 export default function Product(props) {
-
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -24,13 +32,6 @@ export default function Product(props) {
     console.log(e.target.value)
     props.handleProductQuantity(e.target.value)
   }
-
-
-  // const increaseQuantity = () => {
-  //   props.productQuantity += 1
-  // }
-
-
 
   let productQuantity = props.products.productStock
   const divStyle ={
@@ -52,12 +53,13 @@ export default function Product(props) {
 
   }
 
-  // document.getElementById("stock").style.color = color;
 
   return (
     <><Col style={{marginBottom: '20px'}} >
         <Card >
-            <Card.Img variant="top" src={props.products.productImageUrl} />
+
+          
+            <Card.Img variant="top" src={props.products.productImageUrls[0]} />
             <Card.Body>
                 <Card.Text style={divStyle}>{productQuantity}</Card.Text>
                 <Card.Title>{props.products.productName}</Card.Title> 
@@ -72,7 +74,9 @@ export default function Product(props) {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
+  
                     <ProductDetail {...props.products} />
+
                   </Modal.Body>
                 </Modal>
 
@@ -80,6 +84,8 @@ export default function Product(props) {
                 {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
                 <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input>
                 {/* <Button onClick={(e) => {props.decreaseQuantity(e)}}> - </Button> */}
+
+
             </Card.Body>
 
         </Card>
