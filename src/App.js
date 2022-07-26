@@ -434,7 +434,7 @@ const editGet = (id) => {
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
-            <Route path="/checkout" element={<Checkout cart={cart}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} />} />
           </Routes>
         </div>
 
