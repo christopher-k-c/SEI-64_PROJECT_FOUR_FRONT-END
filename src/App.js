@@ -172,7 +172,7 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("product/index")
     .then((response) => {
-        console.log(response)
+        console.log(response.data.product)
         // Setting state here:
         setProducts(response.data.product)
     })
@@ -244,7 +244,11 @@ const editGet = (id) => {
     })
   }
 
+  const filmArray = products.filter(products => products.productSourceType === "Film/TV")
+  const videoArray = products.filter(products => products.productSourceType === "Video Game")
+  const originalArray = products.filter(products => products.productSourceType === "Original Work")
 
+  console.log(filmArray)
 
   const allProducts = products.map((products, index) => (
     
@@ -254,6 +258,30 @@ const editGet = (id) => {
       
     </div>
 
+  ))
+
+  const filmProducts = filmArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const videoProducts = videoArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const originalProducts = originalArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
   ))
 
   const allStock = products.map((product, index) => (
@@ -380,7 +408,7 @@ const editGet = (id) => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash role={userRole} user={user} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
