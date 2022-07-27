@@ -37,6 +37,11 @@ export default function ProductMetrics(props) {
     })
   }
 
+    const confirmDelete = () => {
+        props.handleDelete(props.product._id)
+        setShowDeleteModal(false)
+    }
+
   return (
     <div>
         <Modal size="sm" centered show={showDeleteModal}>
@@ -49,8 +54,8 @@ export default function ProductMetrics(props) {
                 <p>Are you sure you want to delete this inventory record?</p>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={() => props.handleDelete(props.product._id)}>Yes</Button> &nbsp;
-                <Button variant="primary" onClick={() => setShowDeleteModal(false)}>No</Button>
+                <Button variant="primary" id="del-yes" onClick={() => confirmDelete()}>Yes</Button> &nbsp;
+                <Button variant="primary" id='del-no' onClick={() => setShowDeleteModal(false)}>No</Button>
             </Modal.Footer>
         </Modal>
         

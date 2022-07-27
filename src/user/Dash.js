@@ -44,7 +44,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table'>
                     <h4>Customer Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products}/>
+                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
                 </div>
             
                 <div>
@@ -60,7 +60,7 @@ export default function Dash(props) {
         ) : (
             <div className='order-table'>
                 <h4>Customer Orders</h4>
-                <OrderHistory {...props.orders}/>
+                <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
             </div>
         )
         }
