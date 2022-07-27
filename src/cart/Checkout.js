@@ -131,7 +131,7 @@ export default function Checkout(props) {
         Axios.post("/checkout", order)
         .then(response => {
             console.log(response)
-            console.log("ordere added successfully")
+            console.log("order added successfully")
             navigation("/confirmation")
         })
         .catch((error) => {

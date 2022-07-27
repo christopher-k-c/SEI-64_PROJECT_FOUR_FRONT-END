@@ -250,7 +250,7 @@ const editGet = (id) => {
     
     <div key={index}>
 
-      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
+      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
       
     </div>
 
@@ -312,59 +312,6 @@ const editGet = (id) => {
       }, 3000);
   }
 
-//   function detailView(id){
-//     console.log("it's me over here!")
-//     Axios.get(`product/detail?id=${id}`)
-//     .then(response => {
-  
-
-  
-
-  // const addProduct = (product) => {
-  //   console.log("Add Product")
-  //   Axios.post("product/add", product)
-  //   .then(response => {
-  //     console.log(response.data)
-  //     console.log("Product added successfully.")
-  //     // loadProductList();
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error adding product.")
-  //     console.log(error)
-  //   })
-  // }
-
-//   return (
-//     <div>
-//       <Router>
-//         <nav>
-//           { isAuth ? (
-//             <div>
-//               {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
-//               <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
-//               <Link to="/">Home</Link> &nbsp;
-//               <Link to="/index">Products</Link> &nbsp;
-//               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-//               <Link to="/cart" onClick={loadCartArray}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
-//             </div>
-//           ):(
-//             <div>
-//               <Link to="/">Home</Link> &nbsp;
-//               <Link to="/index">Products</Link> &nbsp;
-//               <Link to="/signup">Sign Up</Link> &nbsp;
-//               <Link to="/login">Log In</Link> &nbsp;
-//               <Link to="/cart" onClick={() => {loadCartArray(cart)}}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
-
-// //         console.log(response.data)
-// //         var productDetail = response.data
-// //         setIsDetail(true)
-// //         setCurrentProduct(productDetail)
-// //     })
-// //     .catch(error => {
-//         console.log(error)
-//         console.log("Error loading recipe information")
-//     })
-// }
 
 
   const sucMessage = successMessage ? (

@@ -75,7 +75,7 @@ export default function Product(props) {
                   </Modal.Header>
                   <Modal.Body>
   
-                    <ProductDetail {...props.products} />
+                    <ProductDetail {...props.products} addToCart={props.addToCart} handleProductQuantity={props.handleProductQuantity} />
 
                   </Modal.Body>
                 </Modal>

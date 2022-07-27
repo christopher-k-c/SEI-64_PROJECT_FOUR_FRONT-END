@@ -19,11 +19,13 @@ export default function ProductDetail(props) {
 
   const handleNumber = (e) => {
     let number = numberInput.current
+    console.log(number)
     number.focus();
     let inputInt = parseInt(number.value)
     e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
     number.value = inputInt
     console.log(number.value)
+    props.handleProductQuantity(number.value)
   }
 
   const handleChange = (e) => {
@@ -97,7 +99,7 @@ export default function ProductDetail(props) {
             <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
               <input className='numInput' type="text" inputMode='numeric' ref={numberInput} value={1} min={1} onChange={(e) => handleChange(e)} ></input>
             <Button variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
-            <Button variant="primary"> Add to Cart </Button> &nbsp;
+            <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
           </div>
 
         </div>
