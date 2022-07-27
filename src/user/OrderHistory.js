@@ -3,6 +3,7 @@ import { Table, Button, Modal } from 'react-bootstrap'
 import './Dash.css'
 import Axios from 'axios'
 import OrderDetails from './OrderDetails';
+import OrderDetailCard from './OrderDetailCard';
 
 export default function OrderHistory(props) {
 
@@ -19,21 +20,57 @@ export default function OrderHistory(props) {
     }, [])
     
     const getOrders = () => {
+        console.log(props.user)
         Axios.get("orders/index")
         .then((response) => {
-            console.log(response.data.length)
-            props.setAllOrders(response.data)
+            if(props.user.user.role === "seller"){
+                console.log(response.data.length)
+                props.setAllOrders(response.data)
+            } else {
+                let buyerOrders = []
+                console.log(response.data)
+                console.log(props.user.user.id)
+                let userId = props.user.user.id
+                response.data.forEach(order => {
+                if(order.user === userId){
+                    buyerOrders.push(order)
+                }
+            });
+            console.log(buyerOrders)
+            props.setAllOrders(buyerOrders)
+            }
         })
         .catch((error) => {
             console.log(error)
         })
     }
 
+    // const getOrders = () => {
+    //     let buyerOrders = []
+    //     Axios.get("orders/index")
+    //     .then((response) => {
+    //         console.log(response.data)
+    //         console.log(props.user.user.id)
+    //         let userId = props.user.user.id
+    //         response.data.forEach(order => {
+    //             if(order.user === userId){
+    //                 buyerOrders.push(order)
+    //             }
+    //         });
+    //         console.log(buyerOrders)
+    //         props.setAllOrders(response.data)
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
+
     const handleOrderView = (e) => {
         const orderId = e.target.value
         Axios.get(`orders/detail?id=${orderId}`)
         .then((response) => {
             console.log(response)
+            
             setCurrentOrder(response.data)
             setModalOpen()
         })
@@ -64,7 +101,7 @@ export default function OrderHistory(props) {
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <OrderDetails {...currentOrder} products={props.products}/>
+            <OrderDetails {...currentOrder} currentOrder={currentOrder} products={props.products}/>
             </Modal.Body>
         </Modal>
 
