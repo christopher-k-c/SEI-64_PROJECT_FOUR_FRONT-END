@@ -74,7 +74,6 @@ export default function App() {
   const [user, setUser] = useState({})
   const [orderRef, setOrderRef] = useState()
   const [products, setProducts] = useState([])
-  const [filmProducts, setFilmProducts] = useState([])
   const [userRole, setUserRole] = useState("")
   // const [cart, setCart] = useState([])
   // const [cartCount, setCartCount] = useState(0)
@@ -256,18 +255,6 @@ const editGet = (id) => {
     </div>
 
   ))
-
-
-  const allfilmProducts = filmProducts.map((products, index) => (
-    
-    <div key={index}>
-
-      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
-      
-    </div>
-
-  ))
-
 
   const allStock = products.map((product, index) => (
 
