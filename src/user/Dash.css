@@ -52,7 +52,7 @@ table {
 
 .scroll {
     width: 500px;
-    /* height: 100vh; */
+    height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
