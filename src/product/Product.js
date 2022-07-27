@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
@@ -22,15 +22,35 @@ import {
 
 export default function Product(props) {
 
+
+  const numberInput = useRef(null)
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setModalOpen =()=>{
     !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
   }
 
-  const handleInputChange = (e) => {
-    console.log(e.target.value)
-    props.handleProductQuantity(e.target.value)
+  // const handleInputChange = (e) => {
+  //   console.log(e.target.value)
+  //   props.handleProductQuantity(e.target.value)
+  // }
+
+  const handleNumber = (e) => {
+    let number = numberInput.current
+    console.log(number.value)
+    number.focus();
+    let inputInt = parseInt(number.value)
+    console.log(inputInt)
+    e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
+    number.value = inputInt
+    console.log(number.value)
+    props.handleProductQuantity(number.value)
+  }
+
+  const handleChange = (e) => {
+    console.log("test")
+    console.log(numberInput.current.value)
   }
 
   let productQuantity = props.products.productStock
@@ -75,14 +95,17 @@ export default function Product(props) {
                   </Modal.Header>
                   <Modal.Body>
   
-                    <ProductDetail {...props.products} addToCart={props.addToCart} handleProductQuantity={props.handleProductQuantity} />
+                    <ProductDetail products={props.products} addToCart={props.addToCart} handleProductQuantity={props.handleProductQuantity} handleNumber={handleNumber} handleChange={handleChange} numberInput={numberInput} />
 
                   </Modal.Body>
                 </Modal>
 
                 <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
+                <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
+                  <input className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} onChange={(e) => handleChange(e)} ></input>
+                <Button variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
                 {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
-                <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input>
+                {/* <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input> */}
                 {/* <Button onClick={(e) => {props.decreaseQuantity(e)}}> - </Button> */}
 
 

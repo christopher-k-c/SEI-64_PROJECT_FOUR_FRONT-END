@@ -5,9 +5,9 @@ import './ProductDetail.css'
 
 
 export default function ProductDetail(props) {
-  let altText = props.productName.replace(/ /g, '').toLowerCase()
+  let altText = props.products.productName.replace(/ /g, '').toLowerCase()
 
-  const numberInput = useRef(null)
+  // const numberInput = useRef(null)
   
   const [currentlySelected, setCurrentlySelected] = useState("")
   
@@ -17,20 +17,20 @@ export default function ProductDetail(props) {
     defaultImg.className = "selected-img"
   },[])
 
-  const handleNumber = (e) => {
-    let number = numberInput.current
-    console.log(number)
-    number.focus();
-    let inputInt = parseInt(number.value)
-    e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
-    number.value = inputInt
-    console.log(number.value)
-    props.handleProductQuantity(number.value)
-  }
+  // const handleNumber = (e) => {
+  //   let number = numberInput.current
+  //   console.log(number)
+  //   number.focus();
+  //   let inputInt = parseInt(number.value)
+  //   e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
+  //   number.value = inputInt
+  //   console.log(number.value)
+  //   props.handleProductQuantity(number.value)
+  // }
 
-  const handleChange = (e) => {
-    console.log(numberInput.current.value)
-  }
+  // const handleChange = (e) => {
+  //   console.log(numberInput.current.value)
+  // }
 
   const handleSelect = (e) => {
     console.log(e.target)
@@ -50,12 +50,12 @@ export default function ProductDetail(props) {
     }
   }
   
-  const imgThumbs = props.productImageUrls.map((url, index) =>
+  const imgThumbs = props.products.productImageUrls.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
-      <img className='thumb' id={`thumb-${index}`} src={props.productImageUrls[index]} alt={`thumb-${index}`} />
+      <img className='thumb' id={`thumb-${index}`} src={props.products.productImageUrls[index]} alt={`thumb-${index}`} />
     </div>
   );
-  console.log(props.productAudio)
+  // console.log(props.productAudio)
 
 
   return (
@@ -76,10 +76,10 @@ export default function ProductDetail(props) {
       <div className='vr'></div>
     
       <div className='detailsInfo'>
-        <h3>{props.productName}</h3>
-        <p>{props.productSourceType!=="Original Work" ? "from" : "by"} {props.productSource}</p>
-        <h5>£{props.productPrice}</h5>
-        <p>{props.productDescription}</p>
+        <h3>{props.products.productName}</h3>
+        <p>{props.products.productSourceType!=="Original Work" ? "from" : "by"} {props.products.productSource}</p>
+        <h5>£{props.products.productPrice}</h5>
+        <p>{props.products.productDescription}</p>
 
         <div className='audioPlayer'>
 
@@ -93,12 +93,12 @@ export default function ProductDetail(props) {
           </div>
           <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
 
-          <audio id="audio" width="300" height="32" src={props.productAudio} controls> </audio>
+          <audio id="audio" width="300" height="32" src={props.products.productAudio} controls> </audio>
 
           <div className='quantityCounter'>
-            <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-              <input className='numInput' type="text" inputMode='numeric' ref={numberInput} value={1} min={1} onChange={(e) => handleChange(e)} ></input>
-            <Button variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+            <Button variant='secondary' onClick={(e) => props.handleNumber(e)}> - </Button>
+              <input className='numInput' type="text" inputMode='numeric' ref={props.numberInput} defaultValue={1} min={1} onChange={(e) => props.handleChange(e)} ></input>
+            <Button variant='secondary' onClick={(e) => props.handleNumber(e)}> + </Button> &nbsp;
             <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
           </div>
 
