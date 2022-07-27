@@ -1,38 +1,38 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import OrderDetailCard from './OrderDetailCard'
+import './Dash.css'
 
 export default function OrderDetails(props) {
   const [currentUser, setCurrentUser] = useState({})
+  const [currentProducts, setCurrentProducts] = useState([])
 
   useEffect(() => {
     getOrderUser(props.user)
-  }, [])
+    console.log(currentProducts)
+  }, [currentProducts])
 
-  console.log(props.products)
-
-  console.log("Occurrences of The Dude's mix:", props.cart.filter(x => x==='62d95f258e8bb8f9d7eda87a').length)
+  console.log(props)
 
   const orderSet = [...new Set(props.cart)]
 
-  let orderProducts = {}
-
   console.log(orderSet)
 
-  props.products.forEach(product => {
-      if(orderSet.includes(product._id)){
-        orderProducts = {"productName": product.productName, "quantity": (props.cart.filter(x => x===product._id).length)}
-      }
-  });
+  const userProducts = []
 
-  console.log(orderProducts)
+  const getQuantity = (id) => {
+    return props.cart.filter(x => x===id).length
+  }
 
-//   const mappedProducts = orderProducts?.map((product, index) => (
+  // console.log("Occurrences of The Dude's mix:", props.cart.filter(x => x==='62d95f258e8bb8f9d7eda87a').length)
+
+  const mappedProducts = orderSet?.map((product, index) => (
     
-//     <div key={index}>
-//       <p>{product}</p>
-//     </div>
+    <div className='order-card' key={index}>
+      <OrderDetailCard currentOrder={props.currentOrder} id={product} getQuantity={getQuantity} />
+    </div>
 
-// ))
+))
 
   const getOrderUser = (id) => {
     Axios.get(`auth/users/detail?id=${id}`)
@@ -49,11 +49,11 @@ export default function OrderDetails(props) {
   return (
     <div className='order-details'>
 
-      <h3>Delivery Details</h3>
       
       <div className='delivery-details'>
+      <h3>Delivery Details</h3>
         <h4>Customer</h4>
-        <p>Customer Name: <span className='orderDetail'>{currentUser.firstName} {currentUser.lastName}</span></p>
+        <p>Full Name: <span className='orderDetail'>{currentUser.firstName} {currentUser.lastName}</span></p>
         <p>Email Address: <span className='orderDetail'>{currentUser.emailAddress}</span></p>
         
         <h4>Shipping Address</h4>
@@ -69,16 +69,17 @@ export default function OrderDetails(props) {
         <p>Post Code: <span className='orderDetail'>{props.billingAddress.postcode}</span></p>
       </div>
 
-      <h3>Order Details</h3>
+      <div className='vr'></div>
 
-      <div className='product-details'>
+      <div className='product-details scroll'>
+        <h3>Order Details</h3>
         <div>
-          <div>
+          <div className='ref-status'>
             <h4>Order Ref: {props.orderRef}</h4>
-            <h4>Order Status: {props.status}</h4>
+            <h4>Order Status: <span className={props.status}>{props.status}</span></h4>
           </div>
-          {/* {mappedProducts} */}
         </div>
+        {mappedProducts}
       </div>
 
     </div>
