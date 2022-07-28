@@ -36,7 +36,11 @@ export default function OrderDetails(props) {
 ))
 
   const getOrderUser = (id) => {
-    Axios.get(`auth/users/detail?id=${id}`)
+    Axios.get(`auth/users/detail?id=${id}`, {
+      headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+  })
     .then((response) => {
         console.log(response.data.user)
         setCurrentUser(response.data.user)
@@ -54,7 +58,11 @@ export default function OrderDetails(props) {
       console.log(props.currentOrder.status)
       const newStatus = {"_id": props.currentOrder._id, "status": e.target.value }
       console.log(newStatus)
-      Axios.put(`orders/update`, newStatus)
+      Axios.put(`orders/update`, newStatus, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    })
       .then(response => {
             console.log(response.data)
             props.setCurrentOrder(response.data.product)
@@ -95,14 +103,18 @@ export default function OrderDetails(props) {
           <div className='ref-status'>
             <h4>Order Ref: {props.currentOrder.orderRef}</h4>
             {/* <h4>Order Status: <span className={props.status}>{props.status}</span></h4> */}
-            <Form.Select id="status-dropdown" defaultValue={props.currentOrder.status} aria-label="Default select example" onChange={(e) => handleStatus(e)}>
-              <option value="open">Open</option>
-              <option value="processing">Processing</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option>
-              <option value="returned">Returned</option>
-              <option value="closed">Closed</option>
-            </Form.Select>
+            {props.user.role === "seller" ? (
+              <Form.Select id="status-dropdown" defaultValue={props.currentOrder.status} aria-label="Default select example" onChange={(e) => handleStatus(e)}>
+                <option value="open">Open</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="returned">Returned</option>
+                <option value="closed">Closed</option>
+              </Form.Select>
+            ) : (
+              <h4>Order Status: <span className={props.status}>{props.status}</span></h4>
+            )}
           </div>
         </div>
         {mappedProducts}

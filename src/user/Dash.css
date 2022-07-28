@@ -22,6 +22,15 @@
     /* background-color: blue; */
 }
 
+.order-table-buyer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 700px;
+    align-self: center;
+    /* background-color: blue; */
+}
+
 th {
     text-align: center;
 }
@@ -121,7 +130,7 @@ table {
 }
 
 .shipped {
-    color: aqua
+    color: rgb(176, 198, 33)
 }
 
 .delivered {
