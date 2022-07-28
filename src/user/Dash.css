@@ -120,10 +120,18 @@ table {
     color:rgb(220, 178, 38)
 }
 
-.complete {
-    color: rgb(0, 176, 0)
+.shipped {
+    color: aqua
+}
+
+.delivered {
+    color:rgb(0, 176, 0)
+}
+
+.returned {
+    color: rgb(177, 18, 18)
 }
 
 .closed {
-    color: rgb(177, 18, 18)
+    color: rgb(95, 95, 95)
 }

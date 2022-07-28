@@ -26,26 +26,11 @@ export default function OrderDetailCard(props) {
         })
     }
 
-    const closeOrder = (e) => {
-        console.log(props.currentOrder.status)
-        const closeStatus = {"_id": props.currentOrder._id, "status": "closed" }
-        console.log(closeStatus)
-        Axios.put(`orders/update`, closeStatus)
-        .then(response => {
-            console.log(response)
-            e.target.disabled = true
-        })
-        .catch((error) => {
-            console.log("Error updating order:", error)
-        })
-        
-    }
-
   return (
     <div>
         <p>{thisProduct}</p>
         <p>Quantity: {props.getQuantity(prod)}</p>
-        <button>Edit Order</button>&nbsp;<button onClick={props.currentOrder.status !== 'closed' ? (e) => closeOrder(e) : (e) => console.log("Order already closed.")}>Close Order</button>
+        {/* <button onClick={props.currentOrder.status !== 'closed' ? (e) => closeOrder(e) : (e) => console.log("Order already closed.")}>Close Order</button> */}
     </div>
   )
 }

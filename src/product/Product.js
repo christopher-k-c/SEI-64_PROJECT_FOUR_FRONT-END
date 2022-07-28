@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
+
 import {
   Row,
   Container,
   Col,
   Modal
 } from "react-bootstrap";
-
 
 
 
