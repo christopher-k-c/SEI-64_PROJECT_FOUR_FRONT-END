@@ -59,7 +59,7 @@ export default function Dash(props) {
         </>
         ) : (
             <div className='order-table'>
-                <h4>Customer Orders</h4>
+                <h4>My Orders</h4>
                 <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
             </div>
         )
