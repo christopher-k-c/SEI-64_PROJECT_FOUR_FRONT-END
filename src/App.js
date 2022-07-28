@@ -413,7 +413,7 @@ const editGet = (id) => {
           {userRole === "seller" ? "Seller Dashboard" : "My Orders"}
           </Navbar.Text>
           </Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4 size={20}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
           <Navbar.Text>{`Welcome, ${user.user.name}!`}</Navbar.Text>
           </>
           ):(
