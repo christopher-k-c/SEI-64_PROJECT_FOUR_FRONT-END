@@ -24,6 +24,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Image from 'react-bootstrap/Image'
+// import './product/images/logo.png'
+
+// const logo = './product/images/logo.png'
+
 
 
 
@@ -181,9 +186,9 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("product/index")
     .then((response) => {
-      console.log(response)
-      // Setting state here:
-      setProducts(response.data.product)
+        console.log(response.data.product)
+        // Setting state here:
+        setProducts(response.data.product)
     })
     .catch((error) => {
       console.log(error)
@@ -193,6 +198,7 @@ export default function App() {
   const handleDelete = (id) => {
     console.log(id)
     console.log("clicked")
+    
     Axios.delete(`product/delete?id=${id}`)
     .then((response) => {
         console.log(response)
@@ -253,16 +259,44 @@ const editGet = (id) => {
     })
   }
 
+  const filmArray = products.filter(products => products.productSourceType === "Film/TV")
+  const videoArray = products.filter(products => products.productSourceType === "Video Game")
+  const originalArray = products.filter(products => products.productSourceType === "Original Work")
 
+  console.log(filmArray)
 
   const allProducts = products.map((products, index) => (
     
-    <div key={index}>
+    <div className="productCard" key={index}>
 
-      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} />
+      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
       
     </div>
 
+  ))
+
+  const filmProducts = filmArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const videoProducts = videoArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const originalProducts = originalArray.map((products, index) => (
+    <div key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
   ))
 
   const allStock = products.map((product, index) => (
@@ -321,59 +355,6 @@ const editGet = (id) => {
       }, 3000);
   }
 
-//   function detailView(id){
-//     console.log("it's me over here!")
-//     Axios.get(`product/detail?id=${id}`)
-//     .then(response => {
-  
-
-  
-
-  // const addProduct = (product) => {
-  //   console.log("Add Product")
-  //   Axios.post("product/add", product)
-  //   .then(response => {
-  //     console.log(response.data)
-  //     console.log("Product added successfully.")
-  //     // loadProductList();
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error adding product.")
-  //     console.log(error)
-  //   })
-  // }
-
-//   return (
-//     <div>
-//       <Router>
-//         <nav>
-//           { isAuth ? (
-//             <div>
-//               {user ? `Welcome, ${user.user.name}!` : "null"} &nbsp;
-//               <Link to="/manage">{userRole === "seller" ? "Seller Dashboard" : "My Orders"}</Link> &nbsp;
-//               <Link to="/">Home</Link> &nbsp;
-//               <Link to="/index">Products</Link> &nbsp;
-//               <Link to="/logout" onClick={onLogoutHandler}>Log Out</Link> &nbsp;
-//               <Link to="/cart" onClick={loadCartArray}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
-//             </div>
-//           ):(
-//             <div>
-//               <Link to="/">Home</Link> &nbsp;
-//               <Link to="/index">Products</Link> &nbsp;
-//               <Link to="/signup">Sign Up</Link> &nbsp;
-//               <Link to="/login">Log In</Link> &nbsp;
-//               <Link to="/cart" onClick={() => {loadCartArray(cart)}}> <BsCart4> </BsCart4> </Link> <Badge bg="secondary"> {cartCount} </Badge> &nbsp;
-
-// //         console.log(response.data)
-// //         var productDetail = response.data
-// //         setIsDetail(true)
-// //         setCurrentProduct(productDetail)
-// //     })
-// //     .catch(error => {
-//         console.log(error)
-//         console.log("Error loading recipe information")
-//     })
-// }
 
 
   const sucMessage = successMessage ? (
@@ -400,13 +381,13 @@ const editGet = (id) => {
 
     
       {/* React Bootstrap Nav Bar*/}
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
 
 
 
         
-        <Navbar.Brand href="#home">Bootleg Tapes</Navbar.Brand>
+        <Navbar.Brand href="#home"><Image src='./product/images/logo.png' fluid /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
         <Nav>
@@ -442,9 +423,9 @@ const editGet = (id) => {
           <Routes>
             <Route path="/" element={<Home loadProductList={loadProductList} products={products} popular={popular} setPopular={setPopular} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash role={userRole} user={user} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
+            <Route path="/manage" element={<Dash user={user}role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />

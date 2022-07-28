@@ -101,10 +101,9 @@ export default function Cart(props) {
   return (
     <>
         <h1> In your cart: </h1>
-
             {cartItems}
             <h4> Subtotal: £{subtotalPrice} </h4>
-            <button onClick={() => props.makeCart(props.cart)}>Confirm Cart</button>
+            <Button variant="primary" onClick={() => props.makeCart(props.cart)}>Go to checkout</Button>
      
         
     </>

@@ -131,3 +131,14 @@ audio::-webkit-media-controls-play-button {
     border-radius: 10%; 
 }
 
+
+@media (max-width: 987px) {
+
+    audio {
+       /* display: none; */
+       width: 80px;
+   }
+   
+   
+   }
+
