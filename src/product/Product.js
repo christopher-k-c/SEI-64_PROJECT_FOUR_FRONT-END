@@ -91,9 +91,13 @@ export default function Product(props) {
           
             <Card.Img className="imageHover" onClick={() => setModalOpen()} variant="top" src={props.products.productImageUrls[0]} />
             <Card.Body >
-                <Card.Text onClick={() => setModalOpen()}  style={divStyle}>{productQuantity}</Card.Text>
+                
+                
                 <Card.Title onClick={() => setModalOpen()} >{props.products.productName}</Card.Title> 
+                <hr></hr>
                 <Card.Text onClick={() => setModalOpen()} >£{props.products.productPrice}</Card.Text>
+                
+ 
 
                 {/* <Button onClick={() => setModalOpen()} style={{marginBottom: '10px'}}>Product Details</Button> &nbsp; */}
 
@@ -114,13 +118,16 @@ export default function Product(props) {
                 {/* CHRIS CHANGES */}
                 {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
                 {/* <Form.Control disabled={props.products.productStock === 0 ? true : false} type="number" name={props.products.name} placeholder="1" min={1} max={props.products.productStock} onChange={(e) => handleInputChange(e)}></Form.Control> */} 
-
-                <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-                  <input className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} onChange={(e) => handleChange(e)} ></input>
-                <Button variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
-                <br></br>
-                <Button disabled={props.products.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={() => {props.addToCart(props.products)}} style={{marginBottom: '10px'}}> Add to Cart </Button> &nbsp; 
-
+                <Card.Text onClick={() => setModalOpen()}  style={divStyle}>{productQuantity}</Card.Text>
+                <div className="button-container">
+                  <Button size="sm" disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
+                    <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} onChange={(e) => handleChange(e)} ></input>
+                  <Button size="sm" disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+                  
+                </div>
+                <Button size="" disabled={props.products.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={() => {props.addToCart(props.products)}} style={{marginBottom: '10px'}}> Add To Cart </Button>
+                 &nbsp; 
+               
                 {/* <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp; */}
 
                 {/* <BsCart4 size={28} style={{ cursor: 'pointer'}} onClick={() => {props.addToCart(props.products)}}> </BsCart4>&nbsp; */}

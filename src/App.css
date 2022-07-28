@@ -29,3 +29,8 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-text.dash-link:hover {
     color: #F8DC38 !important;
 }
+
+
+.navbar-bg {
+    filter: drop-shadow(0 -4mm 5mm rgb(0, 0, 0));
+}
