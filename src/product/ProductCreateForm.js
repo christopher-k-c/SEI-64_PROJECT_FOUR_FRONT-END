@@ -71,7 +71,11 @@ export default function ProductCreateForm(props) {
         console.log("Add Product")
         console.log(product)
         product.productImageUrls = newImageSet
-        Axios.post("product/add", product)
+        Axios.post("product/add", product, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
         .then(response => {
           console.log(response.data)
           !response.data.product ? props.setError("One or more required fields omitted.") : props.setSuccess("Product added successfully.")

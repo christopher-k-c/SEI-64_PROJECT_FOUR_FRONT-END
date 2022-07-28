@@ -94,17 +94,7 @@ export default function App() {
     
   }, [cart, cartCount, mostPopular])
 
-  // ====================== PART OF POPULARITY GET ======================= //  
 
-  const getProduct = (productId) => {
-    return Axios.get(`product/detail?id=${productId}`);
-  }
-  
-  const getOrder = () => {
-    return Axios.get('orders/index');
-  }
-
-  // ====================== PART OF POPULARITY GET ======================= //
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
@@ -168,13 +158,15 @@ export default function App() {
           for (let i = 1; i <= productQuantity; i++){
             setCart(cart => [...cart, product])
           }
-    // setCart(cart.concat(product))
-    // setCart(cart => [...cart, product])
-    setCartCount(cart.length)
-    setProductQuantity(1)
-    console.log(cart)
-    console.log(cartCount)
-  }
+          // setCart(cart.concat(product))
+          // setCart(cart => [...cart, product])
+          setCartCount(cart.length)
+          setProductQuantity(1)
+          console.log(cart)
+          console.log(cartCount)
+        }
+
+
   const handleRemoveFromCart = (deletedItem) => {
     console.log(deletedItem._id)
     const updatedCart = cart.filter(element => element._id !== deletedItem._id)
@@ -199,7 +191,11 @@ export default function App() {
     console.log(id)
     console.log("clicked")
     
-    Axios.delete(`product/delete?id=${id}`)
+    Axios.delete(`product/delete?id=${id}`, {
+      headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    })
     .then((response) => {
         console.log(response)
         console.log("Product record successfully deleted.")
@@ -214,7 +210,11 @@ export default function App() {
 const editGet = (id) => {
   console.log("Edit GET MAIN")
   console.log(id)
-  Axios.get(`product/edit?id=${id}`)
+  Axios.get(`product/edit?id=${id}`, {
+    headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+    }
+  })
   .then(response => {
     var product = response.data.product
     console.log("GET PRODUCT", product)
@@ -242,22 +242,25 @@ const editGet = (id) => {
     // e.preventDefault()
     console.log(cartItems)
     console.log("makecart working")
-    let idArr = []
-    cartItems.forEach(element => {
-      idArr.push(element._id)
-    });
-    console.log(idArr)
-    var dataObj = {user : user.user.id, status : "active", product : idArr }
-    console.log(dataObj)
-    Axios.post("cart", dataObj)
-    .then(response => {
-      console.log(response)
-      navigation("/checkout")
-      setCartCount(0)
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    if(isAuth){
+      let idArr = []
+      cartItems.forEach(element => {
+        idArr.push(element._id)
+      });
+      console.log(idArr)
+      var dataObj = {user : user.user.id, status : "active", product : idArr }
+      console.log(dataObj)
+      Axios.post("cart", dataObj)
+      .then(response => {
+        console.log(response)
+        navigation("/checkout")
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    } else {
+      navigation("/login")
+    }
   }
 
   const filmArray = products.filter(products => products.productSourceType === "Film/TV")
@@ -399,7 +402,7 @@ const editGet = (id) => {
 
 
         
-        <Navbar.Brand href="#home"><Image src={logo} height="50px" /></Navbar.Brand>
+        <Navbar.Brand href="/"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
         <Nav className="nav-style">
@@ -439,7 +442,7 @@ const editGet = (id) => {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash user={user}role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
+            <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
