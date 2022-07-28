@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
@@ -6,7 +6,9 @@ import {
   Row,
   Container,
   Col,
-  Modal
+  Modal,
+  Control,
+  Form
 } from "react-bootstrap";
 
 
@@ -21,8 +23,14 @@ import {
 
 
 export default function Product(props) {
+  let productQuantity = props.products.productStock
 
+  console.log(props.products.productStock)
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [disabled, setDisabled] = useState(false)
+
+
+
 
   const setModalOpen =()=>{
     !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
@@ -33,20 +41,21 @@ export default function Product(props) {
     props.handleProductQuantity(e.target.value)
   }
 
-  let productQuantity = props.products.productStock
+  
   const divStyle ={
     color: 'black',
+
   }
+  
 
   if (productQuantity === 0){
     productQuantity = "OUT OF STOCK"
-    divStyle.color = 'red'
-
+    divStyle.color = 'red'    
 
   } else if (productQuantity <= 10 ){
     productQuantity = `ONLY ${productQuantity} LEFT`
     divStyle.color = 'orange'
-
+    
   } else if (productQuantity > 10) {
     productQuantity = "IN STOCK"
     divStyle.color = 'green'
@@ -54,18 +63,19 @@ export default function Product(props) {
   }
 
 
+
   return (
     <><Col style={{marginBottom: '20px'}} >
-        <Card >
+        <Card  style={{ cursor: 'pointer'}}>
 
           
-            <Card.Img variant="top" src={props.products.productImageUrls[0]} />
-            <Card.Body>
-                <Card.Text style={divStyle}>{productQuantity}</Card.Text>
-                <Card.Title>{props.products.productName}</Card.Title> 
-                <Card.Text>£{props.products.productPrice}</Card.Text>
+            <Card.Img className="imageHover" onClick={() => setModalOpen()} variant="top" src={props.products.productImageUrls[0]} />
+            <Card.Body >
+                <Card.Text onClick={() => setModalOpen()}  style={divStyle}>{productQuantity}</Card.Text>
+                <Card.Title onClick={() => setModalOpen()} >{props.products.productName}</Card.Title> 
+                <Card.Text onClick={() => setModalOpen()} >£{props.products.productPrice}</Card.Text>
 
-                <Button onClick={() => setModalOpen()}>Product Details</Button> &nbsp;
+                {/* <Button onClick={() => setModalOpen()} style={{marginBottom: '10px'}}>Product Details</Button> &nbsp; */}
 
                 <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
@@ -79,10 +89,11 @@ export default function Product(props) {
 
                   </Modal.Body>
                 </Modal>
-
-                <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
+                
+                <Button disabled={props.products.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={() => {props.addToCart(props.products)}} style={{marginBottom: '10px'}}> Add to Cart </Button> &nbsp;
                 {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
-                <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input>
+                <Form.Control disabled={props.products.productStock === 0 ? true : false} type="number" name={props.products.name} placeholder="1" min={1} max={props.products.productStock} onChange={(e) => handleInputChange(e)}></Form.Control>
+                {/* <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input> */}
                 {/* <Button onClick={(e) => {props.decreaseQuantity(e)}}> - </Button> */}
 
 

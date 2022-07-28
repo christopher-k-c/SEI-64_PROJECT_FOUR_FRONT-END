@@ -41,8 +41,6 @@ export default function ProductList(props) {
 
     console.log(props.products, "ProductList Test")
 
-    // console.log(props.products, "ProductList Test")~
-
 
   return (
     <div >
@@ -52,7 +50,6 @@ export default function ProductList(props) {
           <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
             
             {props.allProducts}
-            
             
           </Row> 
         </Container>
