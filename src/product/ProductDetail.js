@@ -101,10 +101,10 @@ export default function ProductDetail(props) {
               <input disabled={props.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} value={1} min={1} onChange={(e) => handleChange(e)} ></input>
             <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
             <Button disabled={props.productStock === 0 ? true : false} variant="primary"> Add to Cart </Button> &nbsp; */}
-            <Button variant='secondary' onClick={(e) => props.handleNumber(e)}> - </Button>
-              <input className='numInput' type="text" inputMode='numeric' ref={props.numberInput} defaultValue={1} min={1} onChange={(e) => props.handleChange(e)} ></input>
-            <Button variant='secondary' onClick={(e) => props.handleNumber(e)}> + </Button> &nbsp;
-            <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
+            <Button disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => props.handleNumber(e)}> - </Button>
+              <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={props.numberInput} defaultValue={1} min={1} onChange={(e) => props.handleChange(e)} ></input>
+            <Button disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => props.handleNumber(e)}> + </Button> &nbsp;
+            <Button disabled={props.products.productStock === 0 ? true : false} variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
           </div>
 
         </div>
