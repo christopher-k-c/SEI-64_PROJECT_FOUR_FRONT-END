@@ -64,7 +64,6 @@ export default function Checkout(props) {
         var quantities = [...map.values()];
         console.log(quantities)
         quantities.forEach(product => {
-            console.log(product)
             const newStockLevel = {"_id": product._id, "productStock": product.productStock - product.count}
             Axios.put('product/update', newStockLevel)
             .then(response => {

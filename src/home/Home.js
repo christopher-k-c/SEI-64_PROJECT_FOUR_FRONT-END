@@ -39,8 +39,6 @@ export default function Home(props) {
 
       const mapIds = props.products ? props.products.map(product => product._id) : ""
   
-      console.log(mapIds)
-  
   
       mapIds.forEach(prodId => {
         let totalOrdered = 0
@@ -69,7 +67,7 @@ export default function Home(props) {
             
             popularities = {...popularities, [productId]: {"product": popProduct, "popularity": totalOrdered}}
             console.log(`This product has been ordered ${totalOrdered} times.`)
-            console.log(popularities)
+            
             props.setPopular(popularities)
             let sort = []
             for (const key in popularities) {
