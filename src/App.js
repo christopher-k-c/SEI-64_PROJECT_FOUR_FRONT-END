@@ -61,7 +61,7 @@ export default function App() {
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
 
-
+  const [query, setQuery] = useState("")
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
   // const [isDetail, setIsDetail] = useState(false)
@@ -366,7 +366,18 @@ const editGet = (id) => {
     
   ): null;
 
-
+  const test = products.filter(post => {
+    if (query === '') {
+      return post;
+    } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
+      return post;
+    }
+  }).map((post) => (
+    <div key={post._id}>
+      <p>{post.productName}</p>
+      <p>{post.productPrice}</p>
+    </div>
+  ))
 
 
 
@@ -403,6 +414,7 @@ const editGet = (id) => {
           </Nav.Link>
           <Navbar.Text>{`Signed in as: ${user.user.name}!`}</Navbar.Text>
           <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          {/* <Navbar.Text ><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text> */}
           </>
           ):(
           <>
@@ -411,6 +423,8 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
           <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          <Navbar.Text><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text>
+          
           </>
           )}
           </Nav>
