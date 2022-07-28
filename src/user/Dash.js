@@ -60,7 +60,7 @@ export default function Dash(props) {
         ) : (
             <div className='dash-contents'>
                 <div className='order-table-buyer'>
-                    <h4>Customer Orders</h4>
+                    <h4>My Orders</h4>
                     <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
                 </div>
             </div>
