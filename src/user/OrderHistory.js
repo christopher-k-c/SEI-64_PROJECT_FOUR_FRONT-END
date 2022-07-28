@@ -11,13 +11,14 @@ export default function OrderHistory(props) {
 
     const setModalOpen =()=>{
         !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
-      }
+    }
 
     const [currentOrder, setCurrentOrder] = useState("")
 
     useEffect(() => {
         getOrders()
-    }, [])
+        setCurrentOrder(currentOrder)
+    }, [currentOrder])
     
     const getOrders = () => {
         console.log(props.user)
@@ -101,7 +102,7 @@ export default function OrderHistory(props) {
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <OrderDetails {...currentOrder} currentOrder={currentOrder} products={props.products}/>
+            <OrderDetails {...currentOrder} currentOrder={currentOrder} setCurrentOrder={setCurrentOrder} products={props.products}/>
             </Modal.Body>
         </Modal>
 

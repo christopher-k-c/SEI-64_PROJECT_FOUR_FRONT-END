@@ -2,6 +2,7 @@ import React, {useState, useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
+
 import {
   Row,
   Container,
@@ -11,7 +12,6 @@ import {
   Form
 } from "react-bootstrap";
 import {BsCart4} from 'react-icons/bs'
-
 
 
 

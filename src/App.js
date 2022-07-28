@@ -19,11 +19,7 @@ import NewsLetter from './footer/NewsLetter'
 import Checkout from './cart/Checkout' 
 import OrderConfirmation from './cart/OrderConfirmation'
 
-
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -39,37 +35,12 @@ import Image from 'react-bootstrap/Image'
 export default function App() {
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
-
-
-  const navigation = useNavigate()
-
-  useEffect(() => {
-    console.log("useEffect triggered")
-    setCartCount(cart.length)
-    console.log(cartCount)
-    let token = localStorage.getItem("token")
-
-
-    if(token != null){
-      let user = jwt_decode(token)
-      console.log("USER NAME:", user.user.name)
-      console.log("USER ROLE:", user.user.role)
-      console.log(user.user)
-
-      if(user){
-        setIsAuth(true)
-        setUser(user)
-        setUserRole(user.user.role)
-      }
-      else if (!user){
-        localStorage.removeItem("token");
-        setIsAuth(false)
-      }
-    }
-    
-  }, [cart, cartCount])
-
   
+  const navigation = useNavigate()
+  
+  const [mostPopular, setMostPopular] = useState([])
+
+
 
   const [isAuth, setIsAuth] = useState(false)
   const [user, setUser] = useState({})
@@ -84,6 +55,9 @@ export default function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
+  const [filterUSerOrders, setFilterUserOrders] = useState([])
+  const [popular, setPopular] = useState({})
+  const [sortedPopular, setSortedPopular] = useState([])
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
 
@@ -92,6 +66,46 @@ export default function App() {
   // const [currentProduct, setCurrentProduct] = useState()
   // const [isDetail, setIsDetail] = useState(false)
 
+  useEffect(() => {
+    console.log("useEffect triggered")
+    loadProductList()
+    
+    setCartCount(cart.length)
+    console.log(cartCount)
+    let token = localStorage.getItem("token")
+
+
+    if(token != null){
+      let user = jwt_decode(token)
+      console.log(`Token is valid; logged in as [${user.user.name}] with ${user.user.role} privileges. Full object :`, [user.user])
+
+      if(user){
+        setIsAuth(true)
+        setUser(user)
+        setUserRole(user.user.role)
+      }
+      else if (!user){
+        localStorage.removeItem("token");
+        setIsAuth(false)
+      }
+    }
+
+    
+    
+  }, [cart, cartCount, mostPopular])
+
+  // ====================== PART OF POPULARITY GET ======================= //  
+
+  const getProduct = (productId) => {
+    return Axios.get(`product/detail?id=${productId}`);
+  }
+  
+  const getOrder = () => {
+    return Axios.get('orders/index');
+  }
+
+  // ====================== PART OF POPULARITY GET ======================= //
+  
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
     Axios.post("newsletter", email)
@@ -124,36 +138,36 @@ export default function App() {
       setErrorMessage("User registration failed!")
     })
   }
-
-  // const increaseQuantity = (e) => {
-  //   console.log("increment button clicked")
-  //   setProductQuantity(productQuantity + 1)
-  // }
-  // const decreaseQuantity = (e) => {
-  //   console.log("decrement button clicked")
-  //   if(productQuantity > 1){
-  //     setProductQuantity(productQuantity - 1)
-  //   }
-  // }
-
-  const handleProductQuantity = (quantity) => {
-    console.log("hello")
-    console.log(quantity)
-    setProductQuantity(quantity)
-    // console.log(productQuantity)
-  }
-
   
-  const addToCart = (product) => {
-    console.log("button clicked")
-    console.log(product)
-    console.log(productQuantity)
-    // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
-    // console.log(cartItemQuant[product._id])
-    // let tempCart = []
-    for (let i = 1; i <= productQuantity; i++){
-      setCart(cart => [...cart, product])
-    }
+  // const increaseQuantity = (e) => {
+    //   console.log("increment button clicked")
+    //   setProductQuantity(productQuantity + 1)
+    // }
+    // const decreaseQuantity = (e) => {
+      //   console.log("decrement button clicked")
+      //   if(productQuantity > 1){
+        //     setProductQuantity(productQuantity - 1)
+        //   }
+        // }
+
+        const handleProductQuantity = (quantity) => {
+          console.log("hello")
+          console.log(quantity)
+          setProductQuantity(quantity)
+          // console.log(productQuantity)
+        }
+        
+        
+        const addToCart = (product) => {
+          console.log("button clicked")
+          console.log(product)
+          console.log(productQuantity)
+          // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
+          // console.log(cartItemQuant[product._id])
+          // let tempCart = []
+          for (let i = 1; i <= productQuantity; i++){
+            setCart(cart => [...cart, product])
+          }
     // setCart(cart.concat(product))
     // setCart(cart => [...cart, product])
     setCartCount(cart.length)
@@ -167,8 +181,8 @@ export default function App() {
     // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
     console.log(updatedCart)
     setCart(updatedCart)
-}
-
+  }
+  
   const loadProductList = () => {
     Axios.get("product/index")
     .then((response) => {
@@ -177,10 +191,10 @@ export default function App() {
         setProducts(response.data.product)
     })
     .catch((error) => {
-        console.log(error)
+      console.log(error)
     })
   }
-
+  
   const handleDelete = (id) => {
     console.log(id)
     console.log("clicked")
@@ -407,11 +421,11 @@ const editGet = (id) => {
      {errMessage}
         <div>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home loadProductList={loadProductList} products={products} popular={popular} setPopular={setPopular} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
+            <Route path="/manage" element={<Dash user={user}role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />

@@ -50,7 +50,30 @@ export default function Checkout(props) {
 
     console.log(handlePriceCalc())
 
-   
+   const decreaseStock = () => {
+        
+        console.log(props.cart)
+        var map = new Map();
+        props.cart.forEach((item) => {
+            if(map.has(item._id)){
+                map.get(item._id).count++;
+            } else {
+                map.set(item._id,Object.assign(item,{count:1}));
+            }
+        });
+        var quantities = [...map.values()];
+        console.log(quantities)
+        quantities.forEach(product => {
+            const newStockLevel = {"_id": product._id, "productStock": product.productStock - product.count}
+            Axios.put('product/update', newStockLevel)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        });
+   }
 
     // const createOrderRefNo = () => {
     //     Axios.get("orders/index")
@@ -79,7 +102,6 @@ export default function Checkout(props) {
     // setCheckoutItems(Array.from(new Set(props.cart)))
     const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
-    // console.log(props.cart)
     // console.log(checkoutItems)
 
     const handleChange = (e) => {
@@ -131,7 +153,8 @@ export default function Checkout(props) {
         Axios.post("/checkout", order)
         .then(response => {
             console.log(response)
-            console.log("order added successfully")
+            console.log("ordere added successfully")
+            decreaseStock()
             navigation("/confirmation")
         })
         .catch((error) => {
@@ -141,7 +164,6 @@ export default function Checkout(props) {
     // props.setOrderRef(order.orderRef)
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const order = {...newOrder}
         addOrder(order)
     }
@@ -166,6 +188,7 @@ export default function Checkout(props) {
   return (
     <div>
         <h2>Checkout:</h2>
+        <Button onClick={() => decreaseStock()}></Button>
 
         {checkoutList}
         <div>Total: £{getTotalPrice} </div> 
@@ -173,6 +196,7 @@ export default function Checkout(props) {
         <CardDetailsForm orderForm={orderForm} setorderForm={setorderForm} handleChange={handleChange} />
         <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} sameAddress={sameAddress} setSameAddress={setSameAddress} />
         <Button onClick={(e) => {handleSubmit(e)}}> Submit Order</Button>
+        
 
 
     </div>
