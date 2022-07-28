@@ -101,11 +101,12 @@ export default function Product(props) {
                   </Modal.Body>
                 </Modal>
 
-                {/* <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp; */}
                 <Button variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
                   <input className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} onChange={(e) => handleChange(e)} ></input>
                 <Button variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
-                <BsCart4 size={28} style={{ cursor: 'pointer'}} onClick={() => {props.addToCart(props.products)}}> </BsCart4>&nbsp;
+                <Button variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
+
+                {/* <BsCart4 size={28} style={{ cursor: 'pointer'}} onClick={() => {props.addToCart(props.products)}}> </BsCart4>&nbsp; */}
                 {/* <Button onClick={(e) => {props.increaseQuantity(e)}}> + </Button> */}
                 {/* <input type="number" name={props.products.name} placeholder="1" min={1}  onChange={(e) => handleInputChange(e)}></input> */}
                 {/* <Button onClick={(e) => {props.decreaseQuantity(e)}}> - </Button> */}
