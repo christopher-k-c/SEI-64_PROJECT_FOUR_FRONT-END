@@ -25,7 +25,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image'
-// import './product/images/logo.png'
+import logo from './product/images/logo.png'
 
 // const logo = './product/images/logo.png'
 
@@ -387,7 +387,7 @@ const editGet = (id) => {
 
 
         
-        <Navbar.Brand href="#home"><Image src='./product/images/logo.png' fluid /></Navbar.Brand>
+        <Navbar.Brand href="#home"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
         <Nav>
