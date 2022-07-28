@@ -27,17 +27,20 @@ const options = {
   animationHandler: 'fade',
 };
 
+
+
 export default function Home(props) {
+  
+  var popularSorted = []
+
+    const [sorted, setSorted] = useState([])
 
     const getPopular = () => {
       
       var popularities = {}
 
-      
 
       const mapIds = props.products ? props.products.map(product => product._id) : ""
-  
-      console.log(mapIds)
   
   
       mapIds.forEach(prodId => {
@@ -54,7 +57,6 @@ export default function Home(props) {
         
         Promise.all([getProduct(), getOrder()])
           .then(function (responses) {
-            const prodName = responses[0].data.product.productName;
             const popProduct = responses[0].data.product
             const order = responses[1].data;
             order.forEach(order => {
@@ -65,43 +67,42 @@ export default function Home(props) {
               }
             })
             
-            popularities = {...popularities, [productId]: {product: popProduct, popularity: totalOrdered}}
+            popularities = {...popularities, [productId]: {"product": popProduct, "popularity": totalOrdered}}
             console.log(`This product has been ordered ${totalOrdered} times.`)
-            console.log(popularities)
+            
             props.setPopular(popularities)
-            // let sort = []
-            const mapPopKeys = Object.keys(popularities).map(key => popularities[key])
-            console.log(mapPopKeys)
-            const popularSorted = mapPopKeys.sort((a,b) => b.popularity - a.popularity)
-            // for (const key in popularities) {
+            let sort = []
+            for (const key in popularities) {
 
-            //   console.log(popularities)
+            console.log(popularities)
 
-            //   const element = popularities[key];
+            const element = popularities[key];
 
-            //   console.log(element)
-            //   sort.push(element)
-          
-            //   let popularSorted = sort.sort((a,b) => b.popularity - a.popularity)
-            //   console.log(popularSorted)
-      
-            //   props.setSortedPopular(popularSorted)
-            // }
+            console.log(element)
+            sort.push(element)
+        
+            popularSorted = sort.sort((a,b) => b.popularity - a.popularity)
+            console.log(popularSorted)
+    
             props.setSortedPopular(popularSorted)
+    }
           });
         });  
     }
 
     useEffect(() => {
-      if(props.products.length > 0){
       getPopular()
-      }
+      
     }, [props.products])
 
-    if(!props.products.length){
+    useEffect(() => {
+      console.log(props.popularSorted)
+    },[props.popularSorted])
+
+    if(!sorted.length){
       return (
-        <div>
-          <p>Loading...</p>
+        <div className='loading'>
+          <p>Loading Best Sellers...</p>
         </div>
       )
     }
@@ -114,17 +115,17 @@ export default function Home(props) {
       <>
         <Carousel className="main-slide" >
           <div>
-          <div className="type">{props.products[0].productName}</div>
-            <img alt="" src={props.products[0].productImageUrls[0]} />
+          <div className="type">{sorted[0].productName}</div>
+            <img alt="" src={sorted[0].productImageUrls[0]} />
             
           </div>
           <div >
-          <div className="type">{props.products[1].productName}</div>
-            <img alt="" src={props.products[1].productImageUrls[0]}/>
+          <div className="type">{sorted[1].productName}</div>
+            <img alt="" src={sorted[1].productImageUrls[0]}/>
           </div>
           <div>
-          <div className="type">{props.products[2].productName}</div>
-            <img alt="" src={props.products[2].productImageUrls[0]} />
+          <div className="type">{sorted[2].productName}</div>
+            <img alt="" src={sorted[2].productImageUrls[0]} />
           </div>
         </Carousel>
 

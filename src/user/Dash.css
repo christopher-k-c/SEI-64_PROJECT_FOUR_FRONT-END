@@ -121,6 +121,11 @@ table {
     justify-content: space-around;
 }
 
+.status-dropdown {
+    width: 150px;
+    height: 35px;
+}
+
 .open {
     color: rgb(102, 102, 102)
 }
