@@ -423,7 +423,7 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
           <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
-          <Navbar.Text><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text>
+          {/* <Navbar.Text><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text> */}
           
           </>
           )}

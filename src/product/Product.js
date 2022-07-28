@@ -86,7 +86,7 @@ export default function Product(props) {
 
   return (
     <><Col style={{marginBottom: '20px'}} >
-        <Card  style={{ cursor: 'pointer'}}>
+        <Card  style={{ cursor: 'pointer'}} className="card-container">
 
           
             <Card.Img className="imageHover" onClick={() => setModalOpen()} variant="top" src={props.products.productImageUrls[0]} />
