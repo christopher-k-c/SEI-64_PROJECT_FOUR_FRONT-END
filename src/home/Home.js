@@ -53,7 +53,11 @@ export default function Home(props) {
         }
         
         const getOrder = () => {
-          return Axios.get('orders/index');
+          return Axios.get('orders/index', {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         }
         
         Promise.all([getProduct(), getOrder()])

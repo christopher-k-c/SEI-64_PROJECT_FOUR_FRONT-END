@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Container, Form, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function Login(props) {
     console.log(props)
@@ -22,7 +23,7 @@ export default function Login(props) {
 
 
   return (
-    <div>
+    <div className='login-container'>
         <h1>Log In</h1>
         <Container>
             <Form.Group>
@@ -37,6 +38,10 @@ export default function Login(props) {
 
             <Button variant="primary" onClick={loginHandler}>Log In</Button>
         </Container>
+
+        <div className='not-a-user'>
+            <p>Not signed up? <Link to='/signup'>Create an account!</Link> </p>
+        </div>
     </div>
   )
 }
