@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel} from 'react-responsive-carousel';
 import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
-
+import Dropdown from 'react-bootstrap/Dropdown'
 import img1 from "./assets/kirk.jpg";
 import img2 from "./assets/truth-alt.jpg";
 import img3 from "./assets/floral.jpg"
 import Axios from 'axios';
+
+
 
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
@@ -30,6 +32,8 @@ const options = {
 
 
 export default function Home(props) {
+
+  // const [query, setQuery] = useState("")
 
     const getPopular = () => {
       
@@ -103,8 +107,23 @@ export default function Home(props) {
         </div>
       )
     }
-  
     
+
+
+    // const test = props.products.filter(post => {
+    //   if (query === '') {
+    //     // return post;
+    //   } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
+    //     return post;
+    //   }
+    // }).map((post) => (
+    //   <div key={post._id}>
+    //     <p>{post.productName}</p>
+    //   </div>
+    // ))
+
+    
+
     
     return (
       
@@ -126,14 +145,16 @@ export default function Home(props) {
           </div>
         </Carousel>
 
+
+        {/* <div className="test">
   
-  
-        {/* <ReactAudioPlayer
-          src={track1}
-          controlsList
-          loop
-          controls
-        /> */}
+        <input className="search" id="search" placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
+          <div className="results">
+            {test}
+          </div>
+        </div> */}
+
+
      </>
     )
   } 
