@@ -18,14 +18,14 @@ import Footer from './footer/Footer'
 import NewsLetter from './footer/NewsLetter'
 import Checkout from './cart/Checkout' 
 import OrderConfirmation from './cart/OrderConfirmation'
-
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image'
-// import './product/images/logo.png'
+import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
 
@@ -253,6 +253,7 @@ const editGet = (id) => {
     .then(response => {
       console.log(response)
       navigation("/checkout")
+      setCartCount(0)
     })
     .catch(error => {
       console.log(error)
@@ -392,29 +393,28 @@ const editGet = (id) => {
 
     
       {/* React Bootstrap Nav Bar*/}
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+    <Navbar collapseOnSelect expand="lg" className="navbar-bg"  sticky="top">
       <Container>
 
 
 
         
-        <Navbar.Brand href="#home"><Image src='./product/images/logo.png' fluid /></Navbar.Brand>
+        <Navbar.Brand href="#home"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
-        <Nav>
+        <Nav className="nav-style">
           { isAuth ? (
           <>          
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
           <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler}>Logout</Nav.Link>
           <Nav.Link as={Link} to="/manage"> 
-          <Navbar.Text>
+          <Navbar.Text className="dash-link">
           {userRole === "seller" ? "Seller Dashboard" : "My Orders"}
           </Navbar.Text>
           </Nav.Link>
-          <Navbar.Text>{`Signed in as: ${user.user.name}!`}</Navbar.Text>
-          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
-          {/* <Navbar.Text ><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text> */}
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={20}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          <Navbar.Text>{`Welcome, ${user.user.name}!`}</Navbar.Text>
           </>
           ):(
           <>
@@ -441,7 +441,7 @@ const editGet = (id) => {
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user}role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
-            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
         </div>

@@ -11,13 +11,17 @@ h1 {
 
 
 
+
 .btn-primary, .btn-secondary, input {
     margin-top: 5px;
     background-color: white;
     color: #FF2273;
+    font-family: 'Bungee', cursive;
+    font-weight:light;
     border: 2px solid #FF2273;
     border-radius: 5px;
-    margin-right: 2px;
+ 
+
 
 
   
@@ -90,13 +94,16 @@ justify-content: center;
   
 }
 
-
+/* 
 .btn-primary{
   background-color: #00BFC3;
   color: white;
   border: 2px solid #00BFC3;
-}
+} */
 
 @media (max-width: 982px) {
+
+
+
 
 }
