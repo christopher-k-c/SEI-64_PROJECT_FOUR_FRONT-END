@@ -56,7 +56,7 @@ export default function App() {
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
   const [filterUSerOrders, setFilterUserOrders] = useState([])
-  const [popular, setPopular] = useState({})
+  
   const [sortedPopular, setSortedPopular] = useState([])
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
@@ -425,9 +425,7 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
-          {/* <Navbar.Text><input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />{test}</Navbar.Text> */}
-          
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
           </>
           )}
           </Nav>
@@ -438,7 +436,7 @@ const editGet = (id) => {
      {errMessage}
         <div>
           <Routes>
-            <Route path="/" element={<Home loadProductList={loadProductList} products={products} popular={popular} setPopular={setPopular} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
+            <Route path="/" element={<Home loadProductList={loadProductList} products={products} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />

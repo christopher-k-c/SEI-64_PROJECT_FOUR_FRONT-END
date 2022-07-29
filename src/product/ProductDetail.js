@@ -49,12 +49,16 @@ export default function ProductDetail(props) {
       setCurrentlySelected(e.target)
     }
   }
+  const imgThumbsSansBestSeller = props.products.productImageUrls.slice(0, -1)
+
+  console.log(imgThumbsSansBestSeller)
   
-  const imgThumbs = props.products.productImageUrls.map((url, index) =>
+  const imgThumbs = imgThumbsSansBestSeller.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
       <img className='thumb' id={`thumb-${index}`} src={props.products.productImageUrls[index]} alt={`thumb-${index}`} />
     </div>
   );
+
   // console.log(props.productAudio)
 
 

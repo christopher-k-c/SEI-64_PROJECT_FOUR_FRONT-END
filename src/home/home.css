@@ -88,6 +88,11 @@
 .homepage-about {
     width: 40%;
 }
+.loading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
 @media (max-width: 790px) {
     .main-slide {

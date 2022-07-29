@@ -90,6 +90,17 @@ export default function ProductCreateForm(props) {
         e.preventDefault();
         !sourceTypeAltered ? newProduct.productSourceType = defaultSourceType : (console.log("Source type set to user specified"))
         console.log(newProduct)
+        console.log(newImageSet)
+        const filterCriteria = (element) => {
+            if(element !== undefined){
+                return element
+            }
+            
+        }  
+        ;
+        let filterUndefinedUrls = newImageSet.filter(filterCriteria)
+        console.log("URLs with all undefined fields removed:", filterUndefinedUrls)
+        setNewImageSet(filterUndefinedUrls)
         if(!Object.keys(newProduct).length)
         {
             setModalAlert(true)
