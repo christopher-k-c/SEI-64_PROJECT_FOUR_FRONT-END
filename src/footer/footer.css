@@ -17,6 +17,7 @@ h2 {
     background-color: #00BFC3;
     height: 15rem;
     padding-top: 10px;
+
       
 }
 
@@ -156,6 +157,26 @@ transition: 0.3s ease-out;
 
 }
 
+
+
+
+
+
+@media (max-width: 1458px) {
+
+    .footer-container{
+        height: 21rem;
+    }
+
+    .clear {
+        height: 26rem;
+    }
+
+
+
+}
+
+
 @media (max-width: 1225px) {
     .footer-heading{
         margin-right: 1rem;
@@ -172,7 +193,7 @@ transition: 0.3s ease-out;
 
 
 
-@media (max-width: 721px) {
+@media (max-width: 750px) {
 
     .footer-container {
         display: flex;
@@ -210,7 +231,7 @@ text-align: center;
     }
     .clear { 
         clear: both; 
-        height: 32rem; 
+        height: 50rem; 
     }
 
 }
