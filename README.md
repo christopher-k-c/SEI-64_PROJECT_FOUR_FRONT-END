@@ -30,7 +30,7 @@ Bootleg Bill's is an e-commerce site for niche mixed tape cassettes with music f
 ### Team Members
 - Ailish McLaughlin - [GitHub](https://github.com/ailishmcl) | [LinkedIn](www.linkedin.com/in/ailish-mclaughlin)
 - Chris Ailey - [GitHub]() | [LinkedIn]()
-- Christopher Carey - [GitHub]() | [LinkedIn]()
+- Christopher Carey - [GitHub](https://github.com/christopher-k-c) | [LinkedIn](https://www.linkedin.com/in/chriskcarey/)
 
 ### Process
 Planning:
@@ -38,15 +38,21 @@ We dedicated a lot of time to planning; we felt it important to dial in on getti
 ###### Trello
 ![Trello board screenshot picture](/project-04-fe/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
 ###### ERD (Entity Relationship Diagrams)
-![ERD screenshot picture](/project-04-fe/public/ERD.png)
+![ERD screenshot picture](/project-04-fe/public/ERD.png) (https://docs.google.com/spreadsheets/d/1t3OSPLlnp3fUsaDO9et2jlCsDUnY_zXIcBZBl0zRwXg/edit#gid=0)
 ###### User Flow
-![Wireframes pictures screenshot](/project-04-fe/public/userflow.png)
+![Userflow pictures screenshot](/project-04-fe/public/userflow.png) (https://www.figma.com/file/nzI51c1l1kPjnLjdxosC6I/Flow-Chart?node-id=0%3A1)
 ###### Wireframes
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe1.png)
+![Wireframes pictures screenshot](/project-04-fe/public/wireframe1.png) ((https://www.figma.com/file/CbzmDiTOtefvXPzt3A5Pus/Bootleg-Bill's-Unofficial-Audio-Rarities?node-id=508%3A1785))
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe2.png)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe3.png)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe4.png)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe5.png)
+
+###### Static Resources
+* [Static Resources Google Drive](https://drive.google.com/drive/folders/1i3zq2lW8AuenJoQfLGZNG4o_-lGuiJxL)
+
+Teamwork: 
+Early on in the planning phase, we identified that communication and flexible iteration was going to be important for this multifaceted project. To manage this, we held a team standup every morning to discuss what has been done the day before, update the backlog and prioritise what to work on for the coming day. Twice a day we set aside time to merge our code to keep the remote repository up to date. Rather than working in silos, we carried out pair programming to de-bug or solve issues that arose and also when we were tackling the more challenging aspects of the project such as the cart, checkout and modal functionalities. Our approach paid off, as we were able to achieve all of our required functionality, as well as the vast majority of our stretch goal wishlist.
 
 ### Key Features
 - Responsive design for different screen sizes and/or mobile viewports
