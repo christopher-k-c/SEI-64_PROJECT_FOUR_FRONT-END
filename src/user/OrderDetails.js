@@ -9,11 +9,13 @@ export default function OrderDetails(props) {
   const [currentProducts, setCurrentProducts] = useState([])
 
   useEffect(() => {
-    getOrderUser(props.user)
+    // getOrderUser(props.user)
     console.log(currentProducts)
   }, [currentProducts])
 
   console.log(props)
+
+  console.log(props.user)
 
   const orderSet = [...new Set(props.cart)]
 
@@ -103,8 +105,8 @@ export default function OrderDetails(props) {
           <div className='ref-status'>
             <h4>Order Ref: {props.currentOrder.orderRef}</h4>
             {/* <h4>Order Status: <span className={props.status}>{props.status}</span></h4> */}
-            {props.user.role === "seller" ? (
-              <Form.Select id="status-dropdown" defaultValue={props.currentOrder.status} aria-label="Default select example" onChange={(e) => handleStatus(e)}>
+            {props.user.user.role === "seller" ? (
+              <Form.Select bsPrefix="status-dropdown" size='sm' defaultValue={props.currentOrder.status} aria-label="Default select example" onChange={(e) => handleStatus(e)}>
                 <option value="open">Open</option>
                 <option value="processing">Processing</option>
                 <option value="shipped">Shipped</option>

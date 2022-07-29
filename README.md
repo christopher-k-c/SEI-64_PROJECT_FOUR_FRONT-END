@@ -34,7 +34,7 @@ Bootleg Bill's is an e-commerce site for niche mixed tape cassettes with music f
 
 ### Process
 Planning:
-We dedicated a lot of time to planning; we felt it important to dial in on getting the vision aligned in order to maximise efficieny once we started coding. We created a user flow, ERDs and wireframes to assist with this and then translated the broad plan in to detailed user stories, icebox and MVPs, in order to create a clear plan for moving forward. 
+We dedicated a lot of time to planning; we felt it important to dial in on getting the vision aligned in order to maximise efficiency once we started coding. We created a user flow, ERDs and wireframes to assist with this and then translated the broad plan in to detailed user stories, icebox and MVPs, in order to create a clear plan for moving forward. 
 ###### Trello
 ![Trello board screenshot picture](/project-04-fe/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
 ###### ERD (Entity Relationship Diagrams)
