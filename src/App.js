@@ -370,18 +370,18 @@ const editGet = (id) => {
     
   ): null;
 
-  const test = products.filter(post => {
-    if (query === '') {
-      return post;
-    } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
-      return post;
-    }
-  }).map((post) => (
-    <div key={post._id}>
-      <p>{post.productName}</p>
-      <p>{post.productPrice}</p>
-    </div>
-  ))
+  // const test = products.filter(post => {
+  //   if (query === '') {
+  //     return post;
+  //   } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
+  //     return post;
+  //   }
+  // }).map((post) => (
+  //   <div key={post._id}>
+  //     <p>{post.productName}</p>
+  //     <p>{post.productPrice}</p>
+  //   </div>
+  // ))
 
 
 

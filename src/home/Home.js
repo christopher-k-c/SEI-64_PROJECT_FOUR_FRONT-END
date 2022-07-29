@@ -8,7 +8,8 @@ import img1 from "./assets/kirk.jpg";
 import img2 from "./assets/truth-alt.jpg";
 import img3 from "./assets/floral.jpg"
 import Axios from 'axios';
-
+import Image from 'react-bootstrap/Image'
+import bigLogo from './assets/big_logo.png'
 
 
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
@@ -144,6 +145,8 @@ export default function Home(props) {
             <img alt="" src={props.products[2].productImageUrls[0]} />
           </div>
         </Carousel>
+
+        <Image src={bigLogo} alt="" />
 
 
         {/* <div className="test">

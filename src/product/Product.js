@@ -12,7 +12,7 @@ import {
   Form
 } from "react-bootstrap";
 import {BsCart4} from 'react-icons/bs'
-
+import './Product.css'
 
 
 // import audio from './audio/30_Seconds_of_Bowling_Sounds.mp3'

@@ -117,7 +117,6 @@ transition: 0.3s ease-out;
     .footer-container {
 
         height: 20rem;
-        /* display: flex; */
         
 
         
@@ -147,9 +146,7 @@ transition: 0.3s ease-out;
     } */
 
     .EmailTitle{
-        /* margin-bottom: 23px; */
-
-            text-align: center;
+        text-align: center;
     }
 
 
@@ -178,15 +175,15 @@ transition: 0.3s ease-out;
 
 
 @media (max-width: 1225px) {
+
     .footer-heading{
         margin-right: 1rem;
         margin-left: 1rem;
     }
 
     .EmailTitle{
-        /* margin-bottom: 23px; */
 
-            text-align: center;
+        text-align: center;
     }
 
 }
