@@ -103,9 +103,20 @@ export default function Home(props) {
     const top3Products = !!Object.keys(popular).length ? Object.keys(popular).map((key) => popular[key]).sort((a,b) => b.popularity - a.popularity).slice(0,3) : [];
     console.log(top3Products, "PRODUCTS")
 
+
+
+    
     if(top3Products.length === 3) {
-      return (
-        <Carousel className='main-slide'>
+    
+    return (
+      
+        
+      <>
+      <div className="best-seller">
+        <h2> Our Best Sellers: </h2>
+      </div>
+
+      <Carousel className='main-slide'>
         {top3Products.map(popProduct => (
             <div key={popProduct.product._id}>
               <div className="type">{popProduct.product.productName}</div>
@@ -113,6 +124,36 @@ export default function Home(props) {
             </div>
         ))}
       </Carousel>
-      )
+        <div className='homepage-logo'> 
+        <Image src={bigLogo} alt="" height={500}/>
+        <div className="homepage-about">
+          <h3>About Us: </h3>
+          <p> Bootleg Bill's Unofficial Rarities.... SOme more content here....</p>
+        </div>
+        </div>
+
+        {/* <div className="test">
+  
+        <input className="search" id="search" placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
+          <div className="results">
+            {test}
+          </div>
+        </div> */}
+
+
+     </>
+    )
+  } 
+    
+      // return (
+      //   <Carousel className='main-slide'>
+      //   {top3Products.map(popProduct => (
+      //       <div key={popProduct.product._id}>
+      //         <div className="type">{popProduct.product.productName}</div>
+      //         <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
+      //       </div>
+      //   ))}
+      // </Carousel>
+      // )
   }
-}
+
