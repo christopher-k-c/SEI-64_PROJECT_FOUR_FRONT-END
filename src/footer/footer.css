@@ -27,8 +27,6 @@ h2 {
     flex-wrap: wrap;
     margin: 0 auto;
     background-color: #00BFC3;
-
-    
 }
 
 
@@ -37,6 +35,9 @@ h2 {
     flex-direction: column;
     margin-right: 4rem;
     
+}
+.footer-heading > h2 {
+    font-size: medium;
 }
 
 .footer > .footer-heading > a {
@@ -58,7 +59,7 @@ transition: 0.3s ease-out;
 }
 
 .EmailTitle{
-    /* margin-bottom: 23px; */
+    font-size: 16px;
 }
 
 .emailButton{
@@ -81,6 +82,7 @@ transition: 0.3s ease-out;
 .emailInput::placeholder{
     color: grey;
     font-weight: bolder;
+    font-family: 'Bungee Hairline', cursive;
 }
 
 .emailButton {

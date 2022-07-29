@@ -29,12 +29,12 @@ export default function Login(props) {
         <Container bsPrefix='auth-form'>
             <Form.Group>
                 <Form.Label>Email Address</Form.Label>
-                <Form.Control name="emailAddress" onChange={handleChange} />
+                <Form.Control className='auth-input' name="emailAddress" onChange={handleChange} />
             </Form.Group>
             <br/>
             <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control name="password" type="password" onChange={handleChange} />
+                <Form.Control className='auth-input' name="password" type="password" onChange={handleChange} />
             </Form.Group>
             <br/>
             <Button variant="primary" onClick={loginHandler}>Log In</Button>

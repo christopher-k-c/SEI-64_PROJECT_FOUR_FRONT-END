@@ -425,8 +425,7 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
-          
+          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
           </>
           )}
           </Nav>

@@ -8,6 +8,9 @@ import img1 from "./assets/kirk.jpg";
 import img2 from "./assets/truth-alt.jpg";
 import img3 from "./assets/floral.jpg"
 import Axios from 'axios';
+import Image from 'react-bootstrap/Image'
+import bigLogo from './assets/big_logo.png'
+
 
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
