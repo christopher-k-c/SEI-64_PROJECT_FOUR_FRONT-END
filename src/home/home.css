@@ -1,3 +1,8 @@
+.best-seller > h2 {
+    color: black;
+    margin: 30px 10%;
+}
+
 .main-slide {
     position: relative;
     background-color: #f5f5f5; 
@@ -72,6 +77,16 @@
     justify-content: center;
     width: 200px;
     height: 50px;
+}
+
+.homepage-logo {
+    margin: 30px 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.homepage-about {
+    width: 40%;
 }
 
 @media (max-width: 790px) {

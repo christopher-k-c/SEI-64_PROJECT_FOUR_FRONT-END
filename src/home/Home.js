@@ -130,6 +130,9 @@ export default function Home(props) {
       
         
       <>
+      <div className="best-seller">
+        <h2> Our Best Sellers: </h2>
+      </div>
         <Carousel className="main-slide" >
           <div>
           <div className="type">{props.products[0].productName}</div>
@@ -145,9 +148,13 @@ export default function Home(props) {
             <img alt="" src={props.products[2].productImageUrls[0]} />
           </div>
         </Carousel>
-
-        <Image src={bigLogo} alt="" />
-
+        <div className='homepage-logo'> 
+        <Image src={bigLogo} alt="" height={500}/>
+        <div className="homepage-about">
+          <h3>About Us: </h3>
+          <p> Bootleg Bill's Unofficial Rarities.... SOme more content here....</p>
+        </div>
+        </div>
 
         {/* <div className="test">
   
