@@ -13,8 +13,6 @@ import Axios from 'axios';
 // import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
 
 
-
-
 const options = {
   showArrows: false,
   showStatus: false,
@@ -31,7 +29,7 @@ export default function Home(props) {
 
     const [popular, setPopular] = useState({})
 
-    const [getOrderState, setGetOrderState] = useState("")
+    const [getOrderState, setGetOrderState] = useState([])
 
     const getOrder = async () => {
       const data = await Axios.get('orders/index');

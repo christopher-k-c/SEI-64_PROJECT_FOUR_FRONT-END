@@ -68,7 +68,7 @@ export default function Signup(props) {
   return (
     <div>
         <h1>Sign Up</h1>
-        <Container>
+        <Container bsPrefix='auth-form'>
             <Form.Group>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control name="firstName" onChange={handleChange}></Form.Control>
@@ -97,18 +97,19 @@ export default function Signup(props) {
 
             <br/>
 
-            <Form.Group id="formgroup">
+            <Form.Group>
                 <div className="userType">
                     <Form.Label>Register as a seller?:</Form.Label>
                     <Switch className='switch' onChange={handleToggleChange} checked={checked}/>
                 </div>
                 
+            </Form.Group>
+
                 <Form.Group className='verify-seller'>
                     <Form.Label>{userRole === "seller" ? ("Enter your seller verification code:") : ("")}</Form.Label>
                     <Form.Control id="sellerKeyForm" type={userRole === "buyer" ? ("hidden") : ("text")} onChange={(e) => console.log(e.target.value)} autoComplete='new-password' onClick={(e) => {handleMask(e)}}></Form.Control>
                 </Form.Group>
-            </Form.Group>
-
+                
             <br/>
 
 
