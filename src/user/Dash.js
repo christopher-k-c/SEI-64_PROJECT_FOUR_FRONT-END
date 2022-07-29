@@ -30,8 +30,8 @@ export default function Dash(props) {
         <>
 
 
-            <div id='add-modal'>
-            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+            <div id='add-modal' >
+            <Modal isOpen={modalIsOpen} ariaHideApp={false} >
         
             <Button onClick={setModalIsOpenToFalse}>x</Button>
             <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />

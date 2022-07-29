@@ -149,3 +149,7 @@ table {
 .closed {
     color: rgb(95, 95, 95)
 }
+
+.ReactModal__Body--open {
+    z-index: 2;
+}

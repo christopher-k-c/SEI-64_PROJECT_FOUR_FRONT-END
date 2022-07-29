@@ -66,10 +66,11 @@ h1 {
 
 }
 
-.testDiv{
+.filter-container{
 
 display: flex;
 justify-content: center;
+margin-bottom: 30px;
 }
 
 
@@ -101,9 +102,21 @@ justify-content: center;
   border: 2px solid #00BFC3;
 } */
 
-@media (max-width: 982px) {
+.card-title {
 
-
-
-
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+.productCard{
+  filter: drop-shadow(0 2mm 2mm rgb(173, 173, 173, 0.3));
+}
+
+
+
+.product-body{
+  margin-top: 40px;
+}
+

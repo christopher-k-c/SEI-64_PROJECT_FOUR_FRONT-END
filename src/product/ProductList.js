@@ -66,10 +66,10 @@ export default function ProductList(props) {
 
 
   return (
-    <div >
+    <div className="product-body">
 
 
-<div className="testDiv">
+        <div className="filter-container">
 
           <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" name="All" onClick={(e) => {handleFilterClick(e)}}>All</Button>
@@ -77,7 +77,7 @@ export default function ProductList(props) {
           <Button variant="primary" name="Video Game" onClick={(e) => {handleFilterClick(e)}}>Video Game</Button>
           <Button variant="primary" name="Original Work" onClick={(e) => {handleFilterClick(e)}}>Original Work</Button>
           </ButtonGroup>
-        &nbsp;
+          &nbsp;
      
         </div>
         <Container className="d-flex"  >
