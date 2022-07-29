@@ -42,7 +42,7 @@ We dedicated a lot of time to planning; we felt it important to dial in on getti
 ###### User Flow
 ![Wireframes pictures screenshot](/project-04-fe/public/userflow.png)
 ###### Wireframes
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe1.png)
+![Wireframes pictures screenshot](<img src="./public/wireframe1.png" />)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe2.png)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe3.png)
 ![Wireframes pictures screenshot](/project-04-fe/public/wireframe4.png)
