@@ -4,6 +4,66 @@
 > *Unofficial Audio Rarities*
 
 
+
+
+Time Frame
+
+Two Weeks
+
+Goal
+
+Through harnessing the MERN Stack, and as a group of three, we built an ecommerce inspired store front for bootlegged cassette tapes. It is possible to sign up as either a buyer or seller. Buyers can browse, add and remove items in their cart as well as checkout and whilst sellers share the same privileges, they also have access to a seller dashboard which offers add, edit and delete functionality for both individual products and user purchases.
+
+
+Technical Requirements Satisfied
+
+* A MERN-Stack application hosted on Heroku.
+* Built a stylised front-end utilising React which is served information from the backend via AJAX.
+* Using JWT we implemented token-based authentication, allowing the user to sign up, sign in and sign out.
+* Authorisation was implemented, limiting CUD Operations to authenticated users and widening the scope of CUD operations for Seller Users.
+
+
+Process
+
+
+As a group we valued the importance of a shared vision which is why we spent two days planning our Entity Relationship Diagrams, Wireframes, User Stories, and Minimum Viable Requirements. In addition, we scheduled a daily team stand up every morning, each team member detailing their progress in their allotted tasks and then updating the trello board accordingly. Furthermore we made regular commits, generally twice a day and when errors arose, we would pair program, de-bugging or solving as a team which served us well, enabling us to attain our MVPs and begin tackling our Ice box goals.
+
+I was initially tasked with building the applications Product model, its routes and controller, so in short I implemented its schema types, defined each controller url and built full Product CRUD operations which were tested in Postman before connecting these backend functionalities to our front-end components. With my focus now on the React front-end, I began to write the Ajax call using Axios which rendered all products to our index page and built a dynamic grid of react-bootstrap cards that responsively displays said products.
+
+In regards to responsive design, I was keen to take this challenge on as my own. I utilised React-Bootstraps responsive functionality and vanilla CSS to achieve our stretch goal in responsive design. Additional areas that I made an impact in were as follows, user alerts, the initial implementation of the home page Carousel and modals, dynamic audio for each product detail page, the footer and navbar implementation. Dynamically displaying product stock levels and removing a users ability to add a product to cart when it is out of stock.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Overview
 Bootleg Bill's is an e-commerce site for niche mixed tape cassettes with music from movies and tv, video games and original work. Using REACT on the frontend, Bootleg Bill's allows you to sign up as either a buyer or a seller. Buyers can browse the shop, see details about specific products, add items to the cart, go to checkout to complete their order and see a list and the status of their past orders. Sellers can access a dashboard enabling them to add, edit or delete products from the inventory as well as monitor all orders and edit their status.
 
