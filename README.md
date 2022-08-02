@@ -26,7 +26,7 @@ Technical Requirements Satisfied
 Process
 
 
-As a group we valued the importance of a shared vision which is why we spent two days planning our Entity Relationship Diagrams, Wireframes, User Stories, and Minimum Viable Requirements. In addition, we scheduled a daily team stand up every morning, each team member detailing their progress in their allotted tasks and then updating the trello board accordingly. Furthermore we made regular commits, generally twice a day and when errors arose, we would pair program, de-bugging or solving as a team which served us well, enabling us to attain our MVPs and begin tackling our Ice box goals.
+As a group we valued the importance of a shared vision which is why we spent several days planning our Entity Relationship Diagrams, Wireframes, User Stories, and Minimum Viable Requirements. In addition, we scheduled a daily team stand up every morning, each team member detailing their progress in their allotted tasks and then updating the trello board accordingly. Furthermore we made regular commits, generally twice a day and when errors arose, we would pair program, de-bugging or solving as a team which served us well, enabling us to attain our MVPs and begin tackling our Ice box goals.
 
 I was initially tasked with building the applications Product model, its routes and controller, so in short I implemented its schema types, defined each controller url and built full Product CRUD operations which were tested in Postman before connecting these backend functionalities to our front-end components. With my focus now on the React front-end, I began to write the Ajax call using Axios which rendered all products to our index page and built a dynamic grid of react-bootstrap cards that responsively displays said products.
 
