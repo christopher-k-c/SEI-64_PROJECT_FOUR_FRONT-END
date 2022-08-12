@@ -41,6 +41,55 @@ Through harnessing the MERN Stack, and as a group of three, we built an ecommerc
 - Christopher Carey - [GitHub](https://github.com/christopher-k-c) | [LinkedIn](https://www.linkedin.com/in/chriskcarey/)
 
 ### Process
+
+We spent several days planning our Entity Relationship Diagrams, Wireframes, User Stories, and Minimum Viable Requirements to attain a shared vision. In addition, we scheduled a daily team stand up every morning, each team member detailing their progress and then updating the trello board accordingly. Furthermore we made regular commits, generally twice a day and when errors arose, we would pair program, de-bugging or solving as a team which served us well, enabling us to attain our MVPs and begin tackling our stretch goals.
+
+I was initially tasked with building the applications Product model, its routes and controller. Starting with the Model, I mapped a Mongoose schema to a MongoDB collection which defined the attributes a product can take, from name to price and so on. Moving on, I defined the routes and wrote full Product CRUD operations in the product controllers. In example 01 - Express Api, the following code retrieves all product documents stored inside of the Product collection for our index page. Once tested in Postman I would move onto the react front end.
+
+
+01 - Express Api
+<img src="">
+
+With my focus now on the React front-end, I wrote the Ajax call using Axios which rendered all products to our index page and built a dynamic grid of react-bootstrap cards that responsively displays said products.
+
+Axios Call
+<img src="">
+
+React Map rendering 
+<img src="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Planning:
 We dedicated a lot of time to planning; we felt it important to dial in on getting the vision aligned in order to maximise efficiency once we started coding. We created a user flow, ERDs and wireframes to assist with this and then translated the broad plan in to detailed user stories, icebox and MVPs, in order to create a clear plan for moving forward. 
 ###### Trello
