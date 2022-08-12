@@ -64,41 +64,8 @@ src/product/images/Screenshot 2022-08-03 at 12.33.07.png">
 src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Planning:
-We dedicated a lot of time to planning; we felt it important to dial in on getting the vision aligned in order to maximise efficiency once we started coding. We created a user flow, ERDs and wireframes to assist with this and then translated the broad plan in to detailed user stories, icebox and MVPs, in order to create a clear plan for moving forward. 
 ###### Trello
-![Trello board screenshot picture](/project-04-fe/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
+![Trello board screenshot picture](/SEI-64_PROJECT_FOUR_FRONT-END/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
 ###### ERD (Entity Relationship Diagrams)
 ![ERD screenshot picture](/project-04-fe/public/ERD.png) (https://docs.google.com/spreadsheets/d/1t3OSPLlnp3fUsaDO9et2jlCsDUnY_zXIcBZBl0zRwXg/edit#gid=0)
 ###### User Flow
