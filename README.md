@@ -67,15 +67,15 @@ src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 ###### Trello
 ![Trello board screenshot picture](/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
 ###### ERD (Entity Relationship Diagrams)
-![ERD screenshot picture](/project-04-fe/public/ERD.png) (https://docs.google.com/spreadsheets/d/1t3OSPLlnp3fUsaDO9et2jlCsDUnY_zXIcBZBl0zRwXg/edit#gid=0)
+![ERD screenshot picture](/public/ERD.png) (https://docs.google.com/spreadsheets/d/1t3OSPLlnp3fUsaDO9et2jlCsDUnY_zXIcBZBl0zRwXg/edit#gid=0)
 ###### User Flow
-![Userflow pictures screenshot](/project-04-fe/public/userflow.png) (https://www.figma.com/file/nzI51c1l1kPjnLjdxosC6I/Flow-Chart?node-id=0%3A1)
+![Userflow pictures screenshot](/public/userflow.png) (https://www.figma.com/file/nzI51c1l1kPjnLjdxosC6I/Flow-Chart?node-id=0%3A1)
 ###### Wireframes
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe1.png) ((https://www.figma.com/file/CbzmDiTOtefvXPzt3A5Pus/Bootleg-Bill's-Unofficial-Audio-Rarities?node-id=508%3A1785))
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe2.png)
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe3.png)
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe4.png)
-![Wireframes pictures screenshot](/project-04-fe/public/wireframe5.png)
+![Wireframes pictures screenshot](/public/wireframe1.png) ((https://www.figma.com/file/CbzmDiTOtefvXPzt3A5Pus/Bootleg-Bill's-Unofficial-Audio-Rarities?node-id=508%3A1785))
+![Wireframes pictures screenshot](/public/wireframe2.png)
+![Wireframes pictures screenshot](/public/wireframe3.png)
+![Wireframes pictures screenshot](/public/wireframe4.png)
+![Wireframes pictures screenshot](/public/wireframe5.png)
 
 ###### Static Resources
 * [Static Resources Google Drive](https://drive.google.com/drive/folders/1i3zq2lW8AuenJoQfLGZNG4o_-lGuiJxL)
