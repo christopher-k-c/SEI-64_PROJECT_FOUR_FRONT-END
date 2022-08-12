@@ -48,16 +48,21 @@ I was initially tasked with building the applications Product model, its routes 
 
 
 01 - Express Api
+<br>
 <img src="
 src/product/images/Screenshot 2022-08-03 at 12.50.41.png">
 
 With my focus now on the React front-end, I wrote the Ajax call using Axios which rendered all products to our index page and built a dynamic grid of react-bootstrap cards that responsively displays said products.
 
 Axios Call
-<img src="">
+<br>
+<img src="
+src/product/images/Screenshot 2022-08-03 at 12.33.07.png">
 
 React Map rendering 
-<img src="">
+<br>
+<img src="
+src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 
 
 
