@@ -65,7 +65,7 @@ src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 
 
 ###### Trello
-![Trello board screenshot picture](/SEI-64_PROJECT_FOUR_FRONT-END/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
+![Trello board screenshot picture](christopher-k-c/SEI-64_PROJECT_FOUR_FRONT-END/public/trelloboard.png) (https://trello.com/b/qJ5YXS7L/project-four)
 ###### ERD (Entity Relationship Diagrams)
 ![ERD screenshot picture](/project-04-fe/public/ERD.png) (https://docs.google.com/spreadsheets/d/1t3OSPLlnp3fUsaDO9et2jlCsDUnY_zXIcBZBl0zRwXg/edit#gid=0)
 ###### User Flow
