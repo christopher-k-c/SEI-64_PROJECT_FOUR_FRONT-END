@@ -80,8 +80,6 @@ src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 ###### Static Resources
 * [Static Resources Google Drive](https://drive.google.com/drive/folders/1i3zq2lW8AuenJoQfLGZNG4o_-lGuiJxL)
 
-Teamwork: 
-Early on in the planning phase, we identified that communication and flexible iteration was going to be important for this multifaceted project. To manage this, we held a team standup every morning to discuss what has been done the day before, update the backlog and prioritise what to work on for the coming day. Twice a day we set aside time to merge our code to keep the remote repository up to date. Rather than working in silos, we carried out pair programming to de-bug or solve issues that arose and also when we were tackling the more challenging aspects of the project such as the cart, checkout and modal functionalities. Our approach paid off, as we were able to achieve all of our required functionality, as well as the vast majority of our stretch goal wishlist.
 
 ### Key Features
 - Responsive design for different screen sizes and/or mobile viewports
@@ -95,7 +93,7 @@ Early on in the planning phase, we identified that communication and flexible it
 ### Challenges
 - One of the biggest challenges was ensuring we were aligned as a group on the vision and maintaining good communication and regular code merging to ensure we were working as efficiently as possible towards the end goal 
 - It was challenging to figure out how to save entries to the database without filling in a form, such as for the cart and the order form. Paring it back by holding the cart information in a state in the time between adding to cart and going to checkout was the way we figured out how to work around this but has lots of downsides such as loss of cart items/data/information in the case of a page refresh or loss of connection
-- 
+
 
 ### Features to be added in the future
 - Storing cart data on the local storage so that it wouldn't be erased by a page refresh or loss of connection
