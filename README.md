@@ -3,16 +3,24 @@
 ## Bootleg Bill's 
 > *Unofficial Audio Rarities*
 
+## Time Frame
 
-## Overview
-Bootleg Bill's is an e-commerce site for niche mixed tape cassettes with music from movies and tv, video games and original work. Using REACT on the frontend, Bootleg Bill's allows you to sign up as either a buyer or a seller. Buyers can browse the shop, see details about specific products, add items to the cart, go to checkout to complete their order and see a list and the status of their past orders. Sellers can access a dashboard enabling them to add, edit or delete products from the inventory as well as monitor all orders and edit their status.
+> *10 Days*
 
-### Technical Requirements Satisfied:
-- A working, full stack SPA utilising the MERN stack hosted on heroku
-- Interactive front end which communicates with the backend via AJAX calls
-- Token based authentication that allows user to sign up, log in and log out
-- Authorisation controlled access to completing checkout and viewing the dashboard. Navigation changes in response to authorisation.
-- Additional functionality for logged in users with seller status
+## Goal
+
+Through harnessing the MERN Stack, and as a group of three, we built an ecommerce inspired store front for bootlegged cassette tapes. It is possible to sign up as either a buyer or seller. Buyers can browse, add and remove items in their cart as well as checkout and whilst sellers share the same privileges, they also have access to a seller dashboard which offers add, edit and delete functionality for both individual products and user purchases.
+
+
+## Technical Requirements Satisfied
+
+* A MERN-Stack application hosted on Heroku.
+* Built a stylised front-end utilising React which is served information from the backend via AJAX.
+* Using JWT we implemented token-based authentication, allowing the user to sign up, sign in and sign out.
+* Authorisation was implemented, limiting CUD Operations to authenticated users and widening the scope of CUD operations for Seller Users.
+
+
+
 
 
 ### Technologies Used
