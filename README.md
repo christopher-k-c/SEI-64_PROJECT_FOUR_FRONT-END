@@ -47,19 +47,19 @@ We spent several days planning our Entity Relationship Diagrams, Wireframes, Use
 I was initially tasked with building the applications Product model, its routes and controller. Starting with the Model, I mapped a Mongoose schema to a MongoDB collection which defined the attributes a product can take, from name to price and so on. Moving on, I defined the routes and wrote full Product CRUD operations in the product controllers. In example 01 - Express Api, the following code retrieves all product documents stored inside of the Product collection for our index page. Once tested in Postman I would move onto the react front end.
 
 
-01 - Express Api
+> *01 - Express Api*
 <br>
 <img src="
 src/product/images/Screenshot 2022-08-03 at 12.50.41.png">
 
-With my focus now on the React front-end, I wrote the Ajax call using Axios which rendered all products to our index page and built a dynamic grid of react-bootstrap cards that responsively displays said products.
+With my focus now on the React front-end, I wrote the Ajax call using Axios (see example image *02 - Axios Call*) which in combination with the map function in example *03 - React Map rendering * renders all products to our index page, furthermore, the react component Products.js builds a dynamic grid of react-bootstrap cards that responsively displays said products.
 
-Axios Call
+> *02 - Axios Call*
 <br>
 <img src="
 src/product/images/Screenshot 2022-08-03 at 12.33.07.png">
 
-React Map rendering 
+> *03 - React Map rendering*
 <br>
 <img src="
 src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
