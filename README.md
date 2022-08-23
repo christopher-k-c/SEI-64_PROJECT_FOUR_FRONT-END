@@ -11,7 +11,6 @@
 
 Through harnessing the MERN Stack, and as a group of three, we built an ecommerce inspired store front for bootlegged cassette tapes. It is possible to sign up as either a buyer or seller. Buyers can browse, add and remove items in their cart as well as checkout and whilst sellers share the same privileges, they also have access to a seller dashboard which offers add, edit and delete functionality for both individual products and user purchases.
 
-
 ## Technical Requirements Satisfied
 
 * A MERN-Stack application hosted on Heroku.
@@ -20,6 +19,10 @@ Through harnessing the MERN Stack, and as a group of three, we built an ecommerc
 * Authorisation was implemented, limiting CUD Operations to authenticated users and widening the scope of CUD operations for Seller Users.
 
 
+* A MERN-Stack application hosted on Heroku.
+* Built a stylised front-end utilising React which is served information from the backend via AJAX.
+* Using JWT we implemented token-based authentication, allowing the user to sign up, sign in and sign out.
+* Authorisation was implemented, limiting CUD Operations to authenticated users and widening the scope of CUD operations for Seller Users.
 
 
 
