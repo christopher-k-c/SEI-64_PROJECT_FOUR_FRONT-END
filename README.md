@@ -97,7 +97,7 @@ src/product/images/Screenshot 2022-08-03 at 12.33.47.png">
 - Add a filter for viewing different types of orders in the seller dashboard
 - A community forum/review page where users can leave reviews on products and discuss retro music etc.
 
-### Key Learnings 
+### Key Learnings & Wins
 
 - Enhanced my understanding of react functional components and state.
 - This was my first contribution to a MERN stack application.
