@@ -25,6 +25,7 @@ import './Product.css'
 
 export default function Product(props) {
   let productQuantity = props.products.productStock
+  console.log(productQuantity, "me")
 
 
   const numberInput = useRef(null)
@@ -121,7 +122,7 @@ export default function Product(props) {
                 <Card.Text onClick={() => setModalOpen()}  style={divStyle}>{productQuantity}</Card.Text>
                 <div className="button-container">
                   <Button size="sm" disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-                    <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} onChange={(e) => handleChange(e)} ></input>
+                    <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} max={props.products.productStock} min={1} onChange={(e) => handleChange(e)} ></input>
                   <Button size="sm" disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
                   
                 </div>
