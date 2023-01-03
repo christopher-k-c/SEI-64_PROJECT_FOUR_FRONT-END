@@ -46,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://billscassettes-api.onrender.com/10000"
+  "proxy": "https://billscassettes-api.onrender.com:10000"
 }
