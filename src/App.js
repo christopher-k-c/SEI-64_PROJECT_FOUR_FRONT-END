@@ -29,7 +29,7 @@ import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
 
-Axios.defaults.baseURL = 'https://billscassettes-api.onrender.com:10000/';
+Axios.defaults.baseURL = 'https://billscassettes-api.onrender.com:10000';
 
 
 export default function App() {
